@@ -166,5 +166,80 @@
 
 
 
+\section{Harmonic Functions, Brownian Motion, and Analysis in the Plane (Lawler)}
+\begin{itemize}
+    \item These topics will change week to week, so drop in at any point over the summer.
+    \item Schedule:
+    \begin{itemize}
+        \item Lectures MWF at 2:30 PM.
+        \item Group meeting Tuesday at 2:30 PM.
+        \begin{itemize}
+            \item Anybody can attend these!
+        \end{itemize}
+        \item No Zoom on Thursday, but there will be an opportunity to talk to Greg Lawler in person at the department of mathematics outside Eckhart when the weather is good.
+    \end{itemize}
+    \item Resources:
+    \begin{itemize}
+        \item Piazza --- look under the resources tab for lecture notes (with some exercises; these are very rough; gives you something to read with the lectures), other materials, etc.
+        \item There is a 180 page book draft based on his REU lectures last summer.
+        \begin{itemize}
+            \item Do not share this.
+        \end{itemize}
+    \end{itemize}
+    \item This math is at the border of analysis (basically advanced calculus) and probability.
+    \begin{itemize}
+        \item Lawler thinks of these as all basically the same subject.
+    \end{itemize}
+    \item We will work in $\R^2$.
+    \item A lot of what Dr. Lawler does is often called Complex Analysis.
+    \item Complex analysis allows you to get the results quicker even though they encapsulate ideas that are 100\% real; we're going to take a real-function perspective.
+    \item Harmonic function notation:
+    \begin{itemize}
+        \item Domains $D$ are connected open sets that are subsets of $\R^2$.
+        \item Mean value: $f:\R^2\to\R$ (continuous), or $f:D\to\R$.
+        \item $z,w$ are points in $\R^2$, and we write $z=(x,y)$ where $x,y$ are the one-dimensional components.
+        \item $B(z,\epsilon)=\{w:|z-w|<\epsilon\}$ is an open disk and $\partial\, B(Z,\epsilon)$ is the circle of radius $\epsilon$ about $z$.
+    \end{itemize}
+    \item If $B(z,\epsilon)\subset D$, then the (circular) mean value $MV(f;z,\epsilon)$ is the average rate of $f$ on $\partial B(z,\epsilon)$, i.e., the quantity
+    \begin{equation*}
+        \frac{1}{2\pi\epsilon}\int_{\{|w-z|=\epsilon\}}f(w)|\dd{w}|
+    \end{equation*}
+    where $|\dd{w}|$ is with respect to arc length.
+    \item Let $(\cos\theta,\sin\theta)=\e[i\theta]$.
+    \item \textbf{Harmonic function}: $f:D\to\R$ is harmonic if $f$ is continuous and for all $z\in D$ and every $\epsilon>0$ with $d(z,\partial D)>\epsilon$, then $f(z)=MV(f;z,\epsilon)$.
+    \item Many applications, notably in physics wrt. heat.
+    \begin{itemize}
+        \item Consider $D$ describing a surface with heat. Fix the temperature at the boundary. Let $U(z)=\text{temperature at }z$ (in equilibrium).
+        \item Then $U$ is harmonic on $D$.
+    \end{itemize}
+    \item We're going to understand the mean value in terms of the \textbf{Laplacian}.
+    \item If $f:D\to\R$ is $C^2$ (the first and second derivatives exist and are continuous [either two derivatives in one variable or one derivative in both variables for $\R^2$]), then the Laplacian is defined by
+    \begin{equation*}
+        \Delta f(z) = f_{xx}(z)+f_{yy}(z)
+    \end{equation*}
+    \item Proposition: If $u$ is $C^2$ in $D$, then $\Delta u(z)=\lim_{\epsilon\to 0}4\cdot\frac{MV(u;z,\epsilon)-u(z)}{\epsilon^2}$.
+    \item For ease, let's assume that $z=0=(0,0)$ and $u(z)=0$.
+    \item Taylor polynomial (in several variables): If $z=(x,y)$, then
+    \begin{equation*}
+        u(z) = 0+u_x(0)x+u_y(0)y+\frac{1}{2}u_{xx}(0)x^2+\frac{1}{2}u_{yy}(0)y^2+u_{xy}(0)xy+\sigma(|z|^2)\footnotemark
+    \end{equation*}
+    \footnotetext{$\sigma$ is pronounced "little oh."}
+    \begin{itemize}
+        \item $u_x(0)MV(x;0,\epsilon)+u_y(0)MV(y;0,\epsilon)+u_{xy}(0)MV(xy;0,\epsilon)+\sigma(\epsilon^2)+\frac{1}{2}[u_{xx}(0)x^2+u_{yy}(0)y^2]$.
+        \item Note that $u_{xx}(0)x^2=MV(x^2;0,\epsilon)$ and $u_{yy}(0)y^2=MV(y^2;0,\epsilon)$.
+        \item You can use multivariable calculus, or you can observe that $MV(x^2;0,\epsilon)=MV(y^2;0,\epsilon)$, thus telling you that $MV(x^2;0,\epsilon)+MV(y^2;0,\epsilon)=MV(x^2+y^2;0,\epsilon)=\epsilon^2$.
+        \item Since $|z|^2=\epsilon^2$, we have that $u(z)=\frac{1}{2}[\frac{1}{2}]$...
+    \end{itemize}
+    \item Proposition: A function $f:D\to\R$ is harmonic if and only if it is $C^2$ and $\Delta f(z)=0$ for all $z\in D$.
+    \begin{itemize}
+        \item Proof: Backwards direction first. We want to show that $C^2$ and $\Delta f(z)=0$ imply the mean value property. The mean value property clearly holds at $\epsilon=0$. Consider $MV(f;z,\epsilon)$ as a function of $\epsilon$. The derivative in $\epsilon$ ends up looking something like $\frac{1}{2\pi\epsilon}\int_\text{circle}\partial_nf(w)|\dd{w}|$ where $\partial_n$ is the normal direction.
+        \item Using the divergence theorem, we have that the above is equal to $\int_\text{disk}\Delta f(w)\dd{w}$. Note that we sometimes write $\Delta f=\dd{w}(\nabla f)$ where $\nabla f=(f_x,f_y)$. Additionally, $\text{div}\,(\nabla f)=\partial_x(f_x)+\partial_y(f_y)$.
+        \item Exercise: Show that if $u$ is harmonic, then $u$ is $C^2$.
+    \end{itemize}
+    \item The notion of probability comes in when we ask, "what is the `mean value' if we are not a disk viewed from the center?"
+\end{itemize}
+
+
+
 
 \end{document}
