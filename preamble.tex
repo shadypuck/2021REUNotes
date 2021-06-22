@@ -8,6 +8,7 @@
 \usepackage{enumitem}
 \usepackage{amsmath,amssymb}
 \usepackage{physics,bm}
+\usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
 
 \fancypagestyle{main}{
@@ -32,13 +33,33 @@
 
 \setitemize[3]{label=\scriptsize$\blacksquare$}
 
+\colorlet{rex}{red!90!yellow!70!black}
+\colorlet{rey}{red!90!yellow!60}
+
 \renewcommand{\chaptername}{Week}
 \renewcommand{\contentsname}{Weeks}
 
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Ss}{\mathbb{S}}
 
 \newcommand{\e}[1][]{\text{e}^{#1}}
+\newcommand{\permtwo}[3]{
+    \tikz[baseline={(0,0.3)},inner sep=1.5pt]{
+        \path (-0.35,0) -- (1.455,0);
+        \node (A1) at (0,0.8) {1};
+        \node (A2) at (0.525,0.8) {2};
+        \node (A3) at (1.05,0.8) {3};
+        \node (1) at (0,0) {1};
+        \node (2) at (0.525,0) {2};
+        \node (3) at (1.05,0) {3};
+
+        \draw [-stealth] (A1) -- (#1);
+        \draw [-stealth] (A2) -- (#2);
+        \draw [-stealth] (A3) -- (#3);
+    }
+}
 
 \usepackage{subfiles}

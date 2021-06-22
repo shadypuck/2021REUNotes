@@ -293,6 +293,158 @@
 
 
 
+\section{Lecture 1.1: Bijections and Permutations}
+\begin{itemize}
+    \item Consider the statement $4=4$.
+    \begin{itemize}
+        \item "Four is an abstraction for any set of four elements."
+        \item Thus, $4=4$ implies that $\{\text{lion},\text{cat},\text{tiger},\text{cheetah}\}=\{\text{burger},\text{pizza},\text{pasta},\text{borsh}\}$, for instance, but in what sense are these sets similar? They are related because there exists a bijection between them. Note, however, that there are $4!=24$ possible bijections between these two sets.
+    \end{itemize}
+    \item Let $A,B$ be sets and $f:A\to B$ be a function (or map).
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \small
+            \draw (-1,0) ellipse (5mm and 9mm) node[above=9mm]{$A$};
+            \draw (1,0)  ellipse (5mm and 9mm) node[above=9mm]{$B$};
+
+            \footnotesize
+            \fill (-1,0.6)  circle (1.5pt);
+            \fill (-1,0.2)  circle (1.5pt);
+            \fill (-1,-0.2) circle (1.5pt);
+            \fill (-1,-0.6) circle (1.5pt);
+            \fill (1,0.6)   circle (1.5pt);
+            \fill (1,0.2)   circle (1.5pt);
+            \fill (1,-0.2)  circle (1.5pt);
+            \fill [rex] (1,-0.6)  circle (1.5pt);
+
+            \draw [semithick,-stealth,shorten >=2pt] (-1,0.6) -- node[above=2mm]{$f$} (1,0.2);
+            \draw [semithick,-stealth,shorten >=2pt] (-1,0.2) -- (1,0.6);
+            \draw [semithick,rey,-stealth,shorten >=2pt] (-1,-0.2) -- (1,-0.2);
+            \draw [semithick,rey,-stealth,shorten >=2pt] (-1,-0.6) -- (1,-0.2);
+        \end{tikzpicture}
+        \caption{A function that is neither injective nor surjective.}
+        \label{fig:notInjectSurject}
+    \end{figure}
+    \begin{itemize}
+        \item $f$ is \textbf{injective} if for all $a_1,a_2\in A$, $f(a_1)=f(a_2) \Longrightarrow a_1=a_2$.
+        \item $f$ is \textbf{surjective} if for every element $b\in B$, there exists an $a\in A$ such that $f(a)=b$.
+        \item $f$ is \textbf{bijective} if it is surjective and injective.
+        \begin{itemize}
+            \item These are one-to-one correspondances.
+        \end{itemize}
+        \item The function $f$ in Figure \ref{fig:notInjectSurject} is a function because it maps every element of $A$ to an element of $B$. However, it is not injective because the mappings indicated in \textcolor{rey}{light red} map two distinct elements of $A$ to the same element of $B$. Likewise, it is not surjective because the element of $B$ drawn in \textcolor{rex}{dark red} is not the image of any element of $A$ under $f$. Because $f$ is neither injective nor surjective, it is not bijective.
+    \end{itemize}
+    \item If there exists a bijection between the set $A$ and the nice set $[n]=\{1,2,\dots,n\}$, we say that $|A|=n$.
+    \item Example:
+    \begin{itemize}
+        \item Consider the sets $A=\N$ and $B=\{2k\mid k\in\N\}$.
+        \item Define $f:A\to B$ by $f(x)=2x$. $f$ is a bijection.
+        \item Thus, $|A|=|B|$ despite the intuitive sense that $|B|$ should be half $|A|$.
+    \end{itemize}
+    \item Sets in bijection with $\N$ are called \textbf{countable}, and we write $|A|=\aleph_0$.
+    \begin{itemize}
+        \item We can show that $|\Q|=\aleph_0$ and $|\R|\neq\aleph_0$.
+    \end{itemize}
+    \item \textbf{Permutation}: A bijection $\sigma:S\to S$, where $S=\{1,\dots,n\}$.
+    \item Examples:
+    \begin{itemize}
+        \item $n=1$:
+        \begin{itemize}
+            \item There exists a unique permutation of the set, which is an identity.
+        \end{itemize}
+        \item $n=2$:
+        \begin{itemize}
+            \item There are two different bijections here.
+            \item They are denoted by the following matrices.
+            \begin{align*}
+                \sigma &=
+                \begin{pmatrix}
+                    1 & 2\\
+                    1 & 2\\
+                \end{pmatrix}&
+                \sigma &=
+                \begin{pmatrix}
+                    1 & 2\\
+                    2 & 1\\
+                \end{pmatrix}
+            \end{align*}
+        \end{itemize}
+        \item $n=3$:
+        \begin{itemize}
+            \item Listing\footnote{Dr. Rudenko also shows function diagrams and mappings from the elements with loops (similar to graphs).} the elements of $\Ss_3$:
+            \begin{align*}
+                \Ss_3 &= \left\{
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        1 & 2 & 3\\
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        2 & 1 & 3\\
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        3 & 2 & 1\\
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        1 & 3 & 2\\
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        2 & 3 & 1\\
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1 & 2 & 3\\
+                        3 & 1 & 2\\
+                    \end{pmatrix}
+                \right\}\\
+                &= \left\{
+                    \permtwo{1}{2}{3},
+                    \permtwo{2}{1}{3},
+                    \permtwo{3}{2}{1},
+                    \permtwo{1}{3}{2},
+                    \permtwo{2}{3}{1},
+                    \permtwo{3}{1}{2}
+                \right\}
+                % &= \left\{
+                %     \tikz[baseline={(0,0.4)}]{
+                %         \node (1) at (0,0.8) {1} edge [out=150,in=120,loop] ();
+                %         \node (2) at (0.8,0.8) {2} edge [out=30,in=60,loop] ();
+                %         \node (3) at (0,0) {3} edge [out=-150,in=-120,loop] ();
+                %     }
+                % \right\}
+            \end{align*}
+            \item There are different important classes of permutations --- the first one listed is an identity, the next three listed are identities for one object and \textbf{cycles} of length two for the other two, and the last two are \textbf{cycles} of length three.
+            \item $|\Ss_3|=6$.
+        \end{itemize}
+    \end{itemize}
+    \item More generally, the numbers in the first row are the numbers 1 through $n$ and the numbers in the second row are those to which the bijection maps each number:
+    \begin{equation*}
+        \sigma =
+        \begin{pmatrix}
+            1 & 2 & \cdots & n\\
+            \sigma(1) & \sigma(2) & \cdots & \sigma(n)\\
+        \end{pmatrix}
+    \end{equation*}
+    \item We denote by $\Ss_n$ the set of permutations of $S=\{1,\dots,n\}$.
+    \item Exercises:
+    \begin{enumerate}
+        \item Draw all permutations in $\Ss_4$.
+        \item Prove that $|\Ss_n|=n!$.
+        \begin{itemize}
+            \item Perhaps by induction? Trivial for the base case of 0. Then if true for $n$, we can map $n+1$ to $n+1$ possible numbers, so we divide into $n+1$ cases. If $\sigma(n+1)=1$, then we know by the inductive hypothesis that we can permute the remaining $n$ numbers in $n!$ ways. Thus, the number of permutations is $\underbrace{n!+n!+\cdots+n!}_{n+1\text{ times}}=(n+1)\cdot n!=(n+1)!$.
+        \end{itemize}
+    \end{enumerate}
+    \item Note that in $\S_3$, permutations $\sigma(2,1,3)$, $\sigma(3,2,1)$, and $\sigma(1,3,2)$ are considered odd and the others are considered even.
+    \begin{itemize}
+        \item This classification is based on the number of crossings in the function diagrams.
+    \end{itemize}
+\end{itemize}
+
+
+
 \section{Introduction to Complex Dynamics 2 (Calegari)}
 \begin{itemize}
     \item \marginnote{6/22:}Picking up from yesterday on the proof of the proposition, $K(f_c)$ is connected iff $0\in K(f_c)$.
