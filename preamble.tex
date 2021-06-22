@@ -1,0 +1,43 @@
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{csquotes}
+\usepackage{xr}
+\usepackage{marginnote}
+\usepackage{scrextend}
+\usepackage[bottom]{footmisc}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{physics,bm}
+\usepackage[hidelinks]{hyperref}
+
+\fancypagestyle{main}{
+    \fancyhf{}
+    \fancyfoot[R]{Labalme\ \thepage}
+    \fancyhead[R]{MATH\ 16210}
+    \fancyhead[L]{\leftmark}
+}
+\fancypagestyle{plain}{
+    \fancyhead{}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\MakeOuterQuote{"}
+
+\externaldocument{main}
+
+\reversemarginpar
+
+\deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
+\deffootnote[2.1em]{0em}{0em}{\textsuperscript{\thefootnote}}
+
+\setitemize[3]{label=\scriptsize$\blacksquare$}
+
+\renewcommand{\chaptername}{Week}
+\renewcommand{\contentsname}{Weeks}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\e}[1][]{\text{e}^{#1}}
+
+\usepackage{subfiles}
