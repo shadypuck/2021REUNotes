@@ -74,5 +74,97 @@
 
 
 
+\section{Introduction to Complex Dynamics (Calegari)}
+\begin{itemize}
+    \item Main focus: the Mandelbrot Set.
+    \item Let $f_c:\C\to\C$ be the quadratic polynomial $f_c(z):=z^2+c$ where $c\in\C$ is a constant and $z\in\C$ is a variable.
+    \begin{itemize}
+        \item We study quadratics because they're the simplest nontrivial polynomial, i.e., one that displays the interesting phenomena of higher degree polynomials.
+    \end{itemize}
+    \item We want to understand the dynamics of $f_c$, i.e., what happens as we apply $f_c$ over and over again.
+    \begin{itemize}
+        \item In other words $z\to z^2+c\to (z^2+c)^2+c\to ((z^2+c)^2+c)^2+c\to\cdots$.
+        \item Are there any special values of $z$ that have interesting characteristics?
+    \end{itemize}
+    \item \textbf{Fixed point}: A value $z$ such that $f_c(z)=z$.
+    \begin{itemize}
+        \item Fixed points of $f_c$ are equivalent to \textbf{roots} of $f_c-z$.
+    \end{itemize}
+    \item In this branch of mathematics, we don't care so much about factoring $f_c$ as much as we care about other special entities like fixed points and \textbf{critical points}.
+    \item \textbf{Critical point}: A point where $\dv*{f_c}{z}=0$.
+    \item We denote $z$ large by $|z|>>1$.
+    \item Note that $z^2+c$ doesn't change the magnitude of $z$ that much unless $z$ is large.
+    \begin{itemize}
+        \item Essentially, if $|z|>>1$, then $|f_c(z)|>>|z|$.
+    \end{itemize}
+    \item Introduces composition notation: $z\to f_c(z)\to {f_c}^2(z)\to {f_c}^3(z)\to\cdots$\footnote{Sometimes, people also use a circled number in the superscript.}.
+    \item If $z$ large, then the sequence $z,f_c(z),{f_c}^2(z),\dots$ converges to infinity.
+    \item \textbf{Riemann Sphere}: The set $\hat{\C}:=\C\cup\infty$.
+    \begin{itemize}
+        \item Like an open set of complex numbers.
+        \item In this case, we can think of infinity as a fixed point.
+    \end{itemize}
+    \item Any number whose absolute value is sufficiently big will converge to infinity.
+    \item Introduces big $N$ convergence test.
+    \item Infinity is an \textbf{attracting fixed point}, i.e. there exists an open neighborhood $U$ containing $\infty$ such that for all $z\in U$, ${f_c}^n(z)\to\infty$ as $n\to\infty$.
+    \item \textbf{Filled Julia set}: The set $\{z:\text{the iterates }{f_c}^n(z)\text{ do not converge to }\infty\}$. \emph{Also known as} $\bm{K(f_c)}$.
+    \begin{itemize}
+        \item Equivalent to the set $\{z:\exists\text{ a constant }T\text{ s.t. }|{f_c}^n(z)|\leq T\ \forall\ n\}$.
+    \end{itemize}
+    \item The points that diverge to infinity are not that interesting; their divergence is their only property.
+    \item Much more interesting are the points that do not diverge to infinity.
+    \item Lemma: $K(f_c)$ is closed and bounded (i.e., compact).
+    \begin{itemize}
+        \item Proof: There exists $T$ (depending on $c$) such that if $|z|>T$, then $z\notin K(f_c)$. Furthermore, $z\in K(f_c)$ if and only if there exists $n$ such that $|{f_c}^n(z)|>T$. Let $U:=\{z:|z|>T\}$. This is open. Thus, $z\in K(f_c)\Longleftrightarrow z$ iterates ${f_c}^n(z)\in U$. Therefore, $K(f_c)=\C$, so $\bigcup_n{f_c}^n(U)$, i.e., $K(f_c)$ is closed.
+        \item Bounded because numbers are not arbitrarily large. \emph{flesh out details?}
+    \end{itemize}
+    \item Calegari's proofs will be somewhat informal throughout the week; he hits the main points and leaves the details as an exercise to the student.
+    \item Question: What other topological properties does the filled Julia set have?
+    \begin{itemize}
+        \item Is it possible that $K(f_c)=\emptyset$?
+        \begin{itemize}
+            \item No, it is not --- as a degree 2 polynomial, $f_c-z$ has at least one root, which will by necessity be a fixed point, i.e., not diverge to infinity, i.e., in the filled Julia set.
+        \end{itemize}
+        \item Could it be a finite set?
+        \begin{itemize}
+            \item No --- $K(f_c)$ is a \textbf{perfect set}.
+            \item Uncountably infinite, too.
+        \end{itemize}
+        \item Is $K(f_c)$ connected?
+        \begin{itemize}
+            \item Sometimes.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Perfect set}: A set where every point in the set is a \textbf{nontrivial limit point} of the set.
+    \begin{itemize}
+        \item Example: A closed interval, \emph{others listed}.
+    \end{itemize}
+    \item \textbf{Nontrivial limit point}: A point $p$ in a set $A$ such that there is a nontrivial sequence (i.e., not a constant sequence, e.g., $p,p,p,\dots$) of points in $A$ that converge to $p$.
+    \item \textbf{Not connected}: A set $X\subset\C$ such that there exist disjoint, open sets $U,V$ such that $X\subset U\cup V$, $X\cap U\neq\emptyset$, and $X\cap V\neq\emptyset$.
+    \item \textbf{Mandlebrot set}: The set of complex numbers $c\in\C$ such that $K(f_c)$ is connected \emph{Also known as} $\bm{M}$.
+    \item We can prove that $K(f_c)$ is connected if and only if the critical point of $f_c$ is an element of $K(f_c)$.
+    \begin{itemize}
+        \item Remember that critical points of $f_c$ are equivalent to zeroes of $f_c'$.
+    \end{itemize}
+    \item Note that critical points of $f_c:=z^2+c$ are equal to the roots of $f_c'=2z$, i.e., the elements of $\{0\}$.
+    \item $K(f_c)$ is connected is equivalent to the sequence $0\to c\to c^2+c\to (c^2+c)^2+c\to\cdots$ is bounded (an absolute value).
+    \begin{itemize}
+        \item Thus, $c\in M$ is equivalent to the sequence $0\to c\to c^2+c\to (c^2+c)^2+c\to\cdots$ is bounded.
+    \end{itemize}
+    \item The Mandelbrot set is compact, too.
+    \item Proposition: $K(f_c)$ is connected if and only if $0\in K(f_c)$.
+    \begin{itemize}
+        \item "Proof": $\C-K(f_c)=\bigcup_n{f_c}^{-n}(U)$ where $U$ is an open neighborhood of $\infty$, i.e., the set $\{z:|z|>T\}$.
+        \item Let $X_n:=\C-{f_c}^{-n}(U)$, i.e., $X_0=\C-U$, so $K(f_c)=\bigcap_nX_n$.
+        \item Cyclic map? $X_n$ getting "smaller" as $n$ increases? $X_{n+1}\subset X_n$.
+        \item Assume $X_n=\text{little}$.
+        \item Two cases: $X_n$ contains 0 and $X_n$ does not contain 0.
+        \item Either every preimage of $X_n$ is connected or there is a $T$ such that for all $n\geq T$, $X_n$ is not connected.
+    \end{itemize}
+    \item Theorem (Douady-Hubbard): $M$ is connected.
+\end{itemize}
+
+
+
 
 \end{document}
