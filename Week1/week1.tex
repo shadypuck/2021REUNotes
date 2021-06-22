@@ -241,5 +241,57 @@
 
 
 
+\section{The Mathematics of Playing Pool (Mazur)}
+\begin{itemize}
+    \item Main focus: Billiards in a polygon.
+    \item The ball bounces off a side with the same angle of incidence it struck it with. If the ball hits the corner, it stops (maybe it fell into a pocket).
+    \item \textbf{Billiards}: Start with a polygon in the plane. Shoot a billiard ball, thought of as a point mass, ...
+    \item Rectangular tables are fully understood, but other polygons are harder. Curved sides are even more complicated.
+    \item Connection to physics: Ehrenfest windtree model (by Paul and Tatjana Ehrenfest, 1912).
+    \item One thing people study is the diffusion rate of a random particle. This means that if you take a random particle and follow it for a long time $t$, how far is it from where it started? What people know is that a typical particle is about distance $t^{2/3}$ away.
+    \item Another example: Take two point masses with positions $0\leq x_1\leq x_2\leq 1$ on the unit interval $[0,1]$. Suppose their masses are $m_1,m_2$ and they move with velocities $v_1,v_2$, respectively. They collide with each other and with the barriers at 0 and 1. Momentum and energy are conserved.
+    \begin{itemize}
+        \item We can convert this to billiards in a right triangle with the observations that energy and speed are related and momentum and angle of incidence are related.
+    \end{itemize}
+    \item Billiards are important examples of \textbf{dynamical systems} where one studies behavior of objects under a deterministic system (initial position and velocity define motion for the rest of time).
+    \item Billiards questions:
+    \begin{itemize}
+        \item Are there periodic orbits?
+        \item How does a typical orbit behave in the long term? Is it dense? Is it equidistributed?
+        \item Illumination problem (can you get from any point to any other?).
+    \end{itemize}
+    \item Periodic orbits:
+    \begin{itemize}
+        \item There are periodic orbits in acute triangles.
+        \item Drop perpendiculars; use Euclidean geometry to prove.
+        \item It is unknown if a general obtuse triangle has a periodic orbit. This is considered to be one of the big unsolved problems in dynamics\footnote{Can we consider the set of all possible initial positions and directions and see what converges to what?}.
+    \end{itemize}
+    \item Equidistribution and Ergodicity:
+    \begin{itemize}
+        \item ...
+    \end{itemize}
+    \item Rational billiards is much more well-defined. Every rational table has periodic orbits.
+    \item Most paths equidistribute.
+    \item Illumination problem:
+    \begin{itemize}
+        \item Now imagine you put a light source at a point on your table. The walls are mirrors and a light beam bounces of the mirror with angle of incidence equal to angle of reflection. Is every point illuminated? In other words, can you get from any point to any other? Not in a Penrose unilluminable room (a region is dark in this elliptical room).
+        \item Polygon example from Tokarski in the 1980s (a zero-dimensional point is unilluminable).
+        \item Within the last 5 years: For any rational billiard, there are at most a finite number of unilluminable points.
+    \end{itemize}
+    \item Unfolding billiards boards.
+    \item If the slope of the line on a torus is rational, it closes up. If the slope of the line on a torus is irrational, it does not close but is equidistributed.
+    \item For a square, when we glue the unfolded version together, we get a genus 1 surface (a torus).
+    \item For a triangle with angles $\frac{\pi}{2}$, $\frac{\pi}{8}$, and $\frac{3\pi}{8}$, the unfolded version can be glued together into a genus 2 surface.
+    \item Ergodicity:
+    \begin{itemize}
+        \item A common notion in mathematics is that of irreducibility.
+        \item In our context, irreducible (or ergodic) means you cannot divide your table $X$ nontrivially into 2 pieces $X=X_1\cup X_2$ so that if you start with a point in $X_1$ and you move in a straight line, you stay in $X_1$ and if you start in $X_2$ you stay there.
+        \item In other words, there are no invariant sets.
+    \end{itemize}
+    \item Proves the Kronecker-Weyl theorem.
+\end{itemize}
+
+
+
 
 \end{document}
