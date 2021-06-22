@@ -74,7 +74,7 @@
 
 
 
-\section{Introduction to Complex Dynamics (Calegari)}
+\section{Introduction to Complex Dynamics 1 (Calegari)}
 \begin{itemize}
     \item Main focus: the Mandelbrot Set.
     \item Let $f_c:\C\to\C$ be the quadratic polynomial $f_c(z):=z^2+c$ where $c\in\C$ is a constant and $z\in\C$ is a variable.
@@ -166,7 +166,7 @@
 
 
 
-\section{Harmonic Functions, Brownian Motion, and Analysis in the Plane (Lawler)}
+\section{Harmonic Functions, Brownian Motion, and Analysis in the Plane 1 (Lawler)}
 \begin{itemize}
     \item These topics will change week to week, so drop in at any point over the summer.
     \item Schedule:
@@ -289,6 +289,69 @@
         \item In other words, there are no invariant sets.
     \end{itemize}
     \item Proves the Kronecker-Weyl theorem.
+\end{itemize}
+
+
+
+\section{Introduction to Complex Dynamics 2 (Calegari)}
+\begin{itemize}
+    \item \marginnote{6/22:}Picking up from yesterday on the proof of the proposition, $K(f_c)$ is connected iff $0\in K(f_c)$.
+    \begin{itemize}
+        \item Recall that 0 is the unique critical point.
+        \item Also recall that $U$ is the set that contains only elements with sufficiently big absolute values, big enough so that $f_c(U)\subset U$.
+        \item Define $X_0=\C-U$, $X_{n+1}={f_c}^{-n}(X_n)$.
+        \begin{itemize}
+            \item Each $X_n$ is compact, and $K(f_c)$ is equal to the intersection of all $X_n$, therefore compact in and of itself.
+        \end{itemize}
+        \item Thus, $K(f_c)$ is connected iff every $X_n$ is connected.
+        \item Key point: If $0\in K(f_c)$, then each $X_n$ is a disk; otherwise, some $X_n$ is not a disk.
+        \item Fact: Every point in $\C$ has exactly 2 preimages under $f_c$ except for the critical value $c=f_c(0)$ since $f_c$ is a degree 2 polynomial.
+        \item Assume $X_n$ is a disk. If $X_n$ contains the critical value, then $X_{n+1}$ is a disk; otherwise, not (in fact, it will be disconnected).
+    \end{itemize}
+    \item Under $f_c$, the preimage of a circle not containing the critical value is either 2 circles, each of which maps one-to-one, or a single circle mapping two-to-one.
+    \begin{itemize}
+        \item Suppose that the preimage of the boundary of the circles is two distinct circles.
+        \item By continuity, concentric circles narrowing down within the original set narrow down within the other two circles.
+        \item Each point in $X_n$ has exactly two preimages iff $c\notin X_n$.
+        \item As we make smaller and smaller circles, than we can split our one-circle preimage into two disconnected subsets.
+    \end{itemize}
+    \item Today: The theory of Julia sets for holomorphic functions in general.
+    \item Let $f$ be a \textbf{holomorphic} map from $\hat{\C}$ to itself.
+    \item Every such $f$ has finitely many 0s and poles ($\infty$s).
+    \item Therefore, $f$ is a rational function, i.e., a ratio of polynomials. Symbolically, $f(z)=\frac{p(z)}{q(z)}$ for some polynomials $p,q$.
+    \item To talk about Julia sets, we need some definitions.
+    \item \textbf{Normal family}: Let $U$ be an open subset of the Riemann sphere $\hat{\C}$, and let $F$ be a family of holomorphic functions $f:U\to\hat{\C}$. $F$ is \textbf{normal} if its closure (in the space of all holomorphic functions from $U$ to $\hat{C}$) is compact.
+    \begin{itemize}
+        \item In other words, if ever infinite sequence $f_n\in F$ has a subsequence that converges locally uniformly to some limit $g:U\to\hat{\C}$.
+    \end{itemize}
+    \item Normality is local.
+    \item Proposition: Suppose $F$ is a family of holomorphic functions defined on $U$, and suppose for all $p\in U$, there exists open $p\in V\subset U$ such that $F|_V$ is normal. Then $F|_U$ is normal.
+    \begin{itemize}
+        \item Proof 1: Diagonal argument.
+        \item Proof 2: ???
+    \end{itemize}
+    \item \textbf{Julia set}: Let $f$ be a holomorphic map from $\hat{\C}$ to itself. Let $\mathcal{F}:=\{f^n\mid n\in\N\}$. The Fatou set $\Omega_f:\subset\hat{\C}$ is the open subset whose $\mathcal{F}$ is normal. It is equal to the union of all $U$ where $F|_U$ is normal. Thus, $\Omega_f$ is open and $\mathcal{F}|_{\Omega_f}$ is normal. The \textbf{Julia set} $J_f:\subset\hat{\C}$ is $\hat{C}-\Omega_f$, i.e., $p\in J_f$ iff for all $U$ containing $p$, $F|_U$ is not normal on $U$.
+    \begin{itemize}
+        \item Hence, $J_f$ is compact.
+    \end{itemize}
+    \item Example: Let's let $p$ be a fixed point for $f$.
+    \begin{itemize}
+        \item $p$ is an attracting fixed point if $|f'(p)|<1$. $p$ is super attracting if $|f'(p)|=0$.
+        \item Example:
+        \begin{itemize}
+            \item If $f$ is a polynomial of degree at least 2, then $\infty$ is a super attracting fixed point.
+        \end{itemize}
+        \item If we take a sufficiently small neighborhood of $p$, then $f$ shrinks and rotates the neighborhood a little bit.
+        \item \textbf{Basin of attraction} of $p$.
+        \item \textbf{Immediate basin of attraction} of $p$ is the connected component of the basin of attraction of $p$.
+    \end{itemize}
+    \item If $f$ is a polynomial, then $K(f_c)$ is equal to the complement of the basin of infinity.
+    \item "Most" "typical" $f$ have $\Omega_f=\bigcup\text{basins of attraction of attracting periodic orbits}$.
+    \begin{itemize}
+        \item Furthermore: every immediate basin of an attracting periodic orbit contains at least one critical point.
+        \item A rational map of degree $d$ (the maximum of the degrees of polynomials $p,q$) has $2d-2$ critical points.
+    \end{itemize}
+    \item Theorem: The closure of the set of repelling periodic orbits (i.e., $p$ with $f^n(p)=p$ and $|(f^n)'(p)|>1$) is $J_f$.
 \end{itemize}
 
 
