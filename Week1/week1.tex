@@ -372,7 +372,7 @@
         \end{itemize}
         \item $n=3$:
         \begin{itemize}
-            \item Listing\footnote{Dr. Rudenko also shows function diagrams and mappings from the elements with loops (similar to graphs).} the elements of $\Ss_3$:
+            \item Listing\footnote{Dr. Rudenko also shows function diagrams and directed graphs (see Figure \ref{fig:directedGraphS8}).} the elements of $\Ss_3$:
             \begin{align*}
                 \Ss_3 &= \left\{
                     \begin{pmatrix}
@@ -475,7 +475,7 @@
             $\bm{x}$ & $x$      & $e$\\
         \end{tabular}
         \caption{Multiplication table for $\Ss_2$.}
-        \label{fig:S2MultiplicationTable}
+        \label{tab:S2MultiplicationTable}
     \end{table}
     \begin{itemize}
         \item This holds where $e=(1,2)$ and $x=(2,1)$.
@@ -604,6 +604,106 @@
     \item Today: Category theory.
     \item \textbf{Poset}: A \underline{p}artially \underline{o}rdered \underline{set}, i.e., one that is transitive, reflexive, and antisymmetric ($A\leq B\text{ and }A\geq B\Longleftrightarrow A=B$).
     \item \textbf{Small category}: A category that has a set of objects as opposed to a class of objects. \emph{Also known as} \textbf{kitty category}, \textbf{kittygory}.
+\end{itemize}
+
+
+
+\section{Lecture 1.3: Cyclic Structure of a Permutation}
+\begin{itemize}
+    \item Let $
+        \sigma=\left(
+            \begin{smallmatrix}
+                1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+                7 & 3 & 4 & 2 & 6 & 5 & 1 & 8\\
+            \end{smallmatrix}
+        \right)\in\Ss_8
+    $.
+    \item Consider the directed graph representation.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[scale=0.9,inner sep=2pt]
+            \small
+            \node (1) at (0,0) {1};
+            \node (7) at (0,1) {7}
+                edge [stealth-,bend right=30] (1)
+                edge [-stealth,bend left=30] (1)
+            ;
+            \node (2) at (1,1) {2};
+            \node (3) at (2,1) {3}
+                edge [stealth-,bend right=30] (2)
+            ;
+            \node (4) at (2,0) {4}
+                edge [stealth-,bend right=30] (3)
+                edge [-stealth,bend left=30] (2)
+            ;
+            \node (8) at (1,0) {8}
+                edge [out=120,in=150,loop] ()
+            ;
+            \node (5) at (3,0) {5};
+            \node (6) at (3,1) {6}
+                edge [stealth-,bend right=30] (5)
+                edge [-stealth,bend left=30] (5)
+            ;
+        \end{tikzpicture}
+        \caption{Directed graph of a permutation in $\Ss_8$.}
+        \label{fig:directedGraphS8}
+    \end{figure}
+    \begin{itemize}
+        \item Note that this is a graph because it has points connected by edges, it is directed because the edges have a direction (they are arrows/mappings), and it has some loops and some multiple edges (points with more than one edge).
+        \item There are four cycles in this graph (a 1-cycle, two 2-cycles, and a 3-cycle).
+    \end{itemize}
+    \item \textbf{Cycle}: A permutation $\sigma=(i_1,\dots,i_k)\in\Ss_n$, where $1\leq i_1\leq\cdots\leq i_k\leq n$, such that $\sigma(i_j)=i_{j+1}$, $\sigma(i_k)=i_1$, and $\sigma(s)=s$ for all $s\in[n]\setminus\{i_1,\dots,i_k\}$.
+    \item For example, $\sigma=(1,3,5)\in\Ss_5$ is the permutation $
+        \sigma=\left(
+            \begin{smallmatrix}
+                1 & 2 & 3 & 4 & 5\\
+                3 & 2 & 5 & 4 & 1\\
+            \end{smallmatrix}
+        \right)
+    $.
+    \item \textbf{Length} (of a cycle): The value $k$ in the above definition.
+    \item \textbf{Support} (of a cycle): The set of indices $\{i_1,\dots,i_k\}$ in the above definition.
+    \item \textbf{Transposition}: A cycle $(i,j)\in\S_n$, where $i,j\in[n]$ are distinct.
+    \item Thus, $\Ss_3=\{e,(1,2),(2,3),(1,3),(1,2,3),(1,3,2)\}$.
+    \item Exercise:
+    \begin{itemize}
+        \item Count the number of transpositions in $\Ss_n$.
+        \item Prove that every permutation is a product of transpositions.
+        \begin{itemize}
+            \item Consider crossings in the function diagram! Relate to braids from knot theory.
+            \item For instance, $
+                \left(
+                    \begin{smallmatrix}
+                        1 & 2 & 3 & 4 & 5\\
+                        3 & 4 & 1 & 2 & 5\\
+                    \end{smallmatrix}
+                \right)=(1,4)(2,4)(1,3)(2,3)
+            $.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Independent} (cycles): Two cycles $\sigma_1,\sigma_2\in\Ss_n$ with disjoint supports.
+    \item \textbf{Dependent} (cycles): Two cycles that are not independent.
+    \item Propositions:
+    \begin{enumerate}
+        \item Every permutation is a product of independent cycles.
+        \begin{itemize}
+            \item In the directed graph corresponding to $\sigma$, every vertex has on incoming edge.
+            \item There exists a smallest $k$ such that $\sigma^k(i)=i$.
+            \item \emph{Return to this?}
+        \end{itemize}
+        \item Independent cycles commute with each other.
+        \begin{itemize}
+            \item Obvious: Consider $c_1,c_2$ independent. Then
+            \begin{equation*}
+                c_1c_2(i) =
+                \begin{cases}
+                    c_1(i) & i\text{ is in the support of }c_1\\
+                    c_2(i) & i\text{ is in the support of }c_2\\
+                    i      & i\text{ is in the support of neither}
+                \end{cases}
+            \end{equation*}
+        \end{itemize}
+    \end{enumerate}
 \end{itemize}
 
 
