@@ -708,5 +708,74 @@
 
 
 
+\section{Lecture 1.4: Binomial Coefficients}
+\begin{itemize}
+    \item Start with the set $S=\{1,\dots,n\}$. Denote by $2^S$ the set of subsets of $S$.
+    \begin{itemize}
+        \item If $n=2$, then $2^S=\{\emptyset,\{1,2\},\{1\},\{2\}\}$ has four elements.
+    \end{itemize}
+    \item Proposition: $|2^S|=2^{|S|}$.
+    \begin{itemize}
+        \item Consider the set $S=\{1,2,3,4,5,6\}$.
+        \item Identify subsets of $S$ with a code, exemplified by $\{1,3,5\}\mapsto(1,0,1,0,1,0)$.
+        \item Based on this, construct a map $f$ which sends $2^S\to$ the set of sequences of $0,1$ of length $n$. In other terms, map each subset $A\in 2^S$ to a sequence $(s_1,\dots,s_n)$ where
+        \begin{equation*}
+            s_i =
+            \begin{cases}
+                0 & i\notin A\\
+                1 & i\in A
+            \end{cases}
+        \end{equation*}
+        \item For example, $f(\emptyset)=(0,0,0,0,0,0)$ and $f(S)=(1,1,1,1,1,1)$.
+        \item Note that $f$ is a bijection.
+        \item Since the set of all sequences of $0,1$ of length $n$ (more commonly denoted by $\{0,1\}^n$) clearly has $2^n$ elements and $2^S$ is in bijective correspondence with this set, we know that $2^S$ has $2^{|S|}=2^n$ elements.
+    \end{itemize}
+    \item Note that coding subsets by sequences is very important in computer science and mathematics.
+    \item Geometric model: Vertices of a line segment give you subsets of a set with 1 element, vertices of a square give you subsets of a set with 2 elements, vertices of a cube give you subsets of a set with 3 elements, \dots
+    \item If $A\in 2^S$ and $f(A)=(a_1,\dots,a_n)$, then $|A|=\sum_{i=1}^na_i$.
+    \item If $0\leq k\leq n$, then $\binom{n}{k}$ is the number of subsets of size $k$ in a set of size $n$.
+    \item Proposition: $\binom{n}{k}=\frac{n!}{k!(n-k)!}$.
+    \begin{itemize}
+        \item $\binom{n}{k}\cdot k!$ is the number of subsets of size $k$ and the orderings of their elements.
+        \item But this is the same as choosing the first element from among $n$ elements, the second from among the remaining $n-1$ elements and so on until $n-k+1$, i.e.,
+        \begin{align*}
+            \binom{n}{k}\cdot k! &= n\cdot(n-1)\cdots(n-k+1)\\
+            &= \frac{n!}{(n-k)!}
+        \end{align*}
+    \end{itemize}
+    \item By convention, $\binom{n}{0}=1=\binom{n}{n}$.
+    \item Proposition: $\binom{n}{k}=\binom{n}{n-k}$.
+    \begin{itemize}
+        \item Follows from the previous proposition.
+        \item Alternatively, we can seek to show that the number of subsets of size $k$ is equal to the number of subsets of size $n-k$. But since these are inverse maps, they obviously are.
+    \end{itemize}
+    \item Proposition: $\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$.
+    \begin{itemize}
+        \item Follows from the factorial formula.
+        \item Conceptually:
+        \begin{itemize}
+            \item Divide the set of subsets of $S$ of size $k$ into those that contain $n$ and those that do not contain $n$.
+            \item The subsets of size $k$ that do not contain $n$ is equal to the subsets of $S\setminus\{n\}$ of size $k$, i.e., $\binom{n-1}{k}$.
+            \item The subsets of size $k$ the do contain $n$ are in bijection with the subsets of size $k-1$ in $S\setminus\{n\}$, i.e., $\binom{n-1}{k-1}$.
+        \end{itemize}
+    \end{itemize}
+    \item Introduces Pascal's triangle.
+    \begin{itemize}
+        \item The symmetry of Pascal's triangle follows from the formula $\binom{n}{k}=\binom{n}{n-k}$.
+    \end{itemize}
+    \item Theorem (Binomial Formula):
+    \begin{align*}
+        (a+b)^n &= \binom{n}{0}a^n+\binom{n}{1}a^{n-1}b+\cdots+\binom{n}{n}b^n\\
+        &= \sum_{k=0}^n\binom{n}{k}a^{n-k}b^k
+    \end{align*}
+    \begin{itemize}
+        \item Induction proof: Left as an exercise.
+        \item $(a+b)^n=\underbrace{(a+b)(a+b)\cdots(a+b)}_{n\text{ times}}=$ a sum of monomials, e.g., $aabbaba$. We get each monomial by choosing $a$ or $b$ from each parentheses. Thus, $(a+b)^n=\sum_{A\subset\{1,\dots,n\}=S}a^{|A|}b^{|S\setminus A|}$.
+    \end{itemize}
+    \item Corollary: If $a=b=1$, then $2^n=(1+1)^n=\sum_{k=0}^n\binom{n}{k}1^{n-k}1^k=\sum_{k=0}^n\binom{n}{k}$.
+\end{itemize}
+
+
+
 
 \end{document}
