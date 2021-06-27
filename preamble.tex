@@ -6,9 +6,10 @@
 \usepackage{scrextend}
 \usepackage[bottom]{footmisc}
 \usepackage{enumitem}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{physics,bm}
 \usepackage{tikz}
+\usepackage{subcaption}
 \usepackage[hidelinks]{hyperref}
 
 \fancypagestyle{main}{
@@ -33,8 +34,10 @@
 
 \setitemize[3]{label=\scriptsize$\blacksquare$}
 
+\usetikzlibrary{decorations.pathreplacing}
 \colorlet{rex}{red!90!yellow!70!black}
 \colorlet{rey}{red!90!yellow!60}
+\colorlet{rez}{red!90!yellow!20}
 
 \renewcommand{\chaptername}{Week}
 \renewcommand{\contentsname}{Weeks}

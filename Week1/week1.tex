@@ -788,5 +788,138 @@
 
 
 
+\section{PSet 1}
+\begin{enumerate}
+    \item We have discussed three ways to prove identities for binomial coefficients: induction, combinatorial bijection, and binomial formula. Try these three approaches on the following identities.
+    \begin{enumerate}
+        \item $\binom{r}{m}\binom{m}{k}=\binom{r}{k}\binom{r-k}{m-k}$.
+        \item $\binom{n}{0}^2+\binom{n}{1}^2+\cdots+\binom{n}{n}^2=\binom{2n}{n}$.
+        \begin{proof}
+            Combinatorial bijection: Divide the $2n$ items into two bins of $n$ items each, which we shall refer to as the red bin and the blue bin. There are as many ways to choose $n$ items from among both bins as there are to choose 0 items from the red bin and $n$ items from the blue bin, plus 1 item from the red bin and $n-1$ items from the blue bin, and so on and so forth. Symbolically, $\binom{2n}{n}=\binom{n}{0}\binom{n}{n}+\binom{n}{1}\binom{n}{n-1}+\cdots+\binom{n}{n}\binom{n}{0}$. We can then apply to this identity the symmetry one (i.e., $\binom{n}{k}=\binom{n}{n-k}$) to yield the final formula.
+        \end{proof}
+        \item $\binom{n}{0}\binom{m}{k}+\binom{n}{1}\binom{m}{k-1}+\cdots+\binom{n}{k}\binom{m}{0}=\binom{n+m}{k}$.
+        \item $\binom{n-1}{k-1}+\binom{n-2}{k-1}+\cdots+\binom{k-1}{k-1}=\binom{n}{k}$.
+        \begin{proof}
+            As can be easily seen from Pascal's triangle, $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$.
+        \end{proof}
+    \end{enumerate}
+    \item We will consider a "disease" that infects cells of a chessboard. Initially, some number of the 64 cells are infected. Subsequently, the infection spreads according to the following rule: If at least two neighbors of a cell are infected, then the cell gets infected. (Neighbors share an edge, so each cell has at most four neighbors.) No cell is ever cured. What is the minimum number of cells one can initially infect so that the whole board is eventually infected? It is easy to see that 8 is sufficient in many ways. Prove that 7 is not enough.
+    \begin{proof}
+        To prove that 8 is the minimum number of cells one can initially infect so that the whole $8\times 8$ board is eventually infected, it will suffice to show $n$ is the minimum number of cells required to infect an $n\times n$ board for all natural numbers $n$. We induct on the the edge length of the board $n$ using strong induction. For the base case $n=1$, it is trivially obvious that the one cell on the board is either infected or not, so to infect the whole board, we need to infect it (i.e., infect 1 cell). Now suppose inductively that we have proven the claim for $n$; we now seek to prove it for $n+1$.\par
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}[scale=0.3]
+                    \footnotesize
+                    \draw [help lines,dashed] (0,0) grid (8,8);
+                    \draw (0,0) rectangle (8,8);
+                    \draw
+                        (1,0) -- (1,8)
+                        (0,1) -- (8,1)
+                        (7,0) -- (7,8)
+                        (0,7) -- (8,7)
+                    ;
+                    
+                    \draw [decorate,decoration={brace}] (0,8.3) -- node[above=1mm]{$n+1$} ++(8,0);
+                    \draw [decorate,decoration={brace}] (-0.3,0) -- node[left=1mm]{$n+1$} ++(0,8);
+        
+                    \path (-4,0) -- (12,0);
+                \end{tikzpicture}
+                \caption{An $(n+1)\times(n+1)$ chessboard.}
+                \label{fig:chessboarda}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}[scale=0.3]
+                    \foreach \x [evaluate=\x as \y using 8-\x] in {0,...,6} {
+                        \fill [rez] (\x,\y) rectangle ([xshift=1cm,yshift=-1cm]\x,\y);
+                    }
+        
+                    \draw [help lines,dashed] (0,0) grid (8,8);
+                    \draw (0,0) rectangle (8,8);
+                    \draw
+                        (1,0) -- (1,8)
+                        (0,1) -- (8,1)
+                        (7,0) -- (7,8)
+                        (0,7) -- (8,7)
+                    ;
+        
+                    \draw [rex,very thick] (0,8) rectangle (7,1);            \draw [rey,very thick] (6,2) rectangle (8,0);
+                \end{tikzpicture}
+                \caption{Subgrids.}
+                \label{fig:chessboardb}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}[scale=0.3]
+                    \foreach \x [evaluate=\x as \y using 8-\x] in {0,...,7} {
+                        \fill [rez] (\x,\y) rectangle ([xshift=1cm,yshift=-1cm]\x,\y);
+                    }
+        
+                    \draw [help lines,dashed] (0,0) grid (8,8);
+                    \draw (0,0) rectangle (8,8);
+                    \draw
+                        (1,0) -- (1,8)
+                        (0,1) -- (8,1)
+                        (7,0) -- (7,8)
+                        (0,7) -- (8,7)
+                    ;
+                \end{tikzpicture}
+                \caption{Infected cells in the beginning.}
+                \label{fig:chessboardc}
+            \end{subfigure}
+            \caption{A chessboard to be infected.}
+            \label{fig:chessboard}
+        \end{figure}
+        Consider an $(n+1)\times(n+1)$ board, as in Figure \ref{fig:chessboarda}. As part of infecting the board, it will be necessary to infect the $n\times n$ subgrid in the upper left-hand corner (in dark red in Figure \ref{fig:chessboardb}, and note that the $n$ shaded cells are the initially infected ones that will infect the whole subgrid). By the inductive hypothesis, it will require a minimum of $n$ infected cells to infect it. However, even after that whole subgrid is infected, there are still healthy cells, none of which has more than one neighbor. Thus, it will be necessary to add in at least one more infected cell. The light red subgrid at the bottom right of Figure \ref{fig:chessboardb} gives us a hint of where to put it; indeed, for the $n=2$ case, it is necessary to have at least 2 cells infected by hypothesis, but this subgrid only contains one infected cell (one that overlaps with the other subgrid). Therefore, by placing the $(n+1)^\text{st}$ infected cell in the bottom right-hand corner (see Figure \ref{fig:chessboardc}), we can infect the whole board.
+    \end{proof}
+    \item Generators of $\Ss_n$
+    \begin{enumerate}
+        \item Prove that
+        \begin{equation*}
+            \sigma =
+            \begin{pmatrix}
+                1 & 2 & 3 & 4 & 5 & 6\\
+                6 & 3 & 2 & 4 & 5 & 1\\
+            \end{pmatrix}
+        \end{equation*}
+        is a product of transpositions.
+        \begin{proof}
+            $\sigma=(16)(23)$.
+        \end{proof}
+        \item Prove that any permutation is a product of transpositions.
+        \begin{proof}
+            Let $\sigma=(a_1,a_2,\dots,a_n)\in\Ss_n$ be an arbitrary permutation. Starting from $e=(1,2,\dots,n)$, have the first permutation be $(1a_1)$. This will set $a_1$ in the correct position. The second will then be $(xa_2)$, where $x$ is whatever is in the second position after the first transposition. This will set $a_2$ in the correct position. Continue down the line, always switching whatever is in the $k^\text{th}$ spot with what should be there before moving on the the $(k+1)^\text{th}$ spot and ending at the $n^\text{th}$ spot.
+        \end{proof}
+        \item Prove that any permutation in $\Ss_n$ can be written as a product of two permutations $(12)$ and $(12\dots n)$.
+    \end{enumerate}
+    \item Two players put 25 cent coins on the round table alternately. They are allowed to put a coin on an empty spot only. The person, who cannot make a move, loses the game. Find a winning strategy for one of the players.
+    \item Let $G$ be a finite group.
+    \begin{enumerate}
+        \item Prove that for $g_1,g_2,g_3\in G$, if $g_1g_2=g_1g_3$, then $g_2=g_3$.
+        \begin{proof}
+            By the inverse property of a group, there exists ${g_1}^{-1}$. Therefore, we have that
+            \begin{align*}
+                {g_1}^{-1}(g_1g_2) &= {g_1}^{-1}(g_1g_3)\tag*{Multiplicative POE}\\
+                ({g_1}^{-1}g_1)g_2 &= ({g_1}^{-1}g_1)g_3\tag*{Associativity}\\
+                eg_2 &= eg_3\tag*{Inverse}\\
+                g_2 &= g_3\tag*{Identity}
+            \end{align*}
+            as desired.
+        \end{proof}
+        \item Prove that in the multiplication table of a finite group, every element appears exactly once in each row and once in each column.
+        \begin{proof}
+            Let $G=\{g_1,g_2,\dots,g_n\}$ be a finite group of order $n$. Consider the row/column defined by $g_i$, where $i$ is an arbitrary natural number between 1 and $n$, inclusive. Suppose for the sake of contradiction that the object $g$ appears twice in the row, such that $g_ig_j=g$ and $g_ig_k=g$, where $j\neq k$. But by part (a), $g_ig_j=g=g_ig_k$ implies that $g_j=g_k$, a contradiction, since every element of $G$ is only listed once in the row/column headers.
+        \end{proof}
+        \item Prove that for any permutation $\sigma\in\Ss_n$, there exists $N\in\N$ such that $\sigma^N=e$.
+        \item Prove that for $g\in G$, we have $g^{|G|}=e$.
+    \end{enumerate}
+    \item \textbf{Erd\H{o}s-Szekeres theorem}:\par
+    Prove that for any $n,m\in\N$, every sequence of $nm+1$ distinct real numbers contains an increasing subsequence of length $n+1$ or a decreasing subsequence of length $m+1$.
+\end{enumerate}
+
+
+
 
 \end{document}
