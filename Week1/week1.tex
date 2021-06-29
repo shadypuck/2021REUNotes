@@ -788,6 +788,145 @@
 
 
 
+\section{Lecture 1.5: Catalan Numbers}
+\begin{itemize}
+    \item \marginnote{6/26:}The sequence $1,1,2,5,14,42,\dots$.
+    \item Discovered by Euler, who was investigating \textbf{triangulations} of a polygon.
+    \item Let $P$ be a \textbf{convex} polygon with $n+2$ sides.
+    \item \textbf{Convex} (polygon): A polygon such that for all chords connecting points, the chord passes entirely through the interior of the polygon.
+    \item \textbf{Triangulation}: A decomposition of a polygon $P$ into triangles by nonintersecting diagonals.
+    \item Exercise:
+    \begin{itemize}
+        \item Every triangulation of $P$ has $n$ triangles.
+    \end{itemize}
+    \item The $n^\text{th}$ Catalan number $C_n$ is the number of such triangulations.
+    \begin{itemize}
+        \item $C_0:=1$.
+        \item $C_1=1$.
+        \item $C_2=2$.
+        \item $C_3=5$ (there are 5 rotations of the "same" triangulation).
+        \item $C_4=14$ (there are 6 with all three diagonals coming out of one vertex, 6 with opposite vertices having two diagonals, each, and 2 with a triangle in the center).
+        \item Computing $C_5$ gets more complicated. Number the vertices of the heptagon 0-6.
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[b]{0.24\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \footnotesize
+                    \draw ({90}:1) coordinate (3) node[above]{3}
+                        -- ({90-1*360/7}:1) coordinate (4) node[above right]{4}
+                        -- ({90-2*360/7}:1) coordinate (5) node[right]{5}
+                        -- ({90-3*360/7}:1) coordinate (6) node[below right]{6}
+                        -- ({90-4*360/7}:1) coordinate (0) node[below left]{0}
+                        -- ({90-5*360/7}:1) coordinate (1) node[left]{1}
+                        -- ({90-6*360/7}:1) coordinate (2) node[above left]{2}
+                        -- cycle
+                    ;
+
+                    \draw [very thick] (0) -- (6);
+                \end{tikzpicture}
+                \caption{Original shape.}
+                \label{fig:Catalan5a}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.24\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \footnotesize
+                    \draw ({90}:1) coordinate (3) node[above]{3}
+                        -- ({90-1*360/7}:1) coordinate (4) node[above right]{4}
+                        -- ({90-2*360/7}:1) coordinate (5) node[right]{5}
+                        -- ({90-3*360/7}:1) coordinate (6) node[below right]{6}
+                        -- ({90-4*360/7}:1) coordinate (0) node[below left]{0}
+                        -- ({90-5*360/7}:1) coordinate (1) node[left]{1}
+                        -- ({90-6*360/7}:1) coordinate (2) node[above left]{2}
+                        -- cycle
+                    ;
+
+                    \draw [rex,thick] (0) -- (1) -- (6) -- cycle;
+                \end{tikzpicture}
+                \caption{Term 1.}
+                \label{fig:Catalan5b}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.24\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \footnotesize
+                    \draw ({90}:1) coordinate (3) node[above]{3}
+                        -- ({90-1*360/7}:1) coordinate (4) node[above right]{4}
+                        -- ({90-2*360/7}:1) coordinate (5) node[right]{5}
+                        -- ({90-3*360/7}:1) coordinate (6) node[below right]{6}
+                        -- ({90-4*360/7}:1) coordinate (0) node[below left]{0}
+                        -- ({90-5*360/7}:1) coordinate (1) node[left]{1}
+                        -- ({90-6*360/7}:1) coordinate (2) node[above left]{2}
+                        -- cycle
+                    ;
+
+                    \draw [rex,thick] (0) -- (2) -- (6) -- cycle;
+                \end{tikzpicture}
+                \caption{Term 2.}
+                \label{fig:Catalan5c}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.24\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \footnotesize
+                    \draw ({90}:1) coordinate (3) node[above]{3}
+                        -- ({90-1*360/7}:1) coordinate (4) node[above right]{4}
+                        -- ({90-2*360/7}:1) coordinate (5) node[right]{5}
+                        -- ({90-3*360/7}:1) coordinate (6) node[below right]{6}
+                        -- ({90-4*360/7}:1) coordinate (0) node[below left]{0}
+                        -- ({90-5*360/7}:1) coordinate (1) node[left]{1}
+                        -- ({90-6*360/7}:1) coordinate (2) node[above left]{2}
+                        -- cycle
+                    ;
+
+                    \draw [rex,thick] (0) -- (3) -- (6) -- cycle;
+                \end{tikzpicture}
+                \caption{Term 3.}
+                \label{fig:Catalan5d}
+            \end{subfigure}
+            \caption{Computing $C_5$.}
+            \label{fig:Catalan5}
+        \end{figure}
+        \begin{itemize}
+            \item Observe: There will always be one triangle with $\overline{06}$ as an edge (see Figure \ref{fig:Catalan5a}).
+            \item If we include $\triangle 016$, we know that there are $C_4$ ways to triangulate the remaining 6-gon and $C_0$ ways to triangulate the "triangle" to the left of $\triangle 016$, i.e., the edge $\overline{01}$. Thus, we have that $C_5=C_0\cdot C_4+\cdots$ (see Figure \ref{fig:Catalan5b}).
+            \item If we consider $\triangle 026$, there are $C_1$ ways to triangulate the triangle to the left of $\triangle 026$ and $C_3$ ways to triangulate the 5-gon to the right of $\triangle 026$ (see Figure \ref{fig:Catalan5c}).
+            \item If we consider $\triangle 036$, there are $C_2$ ways to triangulate the 4-gons on both sides of $\triangle 026$ (see Figure \ref{fig:Catalan5d}).
+            \item Continuing, we can see that
+            \begin{equation*}
+                C_5 = C_0C_4+C_1C_3+C_2C_2+C_3C_1+C_4C_0
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    \item Proposition: The following recurrence relation holds.
+    \begin{equation*}
+        C_n = \sum_{i=0}^{n-1}C_iC_{n-1-i}
+    \end{equation*}
+    \begin{itemize}
+        \item Proof: Repeat the same argument.
+    \end{itemize}
+    \item A second interpretation of Catalan numbers.
+    \item Consider a sequence of brackets $(,)$ such as $((()))(()))($. A sequence is \textbf{admissible} if
+    \begin{enumerate}
+        \item The number of opening brackets is equal to the number of closing brackets.
+        \item In every initial subsequence, the number of opening brackets is greater than or equal to the number of closing brackets.
+    \end{enumerate}
+    \item For example, $(()))($ is not admissible but $(())()$ is.
+    \item Note that admissible sequences are the ones that can be taken to be the parentheses to expressions, e.g., $(a+b(c+d))(e+f)$ makes sense, but we can't fill in anything in $(()))($.
+    \item Proposition: The number of admissible sequences with $2n$ brackets equals $C_n$.
+    \begin{itemize}
+        \item $n=1$: $()$.
+        \item $n=2$: $(())$, $()()$.
+        \item $n=3$: $((()))$, $(()())$, $(())()$, $()(())$, $()()()$.
+        \item We have to show that the number of admissible sequences satisfies the same recurrence relation.
+        \item Consider $n=3$. For the first two, we have 2 sets of parentheses within the initial subsequence, and 0 outside it ($C_2C_0$). For the next one, we have 1 set within and 1 set outside ($C_1C_1$). For the last two, we have 0 sets in and 2 sets outside ($C_0C_2$). The number is the sum of all three.
+    \end{itemize}
+    \item Exercise: Construct an explicit bijection between triangulations and parentheses.
+\end{itemize}
+
+
+
 \section{PSet 1}
 \begin{enumerate}
     \item We have discussed three ways to prove identities for binomial coefficients: induction, combinatorial bijection, and binomial formula. Try these three approaches on the following identities.
