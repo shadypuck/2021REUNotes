@@ -1,0 +1,69 @@
+\documentclass[../main.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
+
+\begin{document}
+
+
+
+
+\chapter{}
+\section{Gaussian Curvature (Neves)}
+\begin{itemize}
+    \item \marginnote{6/28:}Plan:
+    \begin{enumerate}
+        \item What is a surface?
+        \item What is the tangent space?
+        \item What are the principal curvatures?
+        \item What is the Gaussian curvature?
+    \end{enumerate}
+    \item In analysis:
+    \begin{enumerate}
+        \item What is a function?
+        \item What is the derivative?
+        \item What is the Hemian of function?
+        \item 2nd derivative test (determinant of Hemina).
+    \end{enumerate}
+    \item \textbf{Surface}: A subset $\sigma\subseteq\R^3$ such that for all $p\in\Sigma$, there's a neighborhood $B$ of $p$ in $\R^3$ so that $\Sigma\cap B$ "looks like a disk." More precisely, there exists an open neighborhood $U\subseteq\R^2$ and a map $\varphi:U\to\Sigma\cap B\subseteq\R^3$ such that
+    \begin{enumerate}[label={\roman*)}]
+        \item $\varphi$ is continuous and smooth.
+        \item $\varphi$ is a bijection (with $\varphi^{-1}$ continuous).
+        \item $\dd{\varphi}_{|x}:\R^2\to\R^3$ is injective for all $x\in U$.
+    \end{enumerate}
+    \item \textbf{Chart}: The quantity $(\varphi,U)$ near $p\in U$.
+    \item Examples:
+    \begin{enumerate}[label={\Alph*)}]
+        \item Plane. $\Sigma=\R^2\times|0|\subseteq\R^3$ is a surface with chart $\varphi:\R^2\to\Sigma$ where $(x,y)\mapsto(x,y,0)$.
+        \item Sphere. $\Sigma=\{\vec{u}\in\R^3\mid|\vec{u}|=1\}$.
+        \begin{itemize}
+            \item Charts: Consider the sets $U=\{(x_1,x_2)\mid {x_1}^2+{x_2}^2<1\}\subseteq\R^2$. Let $\varphi_1^+:U\to\Sigma\cap\{(x,y,z)\mid x>0\}$ be defined by $\varphi_1^+(u_1,u_2)=(\sqrt{1-{x_1}^2-{x_2}^2},u_1,u_2)$, $\varphi_1^-:U\to\Sigma\cap\{(x,y,z)\mid x<0\}$ be defined by $\varphi_1^-(u_1,u_2)=(-\sqrt{1-{x_1}^2-{x_2}^2},u_1,u_2)$.
+            \item Same thing for $\varphi_2^\pm,\varphi_3^\pm$.
+        \end{itemize}
+        \item A cone $\Sigma=\{(x,y,z)\mid z=\sqrt{x^2+y^2}\}$ is \emph{not} a surface because it fails property (iii).
+        \item The closed unit disk $\Sigma=\{(x,y,0)\mid x^2+y^2\leq 1\}$ is also not a surface.
+    \end{enumerate}
+    \item \textbf{Tangent space}: Let $\Sigma\subseteq\R^3$ be a surface and let $p\in\Sigma$. Then $T_p\Sigma\subseteq\R^3$ is the $z$-plane so that $p+T_p\Sigma$ is the affine plane that best approximates $\Sigma$ near $p$.
+    \begin{itemize}
+        \item Best linear approximation near the surface.
+        \item Very similar/analogous to the derivative.
+    \end{itemize}
+    \item If $(\varphi,U)$ is a chart near $p$, then $T_p\Sigma=\text{span}\,\{\frac{\partial\varphi}{\partial x_1}(\bar{x}_1,\bar{x}_2),\frac{\partial\varphi}{\partial x_2}(\bar{x}_1,\bar{x}_2)\}$.
+    \item Proves linear independence of above vectors.
+    \item Principal curvatures.
+    \item Let $\Sigma\subseteq\R^3$ be a surface, $p\in\Sigma$, and $\vec{N}$ be a unit normal vector defined around $p$ (i.e., $\vec{N}(q)\cdot\vec{v}=0$ for all $q$ near $p$ and $\vec{v}\in T_q\Sigma$).
+    \item Choose $\vec{v}\in T_p\Sigma$ such that $|\vec{v}|=1$. Set $P_v=\text{span}\,\{\vec{v},\vec{N}(p)\}$. Claim: $(\Sigma-p)\cap P_v$ is a curve near the origin.
+    \item \textbf{Principal curvature}: The reciprocal of the radius of the circle in $P_v$ that best approximates $(\Sigma-p)\cap P_v$ near the origin. \emph{Also known as} $\bm{K(\vec{v})}$.
+    \begin{itemize}
+        \item The sign is positive if the center of the circle is in the direction of $\vec{N}(p)$ and negative otherwise.
+        \item If the sign of $\vec{N}(p)$ changes, then $K(\vec{v})$ will change in sign.
+    \end{itemize}
+    \item If we change $\vec{N}$ by $-\vec{N}$, then the new $K(\vec{v})$ is the opposite of the old one.
+    \item Given $p\in\Sigma$ and $\vec{N}(p)$ a normal vector at $p$, we define $K_1(p)$ to have the maximum $K(\vec{v})$ over all unit vectors $\vec{v}\in T_p\Sigma$ and $K_2(p)=\min\{K(\vec{v})\mid \vec{v}\in T_p\Sigma,|\vec{v}|=1\}$.
+    \item $K_1,K_2$ are computable quantities.
+\end{itemize}
+
+
+
+
+\end{document}
