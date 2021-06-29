@@ -913,7 +913,14 @@
             Let $G=\{g_1,g_2,\dots,g_n\}$ be a finite group of order $n$. Consider the row/column defined by $g_i$, where $i$ is an arbitrary natural number between 1 and $n$, inclusive. Suppose for the sake of contradiction that the object $g$ appears twice in the row, such that $g_ig_j=g$ and $g_ig_k=g$, where $j\neq k$. But by part (a), $g_ig_j=g=g_ig_k$ implies that $g_j=g_k$, a contradiction, since every element of $G$ is only listed once in the row/column headers.
         \end{proof}
         \item Prove that for any permutation $\sigma\in\Ss_n$, there exists $N\in\N$ such that $\sigma^N=e$.
+        \begin{proof}
+            Decompose $\sigma$ into its subcycles, i.e., if there are transpositions (2-cycles), 3-cycles, etc., identify all of these. Let $A$ be the set of subcycle lengths. Let $N$ be the least common multiple of every element of $A$.\par
+            Let $a_i$ be the $i^\text{th}$ element of $\sigma$, where $i$ is an arbitrary natural number between 1 and $n$, inclusive. We want to show that the $i^\text{th}$ element of $\sigma^N$ is $i$. Suppose that $i$ is part of a subcycle of length $k$. It follows that the $i^\text{th}$ element of $\sigma^k,\sigma^{2k},\sigma^{3k},\dots$ is $i$. Therefore, since $N=\text{lcm}\,(\{k,\dots\})$, the $i^\text{th}$ element of $\sigma^N$ is $i$, as desired.
+        \end{proof}
         \item Prove that for $g\in G$, we have $g^{|G|}=e$.
+        \begin{proof}
+            Something to do with part (b)? Possibly something with Lagrange's theorem, i.e., elements of subgroups hit $e$ multiple times as the exponent increases while elements not in subgroups cycle through all elements of $G$ before hitting $e$.
+        \end{proof}
     \end{enumerate}
     \item \textbf{Erd\H{o}s-Szekeres theorem}:\par
     Prove that for any $n,m\in\N$, every sequence of $nm+1$ distinct real numbers contains an increasing subsequence of length $n+1$ or a decreasing subsequence of length $m+1$.
