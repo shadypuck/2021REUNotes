@@ -116,5 +116,104 @@
 
 
 
+\section{PSet 2}
+\begin{enumerate}
+    \item \marginnote{6/30:}Consider $n$ pairs of points on the segment $AB$, which are symmetric with respect to its center. Half of these points are red, the other are blue. Prove that the sum of distances from the point $A$ to the blue points equals the sum of distances from the point $B$ to the red points.
+    \begin{proof}
+        Let $C$ be the midpoint of $AB$. Clearly, if every point is located at $C$, the sum of the distances from $A$ to the blue points is $n\cdot\text{len}\,(AC)$, and similarly for $B$ and the red points. Thus, to prove the claim, it will suffice to show that moving any pair of points located at $C$ to two points that are symmetric with respect to $C$ preserves the equality of the $A$-to-blue-points and $B$-to-red-points distances. We divide into three cases (both points are blue, both points are red, and one point is blue and the other red).\par
+        If both points are blue, then moving them will not affect the $B$-to-red-points distance. As such, we must show that moving them symmetrically similarly does not affect the $A$-to-blue-points distance. But this is obviously true, as shortening the distance from $A$ to $p_1$ by $\ell$ necessitates lengthening the distance from $A$ to $p_2$ by $\ell$, cancelling out any potential change.\par
+        The proof is symmetric if both points are red.\par
+        If one point is blue and the other red, then shortening the distance from $A$ to $p_b$ by $\ell$ necessitates shortening the distance from $B$ to $p_r$ by $\ell$ as well, preserving equality. Vice versa is true for lengthening the distance from $A$ to $p_b$.
+    \end{proof}
+    \item Consider a set $2^S$ of subsets $S=\{1,2,\dots,n\}$. For two subsets $A,B\in 2^S$, define their symmetric difference by $A\triangle B=(A\cup B)\setminus(A\cap B)$. Prove that $2^S$ with this operation is a group.
+    \begin{proof}
+        To prove tht $2^S$ with $\triangle$ is a group, we must verify the associativity, identity, and inverse conditions.\par
+        To confirm that $2^S$ is associative, we must show that for all $A,B,C\in G$, $(A\triangle B)\triangle C=A\triangle(B\triangle C)$. Let $A,B,C$ be arbitrary elements of $2^S$. Then
+        \begin{align*}
+            (A\triangle B)\triangle C &= ((A\cup B)\setminus(A\cap B))\triangle C\\
+            &= (((A\cup B)\setminus(A\cap B))\cup C)\setminus(((A\cup B)\setminus(A\cap B))\cap C)\\
+            % &= (((A\setminus B)\cup(B\setminus A))\cup C)\setminus(((A\setminus B)\cup(B\setminus A))\cap C)\\
+            % &= (((A\setminus B)\cup(B\setminus A))\setminus C)\cup(((A\setminus B)\cup(B\setminus A))\setminus C)\\
+            &= (A\cup((B\cup C)\setminus(B\cap C)))\setminus(A\cap((B\cup C)\setminus(B\cap C)))\\
+            &= A\triangle((B\cup C)\setminus(B\cap C))\\
+            &= A\triangle(B\triangle C)
+        \end{align*}
+        Note that the two big expressions are equal since we can show that they are both represented by the following picture, where the shaded area may have elements and the unshaded area cannot.
+        \begin{figure}
+            \centering
+            \begin{tikzpicture}
+                \footnotesize
+                \filldraw [rez] (90:1.15) arc (59:240:1cm) arc (178:118:1cm) arc (182:122:1cm);
+                \filldraw [rez] (-30:1.15) arc (-61:120:1cm) arc (58:-2:1cm) arc (62:2:1cm);
+                \filldraw [rez] (210:1.15) arc (179:360:1cm) arc (298:238:1cm) arc (302:242:1cm);
+                \filldraw [rez] (30:0.55) arc (-2:-59:1cm) arc (-122:-178:1cm) arc (119:60:1cm);
+
+                \draw (30:0.6) circle (1cm) node[right=4mm]{$B$};
+                \draw (150:0.6) circle (1cm) node[left=4mm]{$A$};
+                \draw (-90:0.6) circle (1cm) node[below=4mm]{$C$};
+            \end{tikzpicture}
+            \caption{Power set group associativity.}
+            \label{fig:2S-associativity}
+        \end{figure}\par
+        To confirm that the identity element is the $\emptyset$, it will suffice to show that $A\triangle\emptyset=\emptyset\triangle A=A$ for all $A\in 2^S$. Let $A$ be an arbitrary element of $2^S$. Then
+        \begin{align*}
+            A\triangle\emptyset &= (A\cup\emptyset)\setminus(A\cap\emptyset)\\
+            &= A\setminus\emptyset\\
+            &= A\\
+            &= A\setminus\emptyset\\
+            &= (\emptyset\cup A)\setminus(\emptyset\cap A)\\
+            &= \emptyset\triangle A
+        \end{align*}
+        as desired.\par
+        To confirm $A=A^{-1}$, we must show that $A\triangle A=\emptyset$. But we have that
+        \begin{align*}
+            A\triangle A &= (A\cup A)\setminus(A\cap A)\\
+            &= A\setminus A\\
+            &= \emptyset
+        \end{align*}
+        as desired.
+    \end{proof}
+    \item Let $G$ be a group.
+    \begin{enumerate}
+        \item Prove that for any $g_1,g_2\in G$, we have $(g_1g_2)^{-1}=g_2^{-1}g_1^{-1}$.
+        \item $G$ is called \textbf{abelian} if for every two elements $g_1,g_2\in G$, we have $g_1g_2=g_2g_1$. In other words, $G$ is abelian if multiplication is commutative.
+        \item Prove that the group $2^S$ from the previous problem is abelian.
+        \item Prove that if $g^2=e$ for any $g\in G$, then $G$ is abelian.
+    \end{enumerate}
+    \item \textbf{The Inclusion-Exclusion Principle}\par
+    Consider $N$ objects and some list $P_1,P_2,\dots,P_n$ of their properties. Let $N_i$ be the number of objects satisfying $P_i,N_{ij}$, the number of objects satisfying $P_i$ and $P_j$, and so on. Prove that the number of objects satisfying none of these properties is equal to
+    \begin{equation*}
+        N-\sum N_i+\sum_{i_1<i_2}N_{i_1i_2}-\sum_{i_1<i_2<i_3}N_{i_1i_2i_3}+\cdots+(-1)^nN_{123\dots n}
+    \end{equation*}
+    \item Prove that if we remove two opposite corners of a chessboard, the board cannot be covered by dominoes (each domino covers two neighboring cells of the chessboard).
+    \begin{proof}
+        Opposite corners necessarily have the same color. However, each domino covers two squares of differing color. Therefore, since removing two opposite corners will lead to an excess of two squares of one color, there will be no way to cover every square.
+    \end{proof}
+    \item Define a sequence of Fibonacci numbers by formula:
+    \begin{gather*}
+        F_0 = F_1 = 1\\
+        F_{n+2} = F_{n+1}+F_n\text{ for }n\geq 0
+    \end{gather*}
+    \begin{enumerate}
+        \item Prove that $F_n$ gives the number of ways to present $n$ as a sum of 1 and 2. For instance, $4=1+1+1+1=2+1+1=1+2+1=1+1=2=2+2$, so $F_5=4$.
+        \item Prove the \textbf{Cassini identity}:
+        \begin{equation*}
+            F_{n+1}F_{n-1}-F_n^2 = (-1)^n
+        \end{equation*}
+        \item Prove that the sum of the elements on any diagonal of the pascal triangle is a Fibonacci number:
+        \begin{equation*}
+            \sum_{k=0}^{n/2}\binom{n-k}{k} = F_{n+1}
+        \end{equation*}
+        \item Consider a generating function $f(x)=F_0+F_1x+F_2x^2+\cdots$. Prove that $f(x)=\frac{1}{1-x-x^2}$.
+        \item Prove the following \textbf{Binet's Formula} for Fibonacci numbers:
+        \begin{equation*}
+            F_n = \frac{\gamma^n-(-\gamma^{-1})^n}{\sqrt{5}}
+            = \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^n-\left( \frac{1-\sqrt{5}}{2} \right)^n \right)
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+
+
+
 
 \end{document}
