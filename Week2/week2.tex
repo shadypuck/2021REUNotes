@@ -138,7 +138,7 @@
             &= A\triangle((B\cup C)\setminus(B\cap C))\\
             &= A\triangle(B\triangle C)
         \end{align*}
-        Note that the two big expressions are equal since we can show that they are both represented by the following picture, where the shaded area may have elements and the unshaded area cannot.
+        Note that the two big expressions are equal since we can show that they are both represented by the following picture, where the shaded area may have elements and the unshaded area cannot\footnote{Note that there is an alternate proof of this: Write each set as a permutation of 1s and 0s. Define a bijection $f$ with the property that $f(A\triangle B)=(f(A)+F(B))\text{mod}\,2$. Then commutativity follows easily.}.
         \begin{figure}
             \centering
             \begin{tikzpicture}
@@ -179,12 +179,31 @@
         \item $G$ is called \textbf{abelian} if for every two elements $g_1,g_2\in G$, we have $g_1g_2=g_2g_1$. In other words, $G$ is abelian if multiplication is commutative.
         \item Prove that the group $2^S$ from the previous problem is abelian.
         \item Prove that if $g^2=e$ for any $g\in G$, then $G$ is abelian.
+        \begin{proof}
+            To prove that $G$ is abelian, part (b) tells us that it will suffice to show that for all $g_1,g_2\in G$, we have $g_1g_2=g_2g_1$. Let $g_1,g_2$ be arbitrary elements of $G$. Then
+            \begin{align*}
+                g_1g_2 &= eg_1g_2e\tag*{Identity}\\
+                &= (g_1^{-1}g_1)(g_1g_2)(g_2g_2^{-1})\tag*{Inverse}\\
+                &= g_1^{-1}g_1^2g_2^2g_2^{-1}\tag*{Associativity}\\
+                &= g_1^{-1}eeg_2^{-1}\tag*{Property}\\
+                &= g_1^{-1}g_2^{-1}\tag*{Identity}\\
+                &= (g_2g_1)^{-1}\tag*{Part (a)}\\
+                &= (g_2g_1)^{-1}e\tag*{Identity}\\
+                &= (g_2g_1)^{-1}(g_2g_1)^{-1}(g_2g_1)\tag*{Inverse}\\
+                &= eg_2g_1\tag*{Property}\\
+                &= g_2g_1\tag*{Identity}
+            \end{align*}
+            as desired.
+        \end{proof}
     \end{enumerate}
     \item \textbf{The Inclusion-Exclusion Principle}\par
     Consider $N$ objects and some list $P_1,P_2,\dots,P_n$ of their properties. Let $N_i$ be the number of objects satisfying $P_i,N_{ij}$, the number of objects satisfying $P_i$ and $P_j$, and so on. Prove that the number of objects satisfying none of these properties is equal to
     \begin{equation*}
         N-\sum N_i+\sum_{i_1<i_2}N_{i_1i_2}-\sum_{i_1<i_2<i_3}N_{i_1i_2i_3}+\cdots+(-1)^nN_{123\dots n}
     \end{equation*}
+    \begin{proof}
+        Induct on the number of properties.
+    \end{proof}
     \item Prove that if we remove two opposite corners of a chessboard, the board cannot be covered by dominoes (each domino covers two neighboring cells of the chessboard).
     \begin{proof}
         Opposite corners necessarily have the same color. However, each domino covers two squares of differing color. Therefore, since removing two opposite corners will lead to an excess of two squares of one color, there will be no way to cover every square.
@@ -196,10 +215,30 @@
     \end{gather*}
     \begin{enumerate}
         \item Prove that $F_n$ gives the number of ways to present $n$ as a sum of 1 and 2. For instance, $4=1+1+1+1=2+1+1=1+2+1=1+1=2=2+2$, so $F_5=4$.
+        \begin{proof}
+            Clearly, $F_0$ and $F_1$ trivially equal 1. Then to write $F_{n+2}$, we can start by fixing 2 and know that there are $F_n$ ways to write $(n+2)-2$ as a sum of 1 and 2. But 2 can also be written as $1+1$, so if we fix a 1, we know that there are $F_{n+1}$ ways to write the sum like this. Thus, the total number of ways to write $n+2$ are $F_n+F_{n+1}$.
+        \end{proof}
         \item Prove the \textbf{Cassini identity}:
         \begin{equation*}
-            F_{n+1}F_{n-1}-F_n^2 = (-1)^n
+            F_{n+1}F_{n-1}-F_n^2 = (-1)^{n+1}
         \end{equation*}
+        \begin{proof}
+            We induct on $n$. For the base case $n=1$, we have
+            \begin{align*}
+                F_2F_0-F_1^2 &= 2-1\\
+                &= 1\\
+                &= (-1)^{1+1}
+            \end{align*}
+            Now suppose inductively that $F_{n+1}F_{n-1}-F_n^2=(-1)^{n+1}$. It follows that
+            \begin{align*}
+                F_{n+1}F_{n-1}-F_n^2 &= (-1)^{n+1}\\
+                F_{n+1}(F_{n+1}-F_n)-F_n^2 &= (-1)^{n+1}\\
+                F_{n+1}^2-F_nF_{n+1}-F_n^2 &= (-1)^{n+1}\\
+                -1(F_{n+1}^2-F_n(F_{n+1}+F_n)) &= (-1)^{n+2}\\
+                F_{(n+1)+1}F_{(n+1)-1}-F_{n+1}^2 &= (-1)^{(n+1)+1}
+            \end{align*}
+            as desired\footnote{There is an alternate proof using the properties of determinants.}.
+        \end{proof}
         \item Prove that the sum of the elements on any diagonal of the pascal triangle is a Fibonacci number:
         \begin{equation*}
             \sum_{k=0}^{n/2}\binom{n-k}{k} = F_{n+1}
@@ -210,6 +249,33 @@
             F_n = \frac{\gamma^n-(-\gamma^{-1})^n}{\sqrt{5}}
             = \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^n-\left( \frac{1-\sqrt{5}}{2} \right)^n \right)
         \end{equation*}
+        \begin{proof}
+            We induct on $n$. For the base cases $n=0,1$, we have that
+            \begin{align*}
+                F_0 &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^0-\left( \frac{1-\sqrt{5}}{2} \right)^0 \right)&
+                    F_1 &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^1-\left( \frac{1-\sqrt{5}}{2} \right)^1 \right)\\
+                &= \frac{1}{\sqrt{5}}(1-1)&
+                    &= \frac{1}{\sqrt{5}}\left( \frac{2\sqrt{5}}{2} \right)\\
+                &= 0&
+                    &= 1
+            \end{align*}
+            Now suppose inductively that $F_n=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^n-\left( \frac{1-\sqrt{5}}{2} \right)^n \right)$ and $F_{n-1}=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1} \right)$. Then
+            \begingroup
+            \allowdisplaybreaks
+            \begin{align*}
+                F_{n+1} &= F_n+F_{n-1}\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^n-\left( \frac{1-\sqrt{5}}{2} \right)^n \right)+\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1} \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^n+\left( \frac{1+\sqrt{5}}{2} \right)^{n-1}-\left( \frac{1-\sqrt{5}}{2} \right)^n-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1} \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}\left( \frac{1+\sqrt{5}}{2}+1 \right)-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1}\left( \frac{1-\sqrt{5}}{2}+1 \right) \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}\left( \frac{3+\sqrt{5}}{2} \right)-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1}\left( \frac{3-\sqrt{5}}{2} \right) \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}\left( \frac{6+2\sqrt{5}}{4} \right)-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1}\left( \frac{6-2\sqrt{5}}{4} \right) \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}\left( \frac{1+2\sqrt{5}+5}{4} \right)-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1}\left( \frac{1-2\sqrt{5}+5}{4} \right) \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n-1}\left( \frac{(1+\sqrt{5})^2}{2^2} \right)-\left( \frac{1-\sqrt{5}}{2} \right)^{n-1}\left( \frac{(1-\sqrt{5})^2}{2^2} \right) \right)\\
+                &= \frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right)^{n+1}-\left( \frac{1-\sqrt{5}}{2} \right)^{n+1} \right)
+            \end{align*}
+            \endgroup
+            as desired.
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
