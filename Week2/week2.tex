@@ -116,6 +116,38 @@
 
 
 
+\section{Introduction to Quantitative Topology (Weinberger)}
+\begin{itemize}
+    \item \marginnote{7/1:}Topological Problems:
+    \begin{itemize}
+        \item Are $X$ and $Y$ homeomorphic?
+        \item $f,g:X\to Y$. Does there exist a homotopy $f_t:X\to Y$, $f_0=f,f_1=g$?
+        \item Given $X$, does it embed in $\R^n$?
+    \end{itemize}
+    \item When the answer is yes, something exists.
+    \begin{itemize}
+        \item But what can you tell me about the thing that exists?
+        \item Typically, the adjective is, "how big?"
+    \end{itemize}
+    \item Suppose $M$ is an $n$-dimensional triangulated manifold, i.e., $\partial(\text{tetrahedron})=S^2$ (the boundary of $M$ is the two dimensional sphere).
+    \item Poincar\'{e} conjecture: if $M$ looks like a sphere to an algebraic topologist, i.e.,
+    \begin{itemize}
+        \item $\pi_1(M)=e$.
+        \item $\tilde{H}_i(M)=0$, $i<n$.
+        \item $M$ is homotopy equivalent to $S^n$.
+    \end{itemize}
+    then it is a sphere, i.e., there exists some subdivision of $M$ and some subdivision of $\partial(\triangle^n)=S^n$ such that $M^\text{subdivided}$ and $(S^n)^\text{subdivided}$ are combinatorially isomorphic.
+    \item How big means how many simplicities there are.
+    \item Another quantitative question: Suppose I triangulate the sphere with $N$ simplicities. How much further subdivision do I need to do to make it a subdivision of the standard simplex.
+    \item Consider $S^5$ (the 5-dimensional sphere).
+    \begin{itemize}
+        \item Consider $\N\mapsto f(\N)$, where $f(N)$ is the biggest number you need to be able to see $M\approx S^5$ combinatorially.
+        \item Consider the number of protons in the universe. Is it 10, $\N$, $N^?$, $\log(N^2)$, $2^{2^{2^{\nearrow^N}}}$? It's none of the above; $>$ all of them.
+    \end{itemize}
+\end{itemize}
+
+
+
 \section{PSet 2}
 \begin{enumerate}
     \item \marginnote{6/30:}Consider $n$ pairs of points on the segment $AB$, which are symmetric with respect to its center. Half of these points are red, the other are blue. Prove that the sum of distances from the point $A$ to the blue points equals the sum of distances from the point $B$ to the red points.
@@ -139,7 +171,7 @@
             &= A\triangle(B\triangle C)
         \end{align*}
         Note that the two big expressions are equal since we can show that they are both represented by the following picture, where the shaded area may have elements and the unshaded area cannot\footnote{Note that there is an alternate proof of this: Write each set as a permutation of 1s and 0s. Define a bijection $f$ with the property that $f(A\triangle B)=(f(A)+F(B))\text{mod}\,2$. Then commutativity follows easily.}.
-        \begin{figure}
+        \begin{figure}[h!]
             \centering
             \begin{tikzpicture}
                 \footnotesize
