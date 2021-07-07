@@ -313,5 +313,47 @@
 
 
 
+\section{PSet 3}
+\begin{enumerate}
+    \item \marginnote{7/2:}\textbf{Euler's function}\par
+    Let $n=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_k^{\alpha_k}$ be the prime factorization of $n$ and $\varphi(n)$ be the number of integers from 1 to $n$ which are coprime to $n$. Prove that
+    \begin{equation*}
+        \varphi(n) = n\left( 1-\frac{1}{p_1} \right)\left( 1-\frac{1}{p_2} \right)\cdots\left( 1-\frac{1}{p_k} \right)
+    \end{equation*}
+    \item Is it possible to draw 9 segments in the plane, so that each of them intersects exactly five other segments?
+    \begin{proof}
+        Label the segments $\ell_1,\dots,\ell_9$. Suppose for the sake of contradiction that $\ell_1$ intersects $\ell_{i_1},\dots,\ell_{i_5}$ where $1\leq i_j\leq 9$. Do this for all $\ell$. Then the total number of intersections is $\frac{9\times 5}{2}$, which is not a whole number, and therefore a contradiction.
+    \end{proof}
+    \item Consider a regular polygon with vertices $A_1,A_2,\dots,A_n$ and center $O$. Prove that
+    \begin{equation*}
+        \overrightarrow{OA_1}+\overrightarrow{OA-2}+\cdots+\overrightarrow{OA_n} = 0
+    \end{equation*}
+    \item Suppose that $G$ is a group and $S\subset G$ is a finite subset, such that if $x,y\in S$, then $xy\in S$. Prove that $S$ is a subgroup of $G$.
+    \begin{proof}
+        To prove that $S$ is a subgroup of $G$, it will suffice to show that it contains an identity, that inverses exist, and that multiplication is associative. Identities exist since $g^{|S|}=e$. Inverses exist since $gg^{|S|-1}=g^{|S|-1}g=e$. Multiplication is associative follows from multiplication in $G$ is associative.
+    \end{proof}
+    \item 
+    \begin{enumerate}
+        \item Prove that the composition of a parallel transport and a central symmetry (in any order) is a central symmetry.
+        \item Prove that if one reflects a point symmetrically over points $O_1,O_2,O_3$ and then reflects it symmetrically over the same points once again, the point returns back to its initial position.
+        \item Consider three lines $a,b,c$ on the plane. Let $F=S_a\circ S_b\circ S_c$. Prove that $F\circ F$ is a parallel transport.
+    \end{enumerate}
+    \item Prove that a bounded figure in $\R^2$ cannot have more than one center of symmetry. A bounded figure is any subset of $\R^2$, contained in a sufficiently large disc.
+    \item Let $S$ be a set with operation $*:S\times S\to S$. Consider a number $A_n$ of ways to put brackets in an expression
+    \begin{equation}\label{eqn:pset3-7}
+        a_1*a_2*\cdots*a_{n+1}
+    \end{equation}
+    For instance, $A_2=2$ because there are just two ways: $(a_1*a_2)*a_3$ and $a_1*(a_2*a_3)$.
+    \begin{enumerate}
+        \item Compute $A_1$, $A_2$, $A-3$, and $A_4$.
+        \item Prove that $A_n=A_0A_{n-1}+A_1A_{n-2}+\cdots+A_{n-1}A_0$. Deduce that $A_n=c_n$.
+        \item Find an explicit bijection between ways to put brackets in Equation \ref{eqn:pset3-7} and triangulations of a convex $(n+2)$-gon.
+    \end{enumerate}
+    \item \textbf{Sylvester's theorem (*)}\par
+    Consider $n$ lines in the plane, not all of which pass through the same point. Prove that there exists a point in which exactly two of the lines intersect.
+\end{enumerate}
+
+
+
 
 \end{document}
