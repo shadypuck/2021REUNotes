@@ -326,7 +326,7 @@
     \end{proof}
     \item Consider a regular polygon with vertices $A_1,A_2,\dots,A_n$ and center $O$. Prove that
     \begin{equation*}
-        \overrightarrow{OA_1}+\overrightarrow{OA-2}+\cdots+\overrightarrow{OA_n} = 0
+        \overrightarrow{OA_1}+\overrightarrow{OA_2}+\cdots+\overrightarrow{OA_n} = 0
     \end{equation*}
     \item Suppose that $G$ is a group and $S\subset G$ is a finite subset, such that if $x,y\in S$, then $xy\in S$. Prove that $S$ is a subgroup of $G$.
     \begin{proof}
@@ -351,6 +351,23 @@
     \end{enumerate}
     \item \textbf{Sylvester's theorem (*)}\par
     Consider $n$ lines in the plane, not all of which pass through the same point. Prove that there exists a point in which exactly two of the lines intersect.
+    \begin{proof}
+        Let a finite set of points lie in the plane such that they are not all collinear. Is there a configuration such that every line is through at least three points? You can prove that the answer is NO.\par
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}
+                \footnotesize
+                \draw (0,2) -- node(p1)[pos=0.1,fill,circle,inner sep=1.5pt]{} node[below left]{$\ell'$} node(ptilde)[pos=0.7,fill,circle,inner sep=1.5pt,label={below left:$\tilde{p}$}]{} node(p2)[pos=0.9,fill,circle,inner sep=1.5pt]{} (3,0);
+                \draw (1.7,2.3) node(p')[fill,circle,inner sep=1.5pt,label={right:$p'$}]{} -- node[above right]{$\tilde{\ell}$} (p2);
+
+                \draw [dashed] (p') -- ++(-1,-1.5);
+                \draw [dashed] (ptilde) -- ++(1,0.5);
+            \end{tikzpicture}
+            \caption{Sylvester's Theorem.}
+            \label{fig:SylvestersTheorem}
+        \end{figure}
+        Consider points $p_i$ and lines $\ell_j$. Think about $d(p_i,l_j)$. At least one of these values will be nonzero. Thus, since there's only a finite number of distances, there will be a minimum nonzero value. Suppose $p'$ and $\ell'$ minimize nonzero $d$.
+    \end{proof}
 \end{enumerate}
 
 
