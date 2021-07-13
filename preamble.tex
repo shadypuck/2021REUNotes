@@ -9,7 +9,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{physics,bm,siunitx}
 \usepackage{tikz}
-\usepackage{subcaption}
+\usepackage{subcaption,float}
 \usepackage[hidelinks]{hyperref}
 
 \fancypagestyle{main}{
@@ -34,10 +34,16 @@
 
 \setitemize[3]{label=\scriptsize$\blacksquare$}
 
+\DeclareMathOperator{\lcm}{lcm}
+
+\newtheorem{proposition}{Proposition}
+
 \usetikzlibrary{decorations.pathreplacing,calc}
 \colorlet{rex}{red!90!yellow!70!black}
 \colorlet{rey}{red!90!yellow!60}
 \colorlet{rez}{red!90!yellow!20}
+
+\setcounter{secnumdepth}{4}
 
 \renewcommand{\chaptername}{Week}
 \renewcommand{\contentsname}{Weeks}

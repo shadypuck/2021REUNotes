@@ -92,5 +92,499 @@
 
 
 
+\section{Dummit and Foote}
+\setcounter{subsection}{-1}
+\subsection{Preliminaries}
+\subsubsection{Basics}
+\begin{itemize}
+    \item \marginnote{7/9:}Know the basics of set theory.
+    \item \textbf{Order} (of a set $A$): The cardinality of $A$.
+    \item $\Z$ denotes the integers because the German word for numbers is "Zahlen."
+    \item $\Z^+,\Q^+,\R^+$ denote the positive nonzero elements of $\Z,\Q,\R$, respectively.
+    \item \textbf{Fiber} (of $f$ over $b$): The preimage of $\{b\}$ under $f$.
+    \item \textbf{Left inverse} (of $f$): A function $g:B\to A$ such that $g\circ f:A\to A$ is the identity map on $A$.
+    \item \textbf{Right inverse} (of $f$): A function $h:B\to A$ such that $f\circ h:B\to B$ is the identity map on $B$.
+    \item \marginnote{7/10:}$f$ is injective $\Longleftrightarrow$ $f$ has a left inverse.
+    \item $f$ is surjective $\Longleftrightarrow$ $f$ has a right inverse.
+    \item $f$ is a bijection $\Longleftrightarrow$ $f$ has a 2-sided inverse (or simply inverse).
+    \item \textbf{Permutation} (of a set $A$): A bijection from $A$ to itself.
+    \item \textbf{Extension} (of $g$ to $B$): The function $f:B\to C$ where $A\subset B$, $g:A\to C$, and $f|_A=g$.
+\end{itemize}
+
+\subsubsection{Properties of the Integers}
+\begin{itemize}
+    \item "The connection between the greatest common divisor $d$ and the least common multiple $l$ of two integers $a$ and $b$ is given by $dl=ab$."
+    \item \textbf{Euclidean algorithm}: A procedure for finding the greatest common divisor of two integers $a$ and $b$ by iterating the division algorithm:
+    \begin{align*}
+        a &= q_0b+r_0\\
+        b &= q_1r_0+r_1\\
+        r_0 &= q_2r_1+r_2\\
+        r_1 &= q_3r_2+r_3\\
+        &\vdots\\
+        r_{n-2} &= q_nr_{n-1}+r_n\\
+        r_{n-1} &= q_{n+1}r_n
+    \end{align*}
+    This yields $\gcd(a,b)=r_n$.
+    \item Note that $(a,b)=ax+by$ as a consequence of the Euclidean algorithm (write $r_n$ in terms of the other quantities iteratively).
+    \begin{itemize}
+        \item $x$ and $y$ are not unique for any two integers $a,b$.
+    \end{itemize}
+    \item If $p$ is a prime and $p\mid ab$, then $p\mid a$ or $p\mid b$.
+    \item \textbf{Fundamental Theorem of Arithmetic}: If $n\in\Z$ and $n>1$, then $n$ can be factored uniquely into the product of primes, i.e., there are distinct primes $p_1,p_2,\dots,p_s$ and positive integers $\alpha_1,\alpha_2,\dots,\alpha_s$ such that
+    \begin{equation*}
+        n = p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_s^{\alpha_s}
+    \end{equation*}
+    \item Let $a,b$ be positive integers such that
+    \begin{align*}
+        a &= p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_s^{\alpha_s}&
+        b &= p_1^{\beta_1}p_2^{\beta_2}\cdots p_s^{\beta_s}
+    \end{align*}
+    are their prime factorizations (we let $\alpha_i,\beta_j\geq 0$ so that we can express both as the product of the same primes). Then
+    \begin{align*}
+        \gcd(a,b) &= p_1^{\min(\alpha_1,\beta_1)}p_2^{\min(\alpha_2,\beta_2)}\cdots p_s^{\min(\alpha_s,\beta_s)}\\
+        \lcm(a,b) &= p_1^{\max(\alpha_1,\beta_1)}p_2^{\max(\alpha_2,\beta_2)}\cdots p_s^{\max(\alpha_s,\beta_s)}
+    \end{align*}
+    \item \textbf{Euler $\bm{\varphi}$-function}: The function $\varphi:\Z^+\to\N$ defined by $\varphi(n)$ is the number of positive integers $a\leq n$ such that $(a,n)=1$.
+    \begin{itemize}
+        \item If $p$ prime, then $\varphi(p)=p-1$.
+        \item If $p$ prime and $a\geq 1$, then $\varphi(p^a)=p^a-p^{a-1}=p^{a-1}(p-1)$.
+        \item If $(a,b)=1$, then $\varphi(ab)=\varphi(a)\varphi(b)$.
+        \item If $n=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_s^{\alpha_s}$, then
+        \begin{align*}
+            \varphi(n) &= \varphi(p_1^{\alpha_1})\varphi(p_2^{\alpha_2})\cdots\varphi(p_s^{\alpha_s})\\
+            &= p_1^{\alpha_1-1}(p_1-1)p_2^{\alpha_2-1}(p_2-1)\cdots p_s^{\alpha_s-1}(p_s-1)
+        \end{align*}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{$\bm{\Z\setminus n\Z}$: The Integers Modulo $\bm{n}$}
+\begin{itemize}
+    \item Define $\sim$ on $\Z$ by $a\sim b\Longleftrightarrow n\mid(b-a)$.
+    \begin{itemize}
+        \item $\sim$ is an equivalence relation.
+        \item If $a\sim b$, we write $a\equiv b\bmod n$\footnote{$a$ is congruent to $b\mod n$.}.
+    \end{itemize}
+    \item \textbf{Congruence class} (of $a$): The equivalence class $\bar{a}$ of $a\bmod n$. \emph{Also known as} \textbf{residue class}.
+    \begin{align*}
+        \bar{a} &= \{a+kn\mid k\in\Z\}\\
+        &= \{a,a\pm n,a\pm 2n,a\pm 3n,\dots\}
+    \end{align*}
+    \begin{itemize}
+        \item There are $n$ distinct equivalence classes $\bmod n$.
+    \end{itemize}
+    \item \textbf{Integers modulo $\bm{n}$}: The set of equivalence classes $\Z\setminus n\Z$\footnote{The motivation for this notation will become clear in the discussion of quotient groups and quotient rings.} under the equivalence relation $\sim$. \emph{Also known as} \textbf{integers $\bm{\bmod\, n}$}.
+    \item \textbf{Reducing $\bm{a\bmod\, n}$}: The process of finding the equivalence class $\bmod n$ of some integer $a$.
+    \item \textbf{Least residue} (of $a\bmod n$): The smallest nonnegative number congruent to $a\bmod n$.
+    \item \textbf{Modular arithmetic} (on $\Z\setminus n\Z$): The addition and multiplication operations defined by
+    \begin{align*}
+        \bar{a}+\bar{b} &= \overline{a+b}&
+        \bar{a}\cdot\bar{b} &= \overline{ab}
+    \end{align*}
+    for all $\bar{a},\bar{b}\in\Z\setminus n\Z$.
+    \item $(\Z\setminus n\Z)^\times$ is the collection of residue classes which have a multiplicative inverse in $\Z\setminus n\Z$, i.e.,
+    \begin{equation*}
+        (\Z\setminus n\Z)^\times = \{\bar{a}\in\Z\setminus n\Z\mid \exists\ \bar{c}\in\Z\setminus n\Z:\bar{a}\cdot\bar{c}=\bar{1}\}
+    \end{equation*}
+    \begin{itemize}
+        \item It can be proven that $(\Z\setminus n\Z)^\times$ is the set of residue classes whose representatives are relatively prime to $n$.
+        \item Thus, $(\Z\setminus n\Z)^\times=\{\bar{a}\in\Z\setminus n\Z\mid(a,n)=1\}$.
+        \item Let $a$ be an integer that is relatively prime to $n$. Then the Euclidean algorithm generates integers $x,y$ such that $ax+ny=1$. But this implies that $ax=1+(-y)n$, i.e., $ax\equiv 1\bmod n$, so that $\bar{x}$ is the multiplicative inverse of $\bar{a}$.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Introduction to Groups}
+\subsubsection{Group Theory}
+\begin{itemize}
+    \item "One of the essential characteristics of mathematics is that after applying a certain algorithm or method of proof, one then considers the scope and limits of the method. As a result, properties possessed by a number of interesting objects are frequently abstracted and the question raised; can one determine \emph{all} the objects possessing these properties? Attempting to answer such a question also frequently adds considerable understanding of the original objects under consideration."
+    \item Motivation?
+\end{itemize}
+
+\subsubsection{Basic Axioms and Examples}
+\begin{itemize}
+    \item \marginnote{7/12:}\textbf{Binary operation} (on a set $G$): A function $\star:G\times G\to G$.
+    \item \textbf{Closed} (subset $H\subset G$ under $\star$): A subset $H\subset G$ such that $a\star b\in H$ for all $a,b\in H$, where $\star$ is a binary operation on $G$.
+    \begin{itemize}
+        \item Alternatively, we can require that $\star|_H$ be a binary operation on $H$.
+    \end{itemize}
+    \item If $\star$ is an associative (respectively, commutative) binary operation on $G$ and $\star|_H$ is a binary operation on $H\subset G$, then $\star$ is associative (respectively, commutative) on $H$ as well.
+    \item \textbf{Group}: An ordered pair $(G,\star)$ where $G$ is a set and $\star$ is a binary operation on $G$ satisfying the following axioms:
+    \begin{enumerate}[label={(\roman*)}]
+        \item Associativity: $(a\star b)\star c=a\star(b\star c)$ for all $a,b,c\in G$.
+        \item Identity: There exists an element $e\in G$ such that for all $a\in G$, $a\star e=e\star a=a$.
+        \item Inverse: For all $a\in G$, there exists an element $a^{-1}\in G$ such that $a\star a^{-1}=a^{-1}\star a=e$.
+    \end{enumerate}
+    \item \textbf{Abelian} (group): A group $(G,\star)$ such that for all $a,b\in G$, $a\star b=b\star a$. \emph{Also known as} \textbf{commutative}.
+    \item Axiom (ii) implies that $G$ is nonempty.
+    \item \textbf{Direct product} (of $(A,\star)$ and $(B,\diamond)$): The group $A\times B$ whose elements are those in the Cartesian product
+    \begin{equation*}
+        A\times B = \{(a,b)\mid a\in A,\ b\in B\}
+    \end{equation*}
+    and whose operation is defined component-wise by
+    \begin{equation*}
+        (a_1,b_1)(a_2,b_2) = (a_1\star a_2,b_1\diamond b_2)
+    \end{equation*}
+    \item Let $G$ be a group under the operation $\star$.
+    \begin{proposition}\leavevmode
+        \begin{enumerate}[label={\textbf{\textup{(\arabic*)}}}]
+            \item The identity of $G$ is unique.
+            \item For each $a\in G$, $a^{-1}$ is uniquely determined.
+            \item $(a^{-1})^{-1}=a$ for all $a\in G$.
+            \item $(a\star b)^{-1}=(b^{-1})\star(a^{-1})$.
+            \item Generalized associative law: For any $a_1,\dots,a_n\in G$, the value of $a_1\star\cdots\star a_n$ is independent of how the expression is bracketed.
+        \end{enumerate}
+    \end{proposition}
+    \item Let $G$ be a group and let $a,b\in G$.
+    \begin{proposition}
+        The equations $ax=b$ and $ya=b$ have unique solutions for $x,y\in G$. In particular, the left and right cancellation laws hold in $G$, i.e.,
+        \begin{enumerate}[label={\textbf{\textup{(\arabic*)}}}]
+            \item If $au=av$, then $u=v$;
+            \item If $ub=vb$, then $u=v$.
+        \end{enumerate}
+    \end{proposition}
+    \item \textbf{Order} (of an object $x\in G$): The smallest positive integer $n$ such that $x^n=1$. \emph{Denoted by} $\bm{|x|}$.
+    \begin{itemize}
+        \item We say $x$ is of order $n$.
+        \item If no such $n$ exists, the order of $x$ is defined to be infinity and $x$ is said to be of infinite order.
+    \end{itemize}
+    \item $|g|=1\Longleftrightarrow g=e$.
+    \item Is $|\bar{x}|$ for $\bar{x}\in\Z\setminus n\Z$ equal to $\gcd(x,n)$?
+    \item \textbf{Multiplication table} (of a finite group $G$): The $n\times n$ matrix whose $i,j$ entry is the group element $g_ig_j$, where $G=\{g_1,\dots,g_n\}$ and $g_1=e$. \emph{Also known as} \textbf{group table}.
+\end{itemize}
+
+\noindent\textbf{Exercises}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \setcounter{enumi}{4}
+    \item Prove for all $n>1$ that $\Z\setminus n\Z$ is not a group under multiplication of residue classes.
+    \begin{proof}
+        Let $n$ be an arbitrary natural number such that $n>1$. Consider $\bar{0}\in\Z\setminus n\Z$. Since $\bar{x}\cdot\bar{0}=\bar{0}$ for all $\bar{x}\in\Z\setminus n\Z$, there is no element $\bar{0}^{-1}\in\Z\setminus n\Z$ such that $\bar{0}\cdot\bar{0}^{-1}=\bar{1}$. Thus, there is clearly no multiplicative inverse for $\bar{0}$ in $\Z\setminus n\Z$, contradicting axiom (iii).
+    \end{proof}
+    \item Determine which of the following sets are groups under addition:
+    \begin{enumerate}[label={\textbf{(\alph*)}}]
+        \item The set of rational numbers (including $0=0/1$) in lowest terms whose denominators are odd.
+        \begin{proof}[Answer]
+            Yes.\par
+            Closure: Let $\frac{a}{b},\frac{c}{d}$ be two such rational numbers. Then since the product of two odd numbers is odd, $\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}$ is also an element of this set.\par
+            Axiom (i): As stated in the text, the associativity of a closed subset of a group under the same operation follows from the associativity of the original group.\par
+            Axiom (ii): Identity is 0.\par
+            Axiom (iii): Inverse of $\frac{a}{b}$ is $-\frac{a}{b}$, which is also clearly in the set since $b$ is consistently odd.
+        \end{proof}
+        \item The set of rational numbers (including $0=0/1$) in lowest terms whose denominators are even.
+        \begin{proof}[Answer]
+            Yes.\par
+            Symmetric to (a).
+        \end{proof}
+        \item The set of rational numbers of absolute value $<1$.
+        \begin{proof}[Answer]
+            No.\par
+            Not closed: $|\frac{2}{3}+\frac{2}{3}|=|\frac{4}{3}|\geq 1$, for instance.
+        \end{proof}
+        \item The set of rational numbers of absolute value $\geq 1$ together with 0.
+        \begin{proof}[Answer]
+            No.\par
+            Not closed: $|\frac{3}{2}+(-\frac{1}{1})|=|-\frac{1}{2}|=\frac{1}{2}<1$, for instance.
+        \end{proof}
+        \item The set of rational numbers with denominators equal to 1 or 2.
+        \begin{proof}[Answer]
+            Yes.\par
+            Closed: $\lcm(1,1)=1$, $\lcm(1,2)=2$, and $\lcm(2,2)=2$, so the denominator stays within the constraints of the set.\par
+            Axioms (i-iii): Symmetric to (a).
+        \end{proof}
+        \item The set of rational numbers with denominators equal to 1, 2, or 3.
+        \begin{proof}[Answer]
+            No.\par
+            Not closed: $\lcm(2,3)=6\notin\{1,2,3\}$, so $\frac{1}{2}+\frac{1}{3}=\frac{5}{6}$, for instance.
+        \end{proof}
+    \end{enumerate}
+    \stepcounter{enumi}
+    \item Let $G=\{z\in\C\mid z^n=1$ for some $n\in\Z^+\}$.
+    \begin{enumerate}[label={\textbf{(\alph*)}}]
+        \item Prove that $G$ is a group under multiplication (called the group of \textbf{roots of unity} in $\C$).
+        \begin{proof}
+            Closed: Let $z_1,z_2\in G$ such that $z_1^n=1$ and $z_2^m=1$. Consider these complex numbers in the forms $z_1=r_1\e[i\theta_1]$ and $z_2=r_2\e[i\theta_2]$ (note that $r_1=r_2=1$ since if not, repeated exponentiation would change the magnitude of $z^n$ vs. $z^{2n}$, etc.\footnote{This notion can be formalized in a contradiction argument.}). It follows that $z_1^n=\e[in\theta_1]=1$ and $z_2^m=\e[im\theta_2]=1$. Thus, $n\theta_1\equiv 0\bmod 2\pi$ and $m\theta_2\equiv 0\bmod 2\pi$. Consequently, $nm\theta_1\equiv 0\bmod 2\pi$ and $nm\theta_2\equiv 0\bmod 2\pi$. But this implies that $nm(\theta_1+\theta_2)\equiv 0\bmod 2\pi$, i.e., that $nm$ is an integer such that $(z_1z_2)^{nm}=\e[i(nm(\theta_1+\theta_2))]=1$, as desired.\par
+            Axiom (i): As stated in the text, the associativity of a closed subset of a group under the same operation follows from the associativity of the original group.\par
+            Axiom (ii): Clearly, $1=1+0i\in\C$ and $1^1=1$, so $1\in G$. Additionally, by the definition of 1, $z\cdot 1=1\cdot z=z$, as desired.\par
+            Axiom (iii): Let $z\in G$ be arbitrary. Choose $z^{-1}=z^{n-1}$. Then
+            \begin{align*}
+                z\cdot z^{-1} &= z\cdot z^{n-1}\\
+                &= z^n\\
+                &= 1\\
+                &= z^n\\
+                &= z^{n-1}\cdot z\\
+                &= z^{-1}\cdot z
+            \end{align*}
+            as desired.
+        \end{proof}
+        \item Prove that $G$ is not a group under addition.
+        \begin{proof}
+            By part (a), $1\in G$. However, $1+1=2\notin G$ since $2^n$ grows exponentially and never equals 1.
+        \end{proof}
+    \end{enumerate}
+    \setcounter{enumi}{14}
+    \item Prove that $(a_1a_2\cdots a_n)^{-1}=a_n^{-1}a_{n-1}^{-1}\cdots a_1^{-1}$ for all $a_1,a_2,\dots,a_n\in G$.
+    \begin{proof}
+        We induct on $n$. For the base case $n=2$, we have by Proposition 1.4 that $(a_1a_2)=a_2^{-1}a_1^{-1}$, as desired. Now suppose inductively that we have proven the claim for $n$; we now seek to prove it for $n+1$. But we have that
+        \begin{align*}
+            (a_1a_2\cdots a_{n+1})^{-1} &= a_{n+1}^{-1}(a_1a_2\cdots a_n)^{-1}\tag*{Proposition 1.4}\\
+            &= a_{n+1}^{-1}a_n^{-1}\cdots a_1^{-1}\tag*{Hypothesis}
+        \end{align*}
+        as desired.
+    \end{proof}
+    \setcounter{enumi}{23}
+    \item If $a$ and $b$ are commuting elements of $G$, prove that $(ab)^n=a^nb^n$ for all $n\in\Z$. [Do this by induction for positive $n$ first.]
+    \begin{proof}
+        We divide into three cases ($n=0$, $n\in\N$, $n\in-\N$).\par\smallskip
+        If $n=0$, then $(ab)^0=1=1\cdot 1=a^0b^0$, as desired.\par
+        If $n\in\N$, we induct on $n$. For the base case $n=1$, we have that $(ab)^1=ab=a^1b^1$ trivially, as desired. Now suppose inductively that we've proven the claim for $n$; we now seek to prove it for $n+1$. But we have that
+        \begin{align*}
+            (ab)^{n+1} &= (ab)^n(ab)\\
+            &= a^nb^nab\\
+            &= a^nab^nb\\
+            &= a^{n+1}b^{n+1}
+        \end{align*}
+        as desired.\par
+        If $n\in-\N$, then $-n\in\N$. Therefore, by the above,
+        \begin{align*}
+            (ab)^n &= \frac{1}{(ab)^{-n}}\\
+            &= \frac{1}{a^{-n}b^{-n}}\\
+            &= \frac{1}{a^{-n}}\cdot\frac{1}{b^{-n}}\\
+            &= a^nb^n
+        \end{align*}
+        as desired.
+    \end{proof}
+\end{enumerate}
+
+\subsubsection{Dihedral Groups}
+\begin{itemize}
+    \item \textbf{Dihedral group}: A group whose elements are symmetries of geometric objects.
+    \item $D_{2n}$ denotes the group of symmetries of a regular $n$-gon.
+    \item Note that $|D_{2n}|=2n$.
+    \item $D_{2n}$ is related to $S_n$ by labeling the vertices of the $n$-gon 1 through $n$.
+    \item "Since symmetries are rigid modtions, one sees that once the position of the ordered pair of vertices 1,2 has been specified, the action of the symmetry on all remaining vertices is completely determined."
+    \item Fix a regular $n$-gon centered at the origin in the $xy$-plane and label the vertices consecutively from 1 to $n$ in a clockwise manner. Let $r$ be the rotation clockwise about the origin through $\frac{2\pi}{n}$ radians. Let $s$ be the reflection about the line of symmetry through vertex 1 and the origin. Then
+    \begin{enumerate}[label={\textbf{(\arabic*)}}]
+        \item $1,r,r^2,\dots,r^{n-1}$ are distinct and $r^n=1$, so $|r|=n$.
+        \item $|s|=2$.
+        \item $s\neq r^i$ for any $i$.
+        \item $sr^i\neq sr^j$ for all $0\leq i,\ j\leq n-1$ with $i\neq j$, so
+        \begin{equation*}
+            D_{2n} = \{1,\dots,r^{n-1},s,\dots,sr^{n-1}
+        \end{equation*}
+        In other words, each element of $D_{2n}$ can be writen uniquely in the form $s^kr^i$ for some $k=0,1$ and $0\leq i\leq n-1$.
+        \item $rs=sr^{-1}$. Thus, $r,s$ do not commute so $D_{2n}$ is non-abelian.
+        \item $r^is=sr^{-i}$ for all $0\leq i\leq n$. This indicates how to commute $s$ with powers of $r$.
+    \end{enumerate}
+    \item Note that $r,s$ in the above example are \textbf{generators}, which will only be rigorously introduced later but are useful now and thus used informally.
+    \item \textbf{Generators} (of $G$): A subset $S\subset G$ with the property that every element in $G$ can be written as a (finite) product of elements of $S$ and their inverses. \emph{Denoted by} $G=\bm{\langle S\rangle}$.
+    \begin{itemize}
+        \item We write that "$G$ is generated by $S$" or "$S$ generates $G$."
+        \item Examples: $\Z=\langle 1\rangle$ and $D_{2n}=\langle r,s\rangle$.
+    \end{itemize}
+    \item \textbf{Relation}: An equation in a general group $G$ that the generators satisfy.
+    \begin{itemize}
+        \item Example: In $D_{2n}$, we have $r^n=1$, $s^2=1$, and $rs=sr^{-1}$.
+    \end{itemize}
+    \item \textbf{Presentation} (of $G$): The set $S$ of generators of $G$ along with the relations $R_1,\dots,R_m$, where each $R_i$ is an equation in the elements from $S\cup\{1\}$, such that any relation among the elements of $S$ can be deduced from these. \emph{Denoted by} $G=\bm{\langle S\mid R_1,...,R_m\rangle}$.
+    \begin{itemize}
+        \item Example: $D_{2n}=\langle r,s\mid r^n=s^2=1,\ rs=sr^{-1}\rangle$.
+    \end{itemize}
+    \item List examples and works with \textbf{collapsing} presentations, i.e., ones in which some important relations are consequences of others.
+\end{itemize}
+
+\subsubsection{Symmetric Groups}
+\begin{itemize}
+    \item \textbf{Symmetric group} (on the set $\Omega$): The group $(S_\Omega,\circ)$, where $S_\Omega$ is the set of all bijections from a nonempty set $\Omega$ to itself and $\circ$ is function composition. \emph{Also known as} \textbf{permutations} (of $\Omega$).
+    \begin{itemize}
+        \item We write $\sigma\in S_\Omega$ and let $1\in S_\Omega$ be the identity function defined by $1(a)=a$ for all $a\in\Omega$.
+        \item If $\Omega=[n]$, then we denote $S_\Omega$ by $S_n$.
+    \end{itemize}
+    \item $|S_n|=n!$.
+    \item \textbf{Cycle}: A string of integers which represents the element of $S_n$ which cyclically permutes these integers (and fixes all other integers).
+    \begin{itemize}
+        \item The cycle $(a_1\ a_2\ \dots\ a_m)$ is the permutation which sends $a_i$ to $a_{i+1}$ for all $1\leq i\leq m-1$ and sends $a_m$ to $a_1$.
+    \end{itemize}
+    \item \textbf{Cycle decomposition} (of $\sigma$): The product of all cycles, often written in the form
+    \begin{equation*}
+        (a_1\ a_2\ \dots\ a_{m_1})(a_{m_1+1}\ a_{m_1+2}\ \dots\ a_{m_2})\dots(a_{m_{k-1}+1}\ a_{m_{k-1}+2}\ \dots\ a_{m_k})
+    \end{equation*}
+    \item Cycle decomposition algorithm:
+    \begin{enumerate}
+        \item To start a new cycle, pick the smallest element of $[n]$ which has not yet appeared in a previous cycle --- call it $a$ (if you are just starting, choose $a=1$); begin the new cycle: "$(a$".
+        \item Read off $\sigma(a)$ from the given description of $\sigma$ --- call it $b$. If $b=a$, close the cycle with a right parenthesis (without writing $b$ down); this completes a cycle --- return to step 1. If $b\neq a$, write $b$ next to $a$ in this cycle: "$(a\ b$".
+        \item Read off $\sigma(b)$ from the given description of $\sigma$ --- call it $c$. If $c=a$, close the cycle with a right parenthesis to complete the cycle --- return to step 1. If $c\neq a$, write $c$ next to $b$ in this cycle: "$(a\ b\ c$". Repeat this step using the number $c$ as the new value for $b$ until the cycle closes.
+        \item Remove all cycles of \textbf{length} 1.
+    \end{enumerate}
+    \item Example:
+    \begin{align*}
+        \sigma(1) &= 12&
+            \sigma(2) &= 2&
+                \sigma(3) &= 3&
+                    \sigma(4) &= 1\\
+        \sigma(5) &= 11&
+            \sigma(6) &= 9&
+                \sigma(7) &= 5&
+                    \sigma(8) &= 10\\
+        \sigma(9) &= 6&
+            \sigma(10) &= 4&
+                \sigma(11) &= 7&
+                    \sigma(12) &= 8\\
+    \end{align*}
+    becomes
+    \begin{equation*}
+        \sigma = (1\ 12\ 8\ 10\ 4)(5\ 11\ 7)(6\ 9)
+    \end{equation*}
+    \item \textbf{Length} (of a cycle): The number of integers which appear in it.
+    \item \textbf{$\bm{t}$-cycle}: A cycle of length $t$.
+    \item \textbf{Disjoint} (cycles): Two cycles that have no numbers in common.
+    \item The convention of removing all cycles of length 1 makes it so that any cyclic decomposition essentially represents a function $\sigma:\N\to\N$.
+    \item For any $\sigma\in S_n$, the cyclic decomposition of $\sigma^{-1}$ is obtained by writing the numbers in each cycle of the cycle decomposition of $\sigma$ in reverse order.
+    \begin{itemize}
+        \item Continuing with the above example, $\sigma^{-1}=(4\ 10\ 8\ 12\ 1)(7\ 11\ 5)(9\ 6)$.
+    \end{itemize}
+    \item $S_n$ is a non-abelian group for all $n\geq 3$.
+    \item Disjoint cycles commute.
+    \item The order of a permutation is the lcm of the lengths of the cycles in its cycle decomposition.
+\end{itemize}
+
+\subsubsection{Matrix Groups}
+\begin{itemize}
+    \item Since $\Z\setminus p\Z$, $p$ prime, is a finite field, we denote it $\mathbb{F}_p$.
+    \item \textbf{Field}: A set $F$ together with two binary operations $+$ and $\cdot$ on $F$ such that $(F,+)$ is an abelian group (call its identity 0), $(F-\{0\},\cdot)$ is also an abeilan group, and the following distributive law holds: $a\cdot(b+c)=(a\cdot b)+(a\cdot c)$ for all $a,b,c\in F$.
+    \item $\bm{F^\times}$: The set $F-\{0\}$ where $F$ is a field.
+    \item \textbf{General linear group of degree $\bm{n}$}: The set of all $n\times n$ matrices, where $n\in\Z^+$, whose entities come from the field $F$ and whose determinant is nonzero. \emph{Denoted by} $\bm{GL_n(F)}$.
+\end{itemize}
+
+\subsubsection{The Quaternion Group}
+\begin{itemize}
+    \item \textbf{Quaternion group}: The group
+    \begin{equation*}
+        Q_8 = \{1,-1,i,-i,j,-j,k,-k\}
+    \end{equation*}
+    with product $\cdot$ computed as follows:
+    \begin{gather*}
+        1\cdot a = a\cdot 1 = a\tag*{for all $a\in Q_8$}\\
+        (-1)\cdot(-1) = 1\\
+        (-1)\cdot a = a\cdot(-1) = -a\tag*{for all $a\in Q_8$}\\
+        i\cdot i = j\cdot j = k\cdot k = -1
+    \end{gather*}
+    \begin{align*}
+        i\cdot j &= k&
+            j\cdot k &= i&
+                k\cdot i &= j\\
+        j\cdot i &= -k&
+            k\cdot j &= -i&
+                i\cdot k &= -j
+    \end{align*}
+    \item $Q_8$ is a non-abelian group of order 8.
+\end{itemize}
+
+\subsubsection{Homomorphisms and Isomorphisms}
+\begin{itemize}
+    \item \textbf{Homomorphism}: A map $\varphi:G\to H$ such that $\varphi(x\star y)=\varphi(x)\diamond\varphi(y)$ for all $x,y\in G$, where $(G,\star)$ and $(H,\diamond)$ are groups.
+    \begin{itemize}
+        \item Intuitively, a map is a homomorphism if it respects the group structures of its domain and codomain.
+    \end{itemize}
+    \item \textbf{Isomorphism}: A map $\varphi:G\to H$ such that $\varphi$ is a homomorphism and a bijection.
+    \begin{itemize}
+        \item If such a $\varphi$ exists, we write that $G$ and $H$ are isomorphic, are of the same isomorphism type, and that $G\cong H$.
+        \item Intuitively, such a map implies that $G$ and $H$ are the same group; they simply have relabeled elements.
+    \end{itemize}
+    \item The existence of an isomorphism between two groups implies that any property of $G$ that can be derived from the group axioms also holds for $H$, and vice versa.
+    \item $\cong$ is an equivalence relation.
+    \item \textbf{Isomorphism class}: An equivalence class of a nonempty collection $\mathcal{G}$ of groups under $\cong$.
+    \item $|\triangle|=|\Omega|\Longleftrightarrow S_\triangle\cong S_\Omega\Longleftrightarrow|S_\triangle|=|S_\Omega|$.
+    \item \textbf{Classification theorem}: A theorem stating what properties of a structure specify its isomorphism type.
+    \begin{itemize}
+        \item For example, a general classification theorem would assert that if $G$ is an object with some structure (such as a group) and $G$ has property $\mathcal{P}$, then any other similarly structured object (group) $X$ with property $\mathcal{P}$ is isomorphic to $G$.
+    \end{itemize}
+    \item If $\varphi:G\to H$ is an isomorphism, then
+    \begin{enumerate}
+        \item $|G|=|H|$.
+        \item $G$ is abelian iff $H$ is abelian.
+        \item For all $x\in G$, $|x|=|\varphi(x)|$.
+    \end{enumerate}
+    \item Let $G$ be a finite group of order $n$ for which we have a presentation and let $S=\{s_1,\dots,s_m\}$ be the generators. Let $H$ be another group and $\{r_1,\dots,r_m\}$ be elements of $H$. Suppose that any relation satisfied in $G$ by the $s_i$ is also satisfied in $H$ when each $s_i$ is replaced by $r_i$. Then there is a unique homomorphism $\varphi:G\to H$ which sends $s_i\mapsto r_i$.
+\end{itemize}
+
+\subsubsection{Group Actions}
+\begin{itemize}
+    \item \textbf{Group action} (of a group $G$ on a set $A$): A map $\cdot:G\times A\to A$ such that $g_1\cdot(g_2\cdot a)=(g_1g_2)\cdot a$ for all $g_1,g_2\in G$ and $a\in A$, and such that $1\cdot a=a$ for all $a\in A$.
+    \item What is a group action?
+    \item Let $G$ act on $A$, and for each $g\in G$, define $\sigma_g:A\to A$ by $\sigma_g(a)=g\cdot a$. Then
+    \begin{enumerate}
+        \item For each fixed $g\in G$, $\sigma_g$ is a permutation of $A$;
+        \begin{proof}
+            We prove that $\sigma_g$ has a two-sided inverse; it follows that $\sigma_g$ is a permutation. Let $g\in G$ be arbitrary. Then by Axiom (iii), there exists $g^{-1}$. Therefore,
+            \begin{align*}
+                (\sigma_{g^{-1}}\circ\sigma_g)(a) &= \sigma_{g^{-1}}(\sigma_g(a))\\
+                &= g^{-1}\cdot(g\cdot a)\\
+                &= (g^{-1}\cdot g)\cdot a\\
+                &= 1\cdot a\\
+                &= 1
+            \end{align*}
+            We can prove something similar in the other direction.
+        \end{proof}
+        \item The map from $G$ to $S_A$ defined by $g\mapsto\sigma_g$ is a homomorphism.
+        \begin{proof}
+            Let $\varphi:G\to S_A$ be defined by $\varphi(g)=\sigma_g$ for all $g\in G$. To prove that $\varphi$ is a homomorphism, it will suffice to show that $\varphi(g_1\cdot g_2)=\varphi(g_1)\circ\varphi(g_2)$ for all $g_1,g_2\in G$. To verify the equality of functions, we must show that for all $a\in A$, $\varphi(g_1\cdot g_2)(a)=(\varphi(g_1)\circ\varphi(g_2))(a)$. Let $a$ be an arbitrary element of $A$. Then
+            \begin{align*}
+                \varphi(g_1\cdot g_2)(a) &= \sigma_{g_1\cdot g_2}(a)\\
+                &= (g_1\cdot g_2)\cdot a\\
+                &= g_1\cdot(g_2\cdot a)\\
+                &= g_1\cdot\sigma_{g_2}(a)\\
+                &= \sigma_{g_1}(\sigma_{g_2}(a))\\
+                &= (\sigma_{g_1}\circ\sigma_{g_2})(a)\\
+                &= (\varphi(g_1)\circ\varphi(g_2))(a)
+            \end{align*}
+        \end{proof}
+    \end{enumerate}
+    \item Intuitively, a group action of $G$ on $A$ means that every element $g\in G$ acts as a permutation on $A$ in a manner consistent with the group operations in $G$.
+    \item \textbf{Permutation representation} (associated to the group action $\cdot$): The homomorphism $\varphi:G\to S_A$ defined by $\varphi(g)=\sigma_g$ for all $g\in G$, defined by $\varphi(g)(a)=\sigma_g(a)=g\cdot a$ for all $a\in A$.
+    \item Getting into what a representation is?
+\end{itemize}
+
+
+\subsection{Subgroups}
+\subsubsection{Definition and Examples}
+\begin{itemize}
+    \item Two way of unraveling the structure of an axiomatically defined mathematical object are to study subsets of the object that satisfy the same axioms, and to study quotients (which, roughly speaking, collapse one group onto a smaller one).
+    \item \textbf{Subgroup} (of $G$): A subset $H\subset G$ that is nonempty and closed under products and inverses. \emph{Denoted by} $H\leq G$.
+    \begin{itemize}
+        \item In other words, we require that $x^{-1}\in H$ for all $x\in H$, and $xy\in H$ for all $x,y\in H$.
+        \item Alternatively, a subgroup of $(G,\cdot)$ is a subset of $G$ that is a group in its own right under $\cdot$.
+    \end{itemize}
+    \item $H\leq G$ and $H\neq G$ imply $H<G$.
+    \item \textbf{Trivial subgroup}: The subgroup $H=\{1\}$, henceforth denoted by 1.
+    \item $\leq$ is transitive: $K\leq H\leq G\Longleftarrow K\leq G$.
+    \item Let $G$ be a group.
+    \begin{proposition}[The Subgroup Criterion]
+        A subset $H\subset G$ is a subgroup iff
+        \begin{enumerate}[label={\textup{\textbf{(\arabic*)}}}]
+            \item $H\neq\emptyset$;
+            \item For all $x,y\in H$, $xy^{-1}\in H$.
+        \end{enumerate}
+        Furthermore, if $H$ is finite, then it suffices to check that $H$ is nonempty and closed under multiplication.
+    \end{proposition}
+\end{itemize}
+
+\textbf{Exercises}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item In each of a-e, prove that the specified subset is a subgroup of the given group.
+    \begin{enumerate}[label={\textbf{(\alph*)}}]
+        \item The set of complex numbers of the form $a+ai$, $a\in\R$ (under addition).
+        \item The set of complex numbers of absolute value 1, i.e., the unit circle in the complex plane (under multiplication).
+        \item For fixed $n\in\Z^+$, the set of rational numbers whose denominators divide $n$ (under addition).
+        \item For fixed $n\in\Z^+$, the set of rational numbers whose denominators are relatively prime to $n$ (under addition).
+        \item The set of nonzero real numbers whose square is a rational number (under multiplication).
+    \end{enumerate}
+    \setcounter{enumi}{3}
+    \item Give an explicit example of a group $G$ and an infinite subset $H\subset G$ that is closed under the group operation but is not a subgroup of $G$.
+    \item Prove that $G$ cannot have a subgroup $H$ with $|H|=n-1$, where $n=|G|>2$.
+    \setcounter{enumi}{7}
+    \item Let $H$ and $K$ be subgroups of $G$. Prove that $H\cup K$ is a subgroup iff either $H\subseteq K$ or $K\subseteq H$.
+\end{enumerate}
+
+
+
 
 \end{document}
