@@ -1,101 +1,17 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../notes.tex]{subfiles}
 
 \pagestyle{main}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
-\setcounter{chapter}{2}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
 
 \begin{document}
 
 
 
 
-\chapter{}
-\section{PSet 4}
-\begin{enumerate}
-    \item \marginnote{7/7:}Consider two lines in the plane with the angle $\gamma$ between them and suppose a grasshopper is jumping from one line to the other. Every jump is exactly 30 inches long, and the grasshopper jumps backwards whenever it has no other options. Prove that the sequence of its jumps is periodic if and only if $\frac{\gamma}{\pi}$ is a rational number.
-    \item Let $ABCD$ be a convex 4-gon and consider four squares constructed on the outside of each of its edges. Prove that the segments connecting the centers of the opposite squares are mutually perpendicular and equal in length.
-    \begin{proof}
-        \begin{figure}[h!]
-            \centering
-            \begin{tikzpicture}[
-                point/.style={circle,fill,inner sep=1.5pt}
-            ]
-                \footnotesize
-                \draw [->,help lines] (-5,0) -- (5,0) node[right]{$\R$};
-                \draw [->,help lines] (0,-5) -- (0,5) node[above]{$\mathbb{I}$};
-        
-                \draw [semithick]
-                    (1.6,-2) coordinate (1) coordinate (5) node[point,label={below right:$A$}]{}
-                    -- node[pos=0.25,right]{$a$} node[pos=0.75,right]{$a$} (1,1.5) coordinate (2) node[point,label={above right:$B$}]{}
-                    -- node[pos=0.25,above]{$b$} node[pos=0.75,above]{$b$} (-0.8,1.9) coordinate (3) node[point,label={above left:$C$}]{}
-                    -- node[pos=0.25,left]{$c$} node[pos=0.75,left]{$c$} (-1.4,-1.2) coordinate (4) node[point,label={below left:$D$}]{}
-                    -- node[pos=0.25,below]{$d$} node[pos=0.75,below]{$d$} cycle
-                ;
-        
-                \foreach \n [remember=\n as \nm (initially 1)] in {2,3,4,5} {
-                    \draw [semithick,dashed] (\n) -- ($(\n)!1!90:(\nm)$) -- ($(\nm)!1!-90:(\n)$) -- (\nm);
-                }
-        
-                \draw ($(1)!0.5!(2)$) coordinate (m1) -- node[below]{$a$} ($(m1)!1!-90:(2)$) node(p)[point]{} node[above right]{$p$};
-                \draw ($(2)!0.5!(3)$) coordinate (m2) -- node[above left,fill=white,inner sep=1.5pt]{$b$} ($(m2)!1!-90:(3)$) node(q)[point]{} node[above right]{$q$};
-                \draw ($(3)!0.5!(4)$) coordinate (m3) -- node[below]{$c$} ($(m3)!1!-90:(4)$) node(r)[point]{} node[above left]{$r$};
-                \draw ($(4)!0.5!(5)$) coordinate (m4) -- node[below right,fill=white,inner sep=1.5pt]{$d$} ($(m4)!1!-90:(5)$) node(s)[point]{} node[below left]{$s$};
-        
-                \draw [rex,thick,-stealth] (q) -- node[right]{$A$} (s);
-                \draw [rex,thick,-stealth] (p) -- node[pos=0.6,above]{$B$} (r);
-            \end{tikzpicture}
-            \caption{Complex polygon.}
-            \label{fig:complexPolygon}
-        \end{figure}
-        Facts:
-        \begin{enumerate}
-            \item If $n$ complex numbers add to 0, then the lines from the origin to them in the complex plane form a closed $n$-gon.
-            \item Multiplication by $i$ is a $\ang{90}$ rotation.
-        \end{enumerate}
-        Let's begin. First, we define the points $p,q,r,s$ at the center of each square in terms of the "complex numbers" from the origin at $A$:
-        \begin{align*}
-            p &= (1-i)a&
-            q &= 2a+(1-i)b&
-            r &= 2a+2b+(1-i)c&
-            s &= 2a+2b+2c+(1-i)d
-        \end{align*}
-        Let $A=\overrightarrow{qs}$, $B=\overrightarrow{pr}$. Then
-        \begin{align*}
-            A &= s-q&
-                B &= r-p\\
-            &= (1+i)b+2c+(1-i)d&
-                &= (1+i)a+2b+(1-i)c
-        \end{align*}
-        To prove that the magnitudes of $A$ and $B$ are the same and that they are perpendicular, Fact (a) tells us that it will suffice to show that $iB=A$, or that $A-iB=0$. But we have that
-        \begin{align*}
-            A-iB &= (1+i)b+2c+(1-i)d-i((1+i)a+2b+(1-i)c)\\
-            &= (1+i)b+2c+(1-i)d-((i-1)a+2bi+(i+1)c)\\
-            &= (1-i)a+(1-i)b+(1-i)c+(1-i)d\\
-            &= \frac{1-i}{2}\cdot(2a+2b+2c+2d)\\
-            &= (1-i)0\tag*{Fact (b)}\\
-            &= 0
-        \end{align*}
-        as desired.
-    \end{proof}
-    \item Prove that a composition of three symmetries is a sliding symmetry.
-    \begin{proof}
-        Each symmetry reverses the orientation of a shape. Thus, three symmetries reverse the orientation like one sliding symmetry. Symmetries also have the ability to rotate an object to any desired angle (by rotating the line of symmetry). Finally, distance from the shape to the line controls position in one orthogonal direction, and the slide can control distance in the other orthogonal direction.
-    \end{proof}
-    \item The points $A_1,\dots,A_n$ form a regular polygon, inscribed in a circle with the center $O$. A point $X$ lies on the same circle. Prove that the images of the point $X$ under the symmetries with axes $OA_1,OA_2,\dots,OA_n$ form a regular polygon.
-    \item Remove a corner from a $101\times 101$ chessboard. Prove that the rest cannot be covered by triominoes. A triomino is like a domino except that it consists of three squares in a row; each cell can cover one cell on a chessboard. Each triomino can either "stand" or "lie."
-    \item Consider a finite collection of segments on a line so that every two of them intersect. Prove that all segments have a common point.
-    \begin{proof}
-        Let $\ell_1,\dots,\ell_n$ be a finite collection of segments on a line (i.e., a closed interval on $\R$). By the hypothesis, $\ell_i\cap\ell_j\neq\emptyset$ for all $i,j\in[n]$. We induct on $n$. For the base case $n=1$, we clearly have $\bigcap_{i\in[1]}\ell_i=\ell_1\neq\emptyset$ by the definition of a closed interval. Now suppose that we have proven that $\bigcap_{i\in[n]}\ell_i\neq\emptyset$; we seek to prove the claim for $n+1$. First off, note that $\bigcap_{i\in[n]}\ell_i$ is a closed interval in its own right, and that its lower and upper bounds are the supremum of the lower bounds of all $\ell_i$ and the infimum of the upper bounds of all $\ell_i$, respectively. Thus, to show that $\bigcap_{i\in[n+1]}\ell_i$ is nonempty, it will suffice to show that the the lower bound of $\ell_{n+1}$ is less than or equal to the upper bound of $\bigcap_{i\in[n+1]}\ell_i$, or vice versa. But clearly it must be, or $\ell_{n+1}$ would have an empty intersection with an $\ell_i$, a contradiction.
-    \end{proof}
-    \item Let $S$ be a set of $n+1$ integers from 1 to $2n$. Prove that at least two elements in $S$ are coprime.
-\end{enumerate}
-
-
-
-\section{Dummit and Foote}
-\setcounter{subsection}{-1}
-\subsection{Preliminaries}
-\subsubsection{Basics}
+\part{Dummit and Foote}\thispagestyle{main}
+\setcounter{chapter}{-1}
+\chapter{Preliminaries}
+\section{Basics}
 \begin{itemize}
     \item \marginnote{7/9:}Know the basics of set theory.
     \item \textbf{Order} (of a set $A$): The cardinality of $A$.
@@ -111,7 +27,8 @@
     \item \textbf{Extension} (of $g$ to $B$): The function $f:B\to C$ where $A\subset B$, $g:A\to C$, and $f|_A=g$.
 \end{itemize}
 
-\subsubsection{Properties of the Integers}
+
+\section{Properties of the Integers}
 \begin{itemize}
     \item "The connection between the greatest common divisor $d$ and the least common multiple $l$ of two integers $a$ and $b$ is given by $dl=ab$."
     \item \textbf{Euclidean algorithm}: A procedure for finding the greatest common divisor of two integers $a$ and $b$ by iterating the division algorithm:
@@ -157,7 +74,8 @@
     \end{itemize}
 \end{itemize}
 
-\subsubsection{$\bm{\Z\setminus n\Z}$: The Integers Modulo $\bm{n}$}
+
+\section[\texorpdfstring{$\Z/n\Z$}{TEXT}: The Integers Modulo \texorpdfstring{$n$}{TEXT}]{\texorpdfstring{$\protect\fakebold{\Z}\bm{/n}\fakebold{\Z}$}{TEXT}: The Integers Modulo \texorpdfstring{$\bm{n}$}{TEXT}}
 \begin{itemize}
     \item Define $\sim$ on $\Z$ by $a\sim b\Longleftrightarrow n\mid(b-a)$.
     \begin{itemize}
@@ -172,35 +90,37 @@
     \begin{itemize}
         \item There are $n$ distinct equivalence classes $\bmod n$.
     \end{itemize}
-    \item \textbf{Integers modulo $\bm{n}$}: The set of equivalence classes $\Z\setminus n\Z$\footnote{The motivation for this notation will become clear in the discussion of quotient groups and quotient rings.} under the equivalence relation $\sim$. \emph{Also known as} \textbf{integers $\bm{\bmod\, n}$}.
+    \item \textbf{Integers modulo $\bm{n}$}: The set of equivalence classes $\Z/n\Z$\footnote{The motivation for this notation will become clear in the discussion of quotient groups and quotient rings.} under the equivalence relation $\sim$. \emph{Also known as} \textbf{integers $\bm{\bmod\, n}$}.
     \item \textbf{Reducing $\bm{a\bmod\, n}$}: The process of finding the equivalence class $\bmod n$ of some integer $a$.
     \item \textbf{Least residue} (of $a\bmod n$): The smallest nonnegative number congruent to $a\bmod n$.
-    \item \textbf{Modular arithmetic} (on $\Z\setminus n\Z$): The addition and multiplication operations defined by
+    \item \textbf{Modular arithmetic} (on $\Z/n\Z$): The addition and multiplication operations defined by
     \begin{align*}
         \bar{a}+\bar{b} &= \overline{a+b}&
         \bar{a}\cdot\bar{b} &= \overline{ab}
     \end{align*}
-    for all $\bar{a},\bar{b}\in\Z\setminus n\Z$.
-    \item $(\Z\setminus n\Z)^\times$ is the collection of residue classes which have a multiplicative inverse in $\Z\setminus n\Z$, i.e.,
+    for all $\bar{a},\bar{b}\in\Z/n\Z$.
+    \item $(\Z/n\Z)^\times$ is the collection of residue classes which have a multiplicative inverse in $\Z/n\Z$, i.e.,
     \begin{equation*}
-        (\Z\setminus n\Z)^\times = \{\bar{a}\in\Z\setminus n\Z\mid \exists\ \bar{c}\in\Z\setminus n\Z:\bar{a}\cdot\bar{c}=\bar{1}\}
+        (\Z/n\Z)^\times = \{\bar{a}\in\Z/n\Z\mid \exists\ \bar{c}\in\Z/n\Z:\bar{a}\cdot\bar{c}=\bar{1}\}
     \end{equation*}
     \begin{itemize}
-        \item It can be proven that $(\Z\setminus n\Z)^\times$ is the set of residue classes whose representatives are relatively prime to $n$.
-        \item Thus, $(\Z\setminus n\Z)^\times=\{\bar{a}\in\Z\setminus n\Z\mid(a,n)=1\}$.
+        \item It can be proven that $(\Z/n\Z)^\times$ is the set of residue classes whose representatives are relatively prime to $n$.
+        \item Thus, $(\Z/n\Z)^\times=\{\bar{a}\in\Z/n\Z\mid(a,n)=1\}$.
         \item Let $a$ be an integer that is relatively prime to $n$. Then the Euclidean algorithm generates integers $x,y$ such that $ax+ny=1$. But this implies that $ax=1+(-y)n$, i.e., $ax\equiv 1\bmod n$, so that $\bar{x}$ is the multiplicative inverse of $\bar{a}$.
     \end{itemize}
 \end{itemize}
 
 
-\subsection{Introduction to Groups}
-\subsubsection{Group Theory}
+
+\chapter{Introduction to Groups}
+\section{Group Theory}
 \begin{itemize}
     \item "One of the essential characteristics of mathematics is that after applying a certain algorithm or method of proof, one then considers the scope and limits of the method. As a result, properties possessed by a number of interesting objects are frequently abstracted and the question raised; can one determine \emph{all} the objects possessing these properties? Attempting to answer such a question also frequently adds considerable understanding of the original objects under consideration."
     \item Motivation?
 \end{itemize}
 
-\subsubsection{Basic Axioms and Examples}
+
+\section{Basic Axioms and Examples}
 \begin{itemize}
     \item \marginnote{7/12:}\textbf{Binary operation} (on a set $G$): A function $\star:G\times G\to G$.
     \item \textbf{Closed} (subset $H\subset G$ under $\star$): A subset $H\subset G$ such that $a\star b\in H$ for all $a,b\in H$, where $\star$ is a binary operation on $G$.
@@ -248,16 +168,16 @@
         \item If no such $n$ exists, the order of $x$ is defined to be infinity and $x$ is said to be of infinite order.
     \end{itemize}
     \item $|g|=1\Longleftrightarrow g=e$.
-    \item Is $|\bar{x}|$ for $\bar{x}\in\Z\setminus n\Z$ equal to $\gcd(x,n)$?
+    \item Is $|\bar{x}|$ for $\bar{x}\in\Z/n\Z$ equal to $\gcd(x,n)$?
     \item \textbf{Multiplication table} (of a finite group $G$): The $n\times n$ matrix whose $i,j$ entry is the group element $g_ig_j$, where $G=\{g_1,\dots,g_n\}$ and $g_1=e$. \emph{Also known as} \textbf{group table}.
 \end{itemize}
 
-\noindent\textbf{Exercises}
+\subsection*{Exercises}
 \begin{enumerate}[label={\textbf{\arabic*.}}]
     \setcounter{enumi}{4}
-    \item Prove for all $n>1$ that $\Z\setminus n\Z$ is not a group under multiplication of residue classes.
+    \item Prove for all $n>1$ that $\Z/n\Z$ is not a group under multiplication of residue classes.
     \begin{proof}
-        Let $n$ be an arbitrary natural number such that $n>1$. Consider $\bar{0}\in\Z\setminus n\Z$. Since $\bar{x}\cdot\bar{0}=\bar{0}$ for all $\bar{x}\in\Z\setminus n\Z$, there is no element $\bar{0}^{-1}\in\Z\setminus n\Z$ such that $\bar{0}\cdot\bar{0}^{-1}=\bar{1}$. Thus, there is clearly no multiplicative inverse for $\bar{0}$ in $\Z\setminus n\Z$, contradicting axiom (iii).
+        Let $n$ be an arbitrary natural number such that $n>1$. Consider $\bar{0}\in\Z/n\Z$. Since $\bar{x}\cdot\bar{0}=\bar{0}$ for all $\bar{x}\in\Z/n\Z$, there is no element $\bar{0}^{-1}\in\Z/n\Z$ such that $\bar{0}\cdot\bar{0}^{-1}=\bar{1}$. Thus, there is clearly no multiplicative inverse for $\bar{0}$ in $\Z/n\Z$, contradicting axiom (iii).
     \end{proof}
     \item Determine which of the following sets are groups under addition:
     \begin{enumerate}[label={\textbf{(\alph*)}}]
@@ -354,7 +274,8 @@
     \end{proof}
 \end{enumerate}
 
-\subsubsection{Dihedral Groups}
+
+\section{Dihedral Groups}
 \begin{itemize}
     \item \textbf{Dihedral group}: A group whose elements are symmetries of geometric objects.
     \item $D_{2n}$ denotes the group of symmetries of a regular $n$-gon.
@@ -391,7 +312,8 @@
     \item List examples and works with \textbf{collapsing} presentations, i.e., ones in which some important relations are consequences of others.
 \end{itemize}
 
-\subsubsection{Symmetric Groups}
+
+\section{Symmetric Groups}
 \begin{itemize}
     \item \textbf{Symmetric group} (on the set $\Omega$): The group $(S_\Omega,\circ)$, where $S_\Omega$ is the set of all bijections from a nonempty set $\Omega$ to itself and $\circ$ is function composition. \emph{Also known as} \textbf{permutations} (of $\Omega$).
     \begin{itemize}
@@ -446,15 +368,17 @@
     \item The order of a permutation is the lcm of the lengths of the cycles in its cycle decomposition.
 \end{itemize}
 
-\subsubsection{Matrix Groups}
+
+\section{Matrix Groups}
 \begin{itemize}
-    \item Since $\Z\setminus p\Z$, $p$ prime, is a finite field, we denote it $\mathbb{F}_p$.
+    \item Since $\Z/p\Z$, $p$ prime, is a finite field, we denote it $\mathbb{F}_p$.
     \item \textbf{Field}: A set $F$ together with two binary operations $+$ and $\cdot$ on $F$ such that $(F,+)$ is an abelian group (call its identity 0), $(F-\{0\},\cdot)$ is also an abeilan group, and the following distributive law holds: $a\cdot(b+c)=(a\cdot b)+(a\cdot c)$ for all $a,b,c\in F$.
     \item $\bm{F^\times}$: The set $F-\{0\}$ where $F$ is a field.
     \item \textbf{General linear group of degree $\bm{n}$}: The set of all $n\times n$ matrices, where $n\in\Z^+$, whose entities come from the field $F$ and whose determinant is nonzero. \emph{Denoted by} $\bm{GL_n(F)}$.
 \end{itemize}
 
-\subsubsection{The Quaternion Group}
+
+\section{The Quaternion Group}
 \begin{itemize}
     \item \textbf{Quaternion group}: The group
     \begin{equation*}
@@ -478,7 +402,8 @@
     \item $Q_8$ is a non-abelian group of order 8.
 \end{itemize}
 
-\subsubsection{Homomorphisms and Isomorphisms}
+
+\section{Homomorphisms and Isomorphisms}
 \begin{itemize}
     \item \textbf{Homomorphism}: A map $\varphi:G\to H$ such that $\varphi(x\star y)=\varphi(x)\diamond\varphi(y)$ for all $x,y\in G$, where $(G,\star)$ and $(H,\diamond)$ are groups.
     \begin{itemize}
@@ -506,7 +431,8 @@
     \item Let $G$ be a finite group of order $n$ for which we have a presentation and let $S=\{s_1,\dots,s_m\}$ be the generators. Let $H$ be another group and $\{r_1,\dots,r_m\}$ be elements of $H$. Suppose that any relation satisfied in $G$ by the $s_i$ is also satisfied in $H$ when each $s_i$ is replaced by $r_i$. Then there is a unique homomorphism $\varphi:G\to H$ which sends $s_i\mapsto r_i$.
 \end{itemize}
 
-\subsubsection{Group Actions}
+
+\section{Group Actions}
 \begin{itemize}
     \item \textbf{Group action} (of a group $G$ on a set $A$): A map $\cdot:G\times A\to A$ such that $g_1\cdot(g_2\cdot a)=(g_1g_2)\cdot a$ for all $g_1,g_2\in G$ and $a\in A$, and such that $1\cdot a=a$ for all $a\in A$.
     \item What is a group action?
@@ -544,8 +470,9 @@
 \end{itemize}
 
 
-\subsection{Subgroups}
-\subsubsection{Definition and Examples}
+
+\chapter{Subgroups}
+\section{Definition and Examples}
 \begin{itemize}
     \item Two way of unraveling the structure of an axiomatically defined mathematical object are to study subsets of the object that satisfy the same axioms, and to study quotients (which, roughly speaking, collapse one group onto a smaller one).
     \item \textbf{Subgroup} (of $G$): A subset $H\subset G$ that is nonempty and closed under products and inverses. \emph{Denoted by} $H\leq G$.
@@ -567,9 +494,9 @@
     \end{proposition}
 \end{itemize}
 
-\textbf{Exercises}
+\subsection*{Exercises}
 \begin{enumerate}[label={\textbf{\arabic*.}}]
-    \item In each of a-e, prove that the specified subset is a subgroup of the given group.
+    \item \marginnote{7/13:}In each of a-e, prove that the specified subset is a subgroup of the given group.
     \begin{enumerate}[label={\textbf{(\alph*)}}]
         \item The set of complex numbers of the form $a+ai$, $a\in\R$ (under addition).
         \item The set of complex numbers of absolute value 1, i.e., the unit circle in the complex plane (under multiplication).

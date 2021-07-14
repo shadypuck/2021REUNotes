@@ -7,7 +7,7 @@
 \usepackage[bottom]{footmisc}
 \usepackage{enumitem}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{physics,bm,siunitx}
+\usepackage{physics,bm,siunitx,scalerel}
 \usepackage{tikz}
 \usepackage{subcaption,float}
 \usepackage[hidelinks]{hyperref}
@@ -24,8 +24,6 @@
 }
 
 \MakeOuterQuote{"}
-
-\externaldocument{main}
 
 \reversemarginpar
 
@@ -45,11 +43,6 @@
 \colorlet{rex}{red!90!yellow!70!black}
 \colorlet{rey}{red!90!yellow!60}
 \colorlet{rez}{red!90!yellow!20}
-
-\setcounter{secnumdepth}{4}
-
-\renewcommand{\chaptername}{Week}
-\renewcommand{\contentsname}{Weeks}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -73,6 +66,19 @@
         \draw [-stealth] (A2) -- (#2);
         \draw [-stealth] (A3) -- (#3);
     }
+}
+
+\makeatletter
+    \patchcmd\part{\thispagestyle{plain}}{\thispagestyle{empty}}{}{}
+    \pretocmd\@spart{\thispagestyle{plain}}{}{}
+\makeatother
+
+\newlength\bshft
+\bshft=.2pt\relax
+\newcommand{\fakebold}[1]{
+    \ThisStyle{\ooalign{$\SavedStyle#1$\cr%
+    \kern-\bshft$\SavedStyle#1$\cr%
+    \kern\bshft$\SavedStyle#1$}}
 }
 
 \usepackage{subfiles}
