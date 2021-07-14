@@ -1,0 +1,51 @@
+\documentclass[../main.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
+\setcounter{chapter}{3}
+
+\begin{document}
+
+
+
+
+\chapter{}
+\section{PSet 5}
+\begin{enumerate}
+    \item \marginnote{7/14:}For a permutation $\sigma\in\Ss_n$, we denote by $\Inv(\sigma)$ the number of inversions in $\sigma$, namely the number of pairs $1\leq i<j\leq n$ such that $\sigma(i)>\sigma(j)$.
+    \begin{enumerate}
+        \item Find permutations in $\Ss_n$ with the smallest number of inversions and with the biggest number of inversions.
+        \begin{proof}
+            $\Inv(\sigma)=0$ for $\sigma=(1\ 2\ 3\ \dots\ n)$. $\Inv(\sigma)=(n-1)!$ for $\sigma=(n\ (n-1)\ (n-2)\ \dots\ 1)$.
+        \end{proof}
+        \item Prove that 
+        \begin{equation*}
+            \sum_{\pi\in\Ss_n}x^{\Inv(\pi)} = (1+x)(1+x+x^2)\cdots (1+x+x^2+\cdots+x^{n-1})
+        \end{equation*}
+        \item Prove that numbers $\Inv(\sigma)$ and $\Inv(\sigma^{-1})$ have the same parity.
+    \end{enumerate}
+    \item A bijection $f:\R^2\to\R^2$ such that there exists $k>0$ satisfying $|f(A)f(B)|=k|AB|$ is called a \textbf{similarity}.
+    \begin{enumerate}
+        \item Prove that similarities form a group. Prove that this group is a subgroup of $\Aff(\R^2)$ and contains a subgroup $\Isom(\R^2)$.
+        \item Prove that similarities send lines to lines, circles to circles, and preserve angles.
+        \item Prove that homothety $H_O^{\lambda}$ is a similarity. 
+        \item Prove that every similarity is a composition of a homothety and an isometry.
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Prove that the homothety $H_O^{\lambda}$ is a similarity. 
+        \item Prove that a composition of two homotheties with coefficients $\lambda_1,\lambda_2\neq 1$ is a homothety with coefficient $\lambda_1\lambda_2$.
+        \item Prove that if a composition of three homotheties is the identity map, then their centers lie on the same line.
+        \item \textbf{Monge's theorem}\par
+        Outer tangent lines to the circles $S_1$ and $S_2$, $S_2$ and $S_3$, $S_3$ and $S_1$ intersect in the points $A$, $B$, and $C$, respectively. Prove that points $A$, $B$, and $C$ lie on the same line.
+    \end{enumerate} 
+    \item Let $R_n$ denote a set of fixed-point-free permutations in $\Ss_n$ (i.e., $R_n=\{\sigma\in\Ss_n\mid\sigma(i)\neq i\ \forall\ 1\leq i\leq n\}$). Prove that
+    \begin{equation*}
+        \lim_{n\to\infty}\frac{|R_n|}{n!} = \frac{1}{e}
+    \end{equation*}
+\end{enumerate}
+
+
+
+
+\end{document}
