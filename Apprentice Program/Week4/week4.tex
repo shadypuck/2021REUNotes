@@ -47,5 +47,256 @@
 
 
 
+\section{Geometric Measure Theory (Jake Fielder)}
+\begin{itemize}
+    \item \marginnote{7/16:}Consider the disk of radius $\frac{1}{2}$.
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[scale=2]
+                \footnotesize
+                \filldraw [semithick,draw=rex,fill=rez] circle (0.5cm);
+                \draw [rex,semithick] (0,0) node[circle,fill,inner sep=1.5pt]{} -- node[below,black,fill=rez,inner sep=1pt]{$\frac{1}{2}$} (0.5,0);
+
+                \draw [help lines,dashed]
+                    (18:0.5) -- ({18-180}:0.5)
+                    (78:0.5) -- ({78-180}:0.5)
+                    (160:0.5) -- ({160-180}:0.5)
+                ;
+            \end{tikzpicture}
+            \caption{Circle of radius $\frac{1}{2}$.}
+            \label{fig:convexCoversa}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[scale=2]
+                \footnotesize
+                \filldraw [semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/3},0) -- ({-3^0.5/3},0) -- cycle;
+                \clip (0,1) -- ({3^0.5/3},0) -- ({-3^0.5/3},0) -- cycle;
+                \draw [gray!50!black]
+                    (0,1) circle (1cm)
+                    ({3^0.5/3},0) circle (1cm)
+                    ({-3^0.5/3},0) circle (1cm)
+                ;
+                \draw [semithick,rex] (0,1) -- ({3^0.5/3},0) -- ({-3^0.5/3},0) -- cycle;
+                \draw [semithick,rex] (0,1) -- node[right,black,fill=rez,inner sep=1pt]{1} (0,0);
+
+
+                \draw [help lines,dashed]
+                    (0,1) -- ++(-75:1)
+                    (0,1) -- ++(-105:1)
+                    ({3^0.5/3},0) -- ++(135:1)
+                    ({3^0.5/3},0) -- ++(165:1)
+                    ({-3^0.5/3},0) -- ++(15:1)
+                    ({-3^0.5/3},0) -- ++(45:1)
+                ;
+            \end{tikzpicture}
+            \caption{Triangle of height 1.}
+            \label{fig:convexCoversb}
+        \end{subfigure}
+        \caption{Convex covers of $\{\ell\mid|\ell|=1\}$.}
+        \label{fig:convexCovers}
+    \end{figure}
+    \begin{itemize}
+        \item One of the disk's less interesting but still curious properties is that it contains (covers) the unit line segments pointing in every direction (the set of its diameters). See Figure \ref{fig:convexCoversa}.
+        \item The same is true with the equilateral triangle of height 1. See Figure \ref{fig:convexCoversb}. However, the triangle does it in less area.
+        \item In fact, Kakeya showed that among all \emph{convex} polygons covering this set of line segments, the triangle with height 1 has the least area.
+    \end{itemize}
+    \item How would we go about finding the general shape with the least area that still covers all of the line segments, though? First, we need some geometric measure theory definitions.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[rotate=35]
+                \footnotesize
+                \draw [semithick] (0,0) node[circle,fill,inner sep=1.5pt]{} -- (2,0) node[circle,fill,inner sep=1.5pt]{};
+                \begin{scope}[on background layer]
+                    \filldraw [draw=rex,fill=rez] (0,-0.2) rectangle (2,0.2);
+                \end{scope}
+
+                \draw [very thin]
+                    (0,-0.3) -- ++(0,-0.2) ++(0,0.1) -- node[below right]{$\ell$} ++(2,0) ++(0,0.1) -- ++(0,-0.2)
+                    (-0.1,-0.2) -- ++(-0.2,0) ++(0.1,0) -- node[below left]{$\frac{\epsilon}{2\ell}$} ++(0,0.4) ++(0.1,0) -- ++(-0.2,0)
+                ;
+
+                \draw [very thin,->] (-0.2,-0.4) -- ++(0,0.15);
+                \draw [very thin,->] (-0.2,0.4) -- ++(0,-0.15);
+            \end{tikzpicture}
+            \caption{Line segment.}
+            \label{fig:coveringLinesa}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.6\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \footnotesize
+                \filldraw [draw=rex,fill=rez] (-3,0.1)
+                    -- ++(1,0) -- ++(0,0.1)
+                    -- ++(1,0) -- ++(0,0.2)
+                    -- ++(2,0) -- ++(0,-0.2)
+                    -- ++(1,0) -- ++(0,-0.1)
+                    -- ++(1,0)
+                    -- ++(0,-0.2)
+                    -- ++(-1,0) -- ++(0,-0.1)
+                    -- ++(-1,0) -- ++(0,-0.2)
+                    -- ++(-2,0) -- ++(0,0.2)
+                    -- ++(-1,0) -- ++(0,0.1)
+                    -- ++(-1,0)
+                    -- cycle
+                ;
+
+                \draw [semithick,<->] (-3.5,0) -- node[circle,fill,inner sep=1.5pt,label={[yshift=-5mm]below:0}]{} (3.5,0);
+                \foreach \x in {-3,-2,-1,1,2,3} {
+                    \draw (\x,0.1) -- ++(0,-0.2) node[below=5mm]{$\x$};
+                }
+            \end{tikzpicture}
+            \caption{Line.}
+            \label{fig:coveringLinesb}
+        \end{subfigure}
+        \caption{Covering lines.}
+        \label{fig:coveringLines}
+    \end{figure}
+    \begin{itemize}
+        \item A shape (set of points) has zero area if it can be covered by arbitrarily small shapes.
+        \item For example, say we want to prove that the line segment of length $\ell$ has zero area (see Figure \ref{fig:coveringLinesa}). In analytical terms, we require that the $A(\ell)<\epsilon$ for all $\epsilon>0$. Let $\epsilon>0$ be arbitrary. Consider the rectangle of side lengths $\ell$ and $\frac{\epsilon}{2\ell}$. Clearly, this rectangle covers the line segment of length $\ell$, i.e., $A(\ell)\leq A(R)$. Additionally, however, $A(R)=\ell\cdot\frac{\epsilon}{2\ell}=\frac{\epsilon}{2}<\epsilon$. Therefore, by transitivity, $A(\ell)<\epsilon$, as desired.
+        \item As another example, say we want to prove that a line has zero area (see Figure \ref{fig:coveringLinesb}). Let $\epsilon>0$ be arbitrary. Choose a point on the line. We shall call this point 0. Draw a rectangle of length 1 unit and height $\frac{\epsilon}{2^3}$ units to the right of 0 and to the left of 0. Then on $[1,2]$ and $[-2,-1]$, draw a rectangle of height $\frac{\epsilon}{2^4}$. Continue on in this fashion forever to $+\infty$ and $-\infty$, always drawing on $[n,n+1]$ and $[-(n+1),-n]$ a rectangle of height $\frac{\epsilon}{2^{n+3}}$. The sequence of areas of rectangles to the right of 0 converges to $\frac{\epsilon}{4}$, as does the sequence of areas of rectangles of those to the left of 0. Thus, the total area of the cover is $\frac{\epsilon}{2}$, and the line falls fully within it, as desired.
+    \end{itemize}
+    \item Now back to the original question. Our approach will be thus: If we can prove that $\frac{1}{3}$ of the lines are covered by 0 area, we prove it for all of the lines.
+    \item Consider the $\frac{1}{3}$ of the lines originating from the top of the triangle in Figure \ref{fig:convexCoversb}.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{\linewidth}
+            \centering
+            \begin{tikzpicture}[scale=2]
+                \begin{scope}
+                    \filldraw [semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/3},0) -- ({-3^0.5/3},0) -- cycle;
+                    \draw [semithick,rex,dashed] (0,1) -- (0,0);
+                    \draw [help lines,dashed]
+                        (0,1) -- ++(-70:1)
+                        (0,1) -- ++(-80:1)
+                        (0,1) -- ++(-100:1)
+                        (0,1) -- ++(-110:1)
+                    ;
+                \end{scope}
+                \draw [very thick,-stealth] (0.7,0.5) -- (1.1,0.5);
+                \begin{scope}[xshift=2cm]
+                    \filldraw [xshift=1mm,semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/3},0) -- (0,0);
+                    \draw [xshift=1mm,semithick,rex,dashed] (0,1) -- (0,0);
+                    \draw [xshift=1mm,help lines,dashed]
+                        (0,1) -- ++(-70:1)
+                        (0,1) -- ++(-80:1)
+                    ;
+
+                    \filldraw [xshift=-1mm,semithick,draw=rex,fill=rez] (0,1) -- ({-3^0.5/3},0) -- (0,0);
+                    \draw [xshift=-1mm,semithick,rex,dashed] (0,1) -- (0,0);
+                    \draw [xshift=-1mm,help lines,dashed]
+                        (0,1) -- ++(-100:1)
+                        (0,1) -- ++(-110:1)
+                    ;
+                \end{scope}
+                \draw [very thick,-stealth] (2.9,0.5) -- (3.3,0.5);
+                \begin{scope}[xshift=4cm]
+                    \filldraw [semithick,draw=rex,fill=rez] ({-3^0.5/6},0) -- ++(0,1) -- ++({3^0.5/6},-0.5) -- ++({3^0.5/6},0.5) -- ++(0,-1) -- cycle;
+                    \draw [semithick,rex,dashed]
+                        (0,0.5) -- ({3^0.5/6},0)
+                        (0,0.5) -- ({-3^0.5/6},0)
+                    ;
+                    \draw [xshift=0.289cm,help lines,dashed]
+                        (0,1) -- ++(-100:1)
+                        (0,1) -- ++(-110:1)
+                    ;
+                    \draw [xshift=-0.289cm,help lines,dashed]
+                        (0,1) -- ++(-70:1)
+                        (0,1) -- ++(-80:1)
+                    ;
+                \end{scope}
+                \path (-2,0) -- (6,0);
+            \end{tikzpicture}
+            \caption{Splitting once.}
+            \label{fig:splittingTrianglesa}
+        \end{subfigure}\\[1cm]
+        \begin{subfigure}[b]{\linewidth}
+            \centering
+            \begin{tikzpicture}[scale=2]
+                \begin{scope}
+                    \filldraw [semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/3},0) -- ({-3^0.5/3},0) -- cycle;
+                    \draw [semithick,rex,dashed]
+                        (0,1) -- ({3^0.5/6},0)
+                        (0,1) -- (0,0)
+                        (0,1) -- ({-3^0.5/6},0)
+                    ;
+                    \draw [help lines,dashed]
+                        (0,1) -- ++(-67.5:1)
+                        (0,1) -- ++(-82.5:1)
+                        (0,1) -- ++(-97.5:1)
+                        (0,1) -- ++(-112.5:1)
+                    ;
+                \end{scope}
+                \draw [very thick,-stealth] (0.7,0.5) -- (1.1,0.5);
+                \begin{scope}[xshift=2cm]
+                    \filldraw [xshift=3mm,semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/3},0) -- ({3^0.5/6},0);
+                    \draw [xshift=3mm,semithick,rex,dashed] (0,1) -- ({3^0.5/6},0);
+                    \draw [xshift=3mm,help lines,dashed]
+                        (0,1) -- ++(-67.5:1)
+                    ;
+
+                    \filldraw [xshift=1mm,semithick,draw=rex,fill=rez] (0,1) -- ({3^0.5/6},0) -- (0,0);
+                    \draw [xshift=1mm,semithick,rex,dashed] (0,1) -- (0,0);
+                    \draw [xshift=1mm,help lines,dashed]
+                        (0,1) -- ++(-82.5:1)
+                    ;
+
+                    \filldraw [xshift=-1mm,semithick,draw=rex,fill=rez] (0,1) -- ({-3^0.5/6},0) -- (0,0);
+                    \draw [xshift=-1mm,semithick,rex,dashed] (0,1) -- (0,0);
+                    \draw [xshift=-1mm,help lines,dashed]
+                        (0,1) -- ++(-97.5:1)
+                    ;
+
+                    \filldraw [xshift=-3mm,semithick,draw=rex,fill=rez] (0,1) -- ({-3^0.5/3},0) -- ({-3^0.5/6},0);
+                    \draw [xshift=-3mm,semithick,rex,dashed] (0,1) -- ({-3^0.5/6},0);
+                    \draw [xshift=-3mm,help lines,dashed]
+                        (0,1) -- ++(-112.5:1)
+                    ;
+                \end{scope}
+                \draw [very thick,-stealth] (2.9,0.5) -- (3.3,0.5);
+                \begin{scope}[xshift=4cm]
+                    \filldraw [semithick,draw=rex,fill=rez] ({-3^0.5/12},0) -- ++({-3^0.5/6},1) -- ++({3^0.5/6},-0.5) -- ++(0,0.5) -- ++({3^0.5/12},-0.5) -- ++({3^0.5/12},0.5) -- ++(0,-0.5) -- ++({3^0.5/6},0.5) -- ++({-3^0.5/6},-1) -- cycle;
+                    \draw [semithick,rex,dashed]
+                        ({-3^0.5/12},0.5) -- ({3^0.5/12},0)
+                        (0,0.5) -- ({3^0.5/12},0)
+                        (0,0.5) -- ({-3^0.5/12},0)
+                        ({3^0.5/12},0.5) -- ({-3^0.5/12},0)
+                        ({-3^0.5/12},0.5) -- ({-3^0.5/12},0)
+                        ({3^0.5/12},0.5) -- ({3^0.5/12},0)
+                    ;
+                    \draw [help lines,dashed]
+                        ({-3^0.5/4},1) -- ++(-67.5:1)
+                        ({-3^0.5/12},1) -- ++(-82.5:1)
+                        ({3^0.5/12},1) -- ++(-97.5:1)
+                        ({3^0.5/4},1) -- ++(-112.5:1)
+                    ;
+                \end{scope}
+                \path (-2,0) -- (6,0);
+            \end{tikzpicture}
+            \caption{Splitting twice.}
+            \label{fig:splittingTrianglesb}
+        \end{subfigure}
+        \caption{Splitting the triangle.}
+        \label{fig:splittingTriangles}
+    \end{figure}
+    \begin{itemize}
+        \item As we split more and more as per Figure \ref{fig:splittingTriangles}, we converge to a shape with zero area.
+    \end{itemize}
+    \item Other misc. notes:
+    \begin{itemize}
+        \item Hausdorff dimension: If something is of zero area, this lets us distinguish the size of a set.
+        \item If $B\subseteq\R^n$ is a Besicovitch set, what is $\dim_H(B)$?
+        \item Theorem (1973): If $n=2$, then $\dim_H(B)=2$.
+        \item Kakeya conjecture: $\dim_H(B)=n$.
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}
