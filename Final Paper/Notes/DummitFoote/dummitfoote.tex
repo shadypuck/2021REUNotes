@@ -8,7 +8,7 @@
 
 
 
-\part{Dummit and Foote}\thispagestyle{main}
+\part{Dummit and Foote}
 \setcounter{chapter}{-1}
 \chapter{Preliminaries}
 \section{Basics}
@@ -499,17 +499,217 @@
     \item \marginnote{7/13:}In each of a-e, prove that the specified subset is a subgroup of the given group.
     \begin{enumerate}[label={\textbf{(\alph*)}}]
         \item The set of complex numbers of the form $a+ai$, $a\in\R$ (under addition).
+        \begin{proof}
+            Let $H=\{a+ai\mid a\in\R\}\subset\C$.\par
+            Criterion 1: Let $a=1$. Then $1+i\in H\subset\C$, so $H\neq\emptyset$, as desired.\par
+            Criterion 2: Let $a+ai,b+bi\in H$ be arbitrary. Then $(a+ai)+(-b-bi)=(a-b)+(a-b)i\in H$, as desired.
+        \end{proof}
         \item The set of complex numbers of absolute value 1, i.e., the unit circle in the complex plane (under multiplication).
+        \begin{proof}
+            Let $H=\{\e[i\theta]\mid\theta\in\R\}\subset\C$.\par
+            Criterion 1: Let $\theta=0$. Then $\e[i(0)]=1\in H$, so $H\neq\emptyset$, as desired.\par
+            Criterion 2: Let $\e[i\theta_1],\e[i\theta_2]\in H$ be arbitrary. Then $\e[i\theta_1]\e[i\theta_2]=\e[i(\theta_1+\theta_2)]\in H$, as desired.
+        \end{proof}
         \item For fixed $n\in\Z^+$, the set of rational numbers whose denominators divide $n$ (under addition).
+        \begin{proof}
+            Let $n\in\Z^+$ be arbitrary, and let $H=\{\frac{p}{q}\in\Q:q\mid n\}$.\par
+            Criterion 1: Let $p=q=1$. Then $\frac{1}{1}\in H$ since $1$ divides all $n$, so $H\neq\emptyset$, as desired.\par
+            Criterion 2: Let $\frac{p}{q},\frac{r}{s}\in H$ be arbitrary. Then since $q,s\mid n$, we can add the fractions with common denominator $n$, i.e., $\frac{p}{q}+\frac{r}{s}=\frac{pn/q}{n}+\frac{rn/s}{n}=\frac{pn/q+rn/s}{n}\in H$, as desired.
+        \end{proof}
         \item For fixed $n\in\Z^+$, the set of rational numbers whose denominators are relatively prime to $n$ (under addition).
+        \begin{proof}
+            Symmetric to part (c) --- the lcm of two numbers coprime to $n$ will not contain any factors of $n$.
+        \end{proof}
         \item The set of nonzero real numbers whose square is a rational number (under multiplication).
+        \begin{proof}
+            Let $H=\{x\in\R\mid x^2\in\Q\}$.\par
+            Criterion 1: Let $x=\sqrt{2}$. Then $x^2=2\in\Q$, so $x\in H$, i.e., $H\neq\emptyset$, as desired.\par
+            Criterion 2: Let $x,y\in H$ be arbitrary. Since $x^2,y^{-2}\in\Q$, it follows that $x^2y^{-2}=(xy^{-1})^2\in\Q$. Therefore, $xy^{-1}\in H$, as desired.
+        \end{proof}
     \end{enumerate}
     \setcounter{enumi}{3}
     \item Give an explicit example of a group $G$ and an infinite subset $H\subset G$ that is closed under the group operation but is not a subgroup of $G$.
     \item Prove that $G$ cannot have a subgroup $H$ with $|H|=n-1$, where $n=|G|>2$.
+    \begin{proof}
+        Suppose for the sake of contradiction that $H<G$ satisfies $|H|=|G|-1\geq 2$. Let $g\in G$ be the unique element of $G$ satisfying $g\notin H$. Since $H$ is a subgroup, we know that $xy^{-1}\in H$, i.e., $xy^{-1}\neq g$ for any $x,y\in H$. It follows that $gy\neq x$ for any $x,y\in H$. However, since $gy$ must be an element of $G$, we therefore have that $gy=yg=g$ for all $y\in H$. Thus, $y=e$ for all $y\in H$, i.e., that $H=\{e\}$. But then $|H|=1<2$, a contradiction.
+    \end{proof}
     \setcounter{enumi}{7}
     \item Let $H$ and $K$ be subgroups of $G$. Prove that $H\cup K$ is a subgroup iff either $H\subseteq K$ or $K\subseteq H$.
+    \begin{proof}
+        Suppose first that $H\cup K$ is a subgroup. Suppose for the sake of contradiction that $H\not\subseteq K$ and $K\not\subseteq H$. Thus, there exists $h\in H$ such that $h\notin K$, and $k\in K$ such that $k\notin H$. Since $H\cup K$ is a subgroup, $hk\in H\cup K$. Thus, $hk\in H$ or $hk\in K$. We divide into two cases. If $hk\in H$, then $h^{-1}hk=k\in H$, a contradiction. The same contradiction in the other case exists. Since we have a contradiction in every case, we must have that $H\subseteq K$ or $K\subseteq H$, as desired.\par
+        Now suppose that $H\subseteq K$ or $K\subseteq H$. We divide into two cases. If $H\subseteq K$, then $H\cup K=K$ is a subgroup of $G$. The argument is symmetric in the other case.
+    \end{proof}
 \end{enumerate}
+
+
+\section{Centralizers and Normalizers, Stabilizers and Kernels}
+\begin{itemize}
+    \item \textbf{Centralizer} (of $A$ in $G$): The set $\{g\in G\mid gag^{-1}=a\ \forall\ a\in A\}$. \emph{Denoted by} $\bm{C_G(A)}$.
+    \begin{itemize}
+        \item Where $A$ is a nonempty subset of $G$, $C_G(A)$ is the set of all elements in $G$ which commute with every element of $A$, since $gag^{-1}=a$ is an equivalent condition to $ga=ag$.
+    \end{itemize}
+    \item $C_G(A)\leq G$:
+    \begin{proof}
+        Criterion 1: Since $1a1=a$ for all $a\in A$, $1\in C_G(A)$. Thus, $C_G(A)$ is nonempty.\par
+        Criterion 2: Let $x,y\in C_G(A)$ be arbitrary. To prove that $xy^{-1}\in C_G(A)$, it will suffice to show that for all $a\in A$, $(xy^{-1})a(xy^{-1})^{-1}=a$. Let $a$ be an arbitrary element of $A$. Since $x,y\in C_G(A)$, we know that $xax^{-1}=a$ and $yay^{-1}=a$. It follows from the latter condition via multiplication on the left by $y^{-1}$ and multiplication on the right by $y$ that $a=y^{-1}ay$. Combining the last two results, we have that
+        \begin{align*}
+            (xy^{-1})a(xy^{-1})^{-1} &= x(y^{-1}ay)x^{-1}\\
+            &= xax^{-1}\\
+            &= a
+        \end{align*}
+        as desired.
+    \end{proof}
+    \item \textbf{Center} (of $G$): The set $\{g\in G\mid gx=xg\ \forall\ x\in G\}$. \emph{Denoted by} $\bm{Z(G)}$.
+    \item Since $Z(G)=C_G(G)$, $Z(G)\leq G$ by the above argument.
+    \item \textbf{Normalizer} (of $A$ in $G$): The set $\{g\in G\mid gAg^{-1}=A\}$, where $gAg^{-1}=\{gag^{-1}\mid a\in A\}$. \emph{Denoted by} $\bm{N_G(A)}$.
+    \item Note that $g\in C_G(A)$ implies $g\in N_G(A)$, so $C_G(A)\leq N_G(A)$.
+    \item \marginnote{7/15:}\textbf{Stabilizer} (of $s$ in $G$): The set $\{g\in G\mid g\cdot s=s\}$. \emph{Denoted by} $\bm{G_s}$.
+    \item $G_s\leq G$.
+    \item \textbf{Kernel} (of the action of $G$ on $S$): The set $\{g\in G\mid g\cdot s=s\ \forall\ s\in S\}$.
+\end{itemize}
+
+\subsection*{Exercises}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item Prove that $C_G(A)=\{g\in G\mid g^{-1}ag=a\ \forall\ a\in A\}$.
+    \begin{proof}
+        \begin{align*}
+            C_G(A) &= \{g\in G\mid gag^{-1}=a\ \forall\ a\in A\}\\
+            &= \{g\in G\mid g^{-1}gag^{-1}g=g^{-1}ag\ \forall\ a\in A\}\\
+            &= \{g\in G\mid a=g^{-1}ag\ \forall\ a\in A\}\\
+            &= \{g\in G\mid g^{-1}ag=a\ \forall\ a\in A\}
+        \end{align*}
+    \end{proof}
+    \item Prove that $C_G(Z(G))=G$ and deduce that $N_G(Z(G))=G$.
+    \begin{proof}
+        Suppose first that $g\in C_G(Z(G))$. Then by the definition of the centralizer, $g\in G$. Now suppose that $g\in G$. To prove that $g\in C_G(Z(G))$, it will suffice to show that $ghg^{-1}=h$ for all $h\in Z(G)$. Let $h$ be an arbitrary element of $Z(G)$. Then $hx=xh$ for all $x\in G$. It follows that $h=xhx^{-1}$ for all $x\in G$, notably including $g$. Therefore, we have shown that $ghg^{-1}=h$, as desired.\par
+        The proof is symmetric in the other case.
+    \end{proof}
+    \item Prove that if $A$ and $B$ are subsets of $G$ with $A\subseteq B$, then $C_G(B)\leq C_G(A)$.
+    \begin{proof}
+        To prove that $C_G(B)\leq C_G(A)$, it will suffice to show that $C_G(B)\subset C_G(A)$, $C_G(B)\neq\emptyset$, and for all $x,y\in C_G(B)$, $xy^{-1}\in C_G(B)$.\par
+        Subsets: Let $g$ be an arbitrary element of $C_G(B)$. Then $gbg^{-1}=b$ for all $b\in B$. Thus, since $A\subset B$, $gag^{-1}=a$ for all $a\in A\subset B$. Therefore, $g\in C_G(A)$, as desired.\par
+        Criterion 1: Since $1b1^{-1}=b$ for all $b\in B\subset G$, $1\in C_G(B)$, so $C_G(B)\neq\emptyset$, as desired.\par
+        Criterion 2: Let $x,y$ be arbitrary elements of $C_G(B)$. Then $xbx^{-1}=b$ and $yby^{-1}=b$ for all $b\in B$. It follows from the latter condition that $b=y^{-1}by$. Therefore,
+        \begin{align*}
+            (xy^{-1})b(xy^{-1})^{-1} &= xy^{-1}byx^{-1}\\
+            &= xbx^{-1}\\
+            &= b
+        \end{align*}
+        as desired.
+    \end{proof}
+    \stepcounter{enumi}
+    \item In each of parts a-c, show that for the specified group $G$ and subgroup $A$ of $G$ that $C_G(A)=A$ and $N_G(A)=G$.
+    \begin{enumerate}[label={\textbf{(\alph*)}}]
+        \item $G=S_3$ and $A=\{1,(1\ 2\ 3),(1\ 3\ 2)\}$.
+        \begin{proof}
+            $1a1^{-1}=a$ for all $a\in A$.
+            \begin{align*}
+                (1\ 2\ 3)\cdot 1\cdot(1\ 2\ 3)^{-1} &= (1\ 2\ 3)\cdot(1\ 2\ 3)^{-1}&
+                    (1\ 2\ 3)\cdot (1\ 2\ 3)\cdot(1\ 2\ 3)^{-1} &= (1\ 2\ 3)\cdot 1\\
+                &= 1&
+                    &= (1\ 2\ 3)
+            \end{align*}
+            \begin{align*}
+                (1\ 2\ 3)\cdot (1\ 3\ 2)\cdot(1\ 2\ 3)^{-1} &= 1\cdot(1\ 2\ 3)^{-1}\\
+                &= (1\ 3\ 2)
+            \end{align*}
+            Etc. in each case.
+        \end{proof}
+        \item $G=D_8$ and $A=\{1,s,r^2,sr^2\}$.
+        \item $G=D_{10}$ and $A=\{1,r,r^2,r^3,r^4\}$.
+    \end{enumerate}
+\end{enumerate}
+
+
+\section{Cyclic Groups and Cyclic Subgroups}
+\begin{itemize}
+    \item \textbf{Cyclic} (group): A group $H$ that can be generated by a single element, i.e., there is some element $x\in H$ such that $H=\{x^n\mid n\in\Z\}$ (where as usual the operation is multiplication).
+    \item A cyclic group may have more than one generator (e.g., we can have $H=\langle x\rangle=\langle x^{-1}\rangle$).
+    \item Let $H=\langle x\rangle$.
+    \begin{proposition}
+        Then $|H|=|x|$ (where if one side of this equality is infinite, so is the other). More specifically,
+        \begin{enumerate}[label={\textbf{\textup{(\arabic*)}}}]
+            \item If $|H|=n<\infty$, then $x^n=1$ and $1,x,x^2,\dots,x^{n-1}$ are all the distinct elements of $H$;
+            \item If $|H|=\infty$, then $x^n\neq 1$ for all $n\neq 0$ and $x^a\neq x^b$ for all $a\neq b\in\Z$.
+        \end{enumerate}
+    \end{proposition}
+    \item Let $G$ be an arbitrary group, let $x\in G$, and let $m,n\in\Z$.
+    \begin{proposition}
+        If $x^n=1$ and $x^m=1$, then $x^d=1$ where $d=(m,n)$. In particular, if $x^m=1$ for some $m\in\Z$, then $|x|$ divides $m$.
+        \begin{proof}
+            If $d=\gcd(m,n)$, then by the Euclidean algorithm, there exist integers $r,s$ such that $d=mr+ns$. Thus,
+            \begin{equation*}
+                x^d = x^{mr+ns}
+                = (x^m)^r(x^n)^s
+                = 1^r1^s
+                = 1
+            \end{equation*}
+            as desired.\par
+            We divide into two cases for the second assertion ($m=0$ and $m\neq 0$). If $m=0$, then clearly $|x|$ divides $0=m$, as desired. On the other hand, if $m\neq 0$, then we continue. Let $d=(m,|x|)$. By the first part, $x^d=1$. By definition, $0<d\leq |x|$. But since $|x|$ is the smallest positive integer such that $x^{|x|}=1$, we must have $d=|x|$. Thus, by the definition of $d$, $|x|=d\mid m$.
+        \end{proof}
+    \end{proposition}
+    \item Cyclic group isomorphisms:
+    \begin{theorem}
+        Any two cyclic groups of the same order are isomorphic. More specifically,
+        \begin{enumerate}[label={\textup{\textbf{(\arabic*)}}}]
+            \item If $n\in\Z$ and $\langle x\rangle$ and $\langle y\rangle$ are both cyclic groups of order $n$, then the map
+            \begin{align*}
+                \varphi:\langle x\rangle &\to \langle y\rangle\\
+                x^k &\mapsto y^k
+            \end{align*}
+            is well defined and is an isomorphism.
+            \begin{proof}
+                To prove that $\varphi$ is well defined, it will suffice to show that if $x^r=x^s$, then $\varphi(x^r)=\varphi(x^s)$. Let $x^r=x^s$. Then $x^{r-s}=1$. Thus, by Proposition 2.3, $n\mid r-s$. It follows that $r-s=nt$, i.e., that $r=nt-s$ for some $t\in\Z$. Consequently,
+                \begin{equation*}
+                    \varphi(x^r) = \varphi(x^{tn+s})
+                    = y^{tn+s}
+                    = (y^n)^ty^s
+                    = y^s
+                    = \varphi(x^s)
+                \end{equation*}
+                as desired.\par
+                To prove that $\varphi$ is an isomorphism, it will suffice to show that it is a homomorphism and a bijection. The following shows that $\varphi$ is a homomorphism.
+                \begin{equation*}
+                    \varphi(x^ax^b) = \varphi(x^{a+b})
+                    = y^{a+b}
+                    = y^ay^b
+                    = \varphi(x^a)\varphi(x^b)
+                \end{equation*}
+                As to proving that $\varphi$ is a bijection, we have by hypothesis that $\langle x\rangle$ and $\langle y\rangle$ are finite groups of the same order, and we know that $\varphi$ is a surjection since each $y^k$ is the image of an $x^k$. These two facts prove that it is a bijection (equivalently, $\varphi$ has an obvious two-sided inverse).
+            \end{proof}
+            \item If $\langle x\rangle$ is an infinite cyclic group, the map
+            \begin{align*}
+                \varphi:\Z &\to \langle x\rangle\\
+                k &\mapsto x^k
+            \end{align*}
+            is well defined and is an isomorphism.
+            \begin{proof}
+                $\varphi$ is automatically well-defined since $\Z$ is well-defined.\par
+                By Proposition 2.2, $a\neq b$ implies $x^a\neq x^b$ for all distinct $a,b\in\Z$. Thus, $\varphi$ is injective. By the definition of a cyclic group, $\varphi$ is surjective. Thus, it is bijective. Additionally, laws of exponents prove that it is a homomorphism, as above.
+            \end{proof}
+        \end{enumerate}
+    \end{theorem}
+    \item Let $G$ be a group, let $x\in G$, and let $a\in\Z-\{0\}$.
+    \begin{proposition}\leavevmode
+        \begin{enumerate}[label={\textup{\textbf{(\arabic*)}}}]
+            \item If $|x|=\infty$, then $|x^a|=\infty$.
+            \begin{proof}
+                Suppose for the sake of contradiction that $|x^a|=m<\infty$. Then $x^{am}=(x^a)^m=1$ and $x^{-am}=((x^a)^m)^{-1}=1^{-1}=1$. Thus, since either $am$ or $-am$ is a positive integer (neither are 0 since $a\neq 0\neq m$), $|x|=\pm am<\infty$, a contradiction.
+            \end{proof}
+            \item If $|x|=n<\infty$, then $|x^a|=\frac{n}{(n,a)}$.
+            \item In particular, if $|x|=n<\infty$, and $a$ is a positive integer dividing $n$, then $|x^a|=\frac{n}{a}$.
+        \end{enumerate}
+    \end{proposition}
+\end{itemize}
+
+
+
+\stepcounter{chapter}
+\chapter{Group Actions}
+\section{Group Actions and Permutation Representations}
+\begin{itemize}
+    \item \textbf{Faithful} (group action): A group action whose kernel is the identity.
+\end{itemize}
 
 
 

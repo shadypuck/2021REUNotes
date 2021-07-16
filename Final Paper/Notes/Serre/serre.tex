@@ -1,0 +1,41 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{part}{1}
+
+\begin{document}
+
+
+
+
+\part{Serre}
+\chapter{Generalities on Linear Representations}
+\section{Definitions}
+\begin{itemize}
+    \item \marginnote{7/15:}$\bm{GL(V)}$: The group of isomorphisms of $V$ onto itself, where $V$ is a vector space over the field $\C$ of complex numbers.
+    \item If $(e_i)$ is a finite basis of $n$ elements for $V$, then each linear map $a:V\to V$ is defined by a square matrix $(a_{ij})$ of order $n$.
+    \item The coefficients $a_{ij}$ are complex number derived from expressing the images $a(e_j)$ in terms of the basis $(e_i)$ and solving, i.e., we know that each $a(e_j)=\sum_ia_{ij}e_i$.
+    \item $a$ is an isomorphism $\Longleftrightarrow$ $\det(a)=\det(a_{ij})\neq 0$.
+    \item We can thus identify $GL(V)$ with the group of invertible square matrices of order $n$.
+    \item \textbf{Linear representation} (of $G$ in $V$): A homomorphism $\rho:G\to GL(V)$, where $G$ is a finite group.
+    \item \textbf{Representation space} (of $G$): The vector space $V$, given a homomorphism $\rho$. \emph{Also known as} \textbf{representation}.
+    \item \textbf{Degree} (of a representation $V$): The dimension of the representation space.
+    \item \textbf{Similar} (representations): Two representations $\rho,\rho'$ of the same group $G$ in vector spaces $V$ and $V'$ such that there exists a linear isomorphism $\tau:V\to V'$ which satisfies the identity $\tau\circ\rho(s)=\rho'(s)\circ\tau$ for all $s\in G$. \emph{Also known as} \textbf{isomorphic}.
+    \begin{itemize}
+        \item When $\rho(s),\rho'(s)$ are given in matrix form by $R_s,R_s'$, respectively, this means that there exists an invertible matrix $T$ such that $T\cdot R_s=R_s'\cdot T$ for all $s\in G$.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Basic Examples}
+\begin{itemize}
+    \item \textbf{Unit representation}: The representation $\rho$ of $G$ defined by $\rho(s)=1$ for all $s\in G$. \emph{Also known as} \textbf{trivial representation}.
+    \item \textbf{Regular representation}: The representation $\rho$ defined by $\rho(s)=f:V\to V$ where $f:e_t\mapsto e_{st}$, where $V$ is a vector space of dimension $g=|G|$ with basis $(e_t)_{t\in G}$.
+    \item \textbf{Permutation representation}: The representation $\rho$ defined by $\rho(s)=f:V\to V$, where $f:e_x\to e_{sx}$, $x\in X$ being the set acted upon by $G$.
+\end{itemize}
+
+
+
+
+\end{document}
