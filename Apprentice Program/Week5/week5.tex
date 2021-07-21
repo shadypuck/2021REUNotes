@@ -1,0 +1,51 @@
+\documentclass[../apprentice.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
+\setcounter{chapter}{4}
+
+\begin{document}
+
+
+
+
+\chapter{}
+\section{Measure Theory}
+\begin{itemize}
+    \item \marginnote{7/21:}\textbf{Metric space}: A space $X$ with a metric $d$ satisfying
+    \begin{enumerate}
+        \item For all $x\in X$, $d(x,x)=0$.
+        \item If $d(x,y)=0$, then $x=y$.
+        \item $d(x,y)=d(y,x)$.
+        \item $d(x,z)\leq d(x,y)+d(y,z)$.
+    \end{enumerate}
+    \item For example, on $\R$, the metric $d$ is defined by $d(x,y)=|x-y|$ for all $x,y\in\R$. One can check that $d$ satisfies the four properties under this definition.
+    \item There is a topology induced by a metric.
+    \begin{itemize}
+        \item Let $B_r(x)=\{y\in X:d(x,y)<r\}$.
+    \end{itemize}
+    \item \textbf{Cauchy sequence}: A sequence $(x_i)$ such that for all $\epsilon>0$, there exists an $N$ such that $d(x_n,x_m)<\epsilon$ for all $n,m\geq N$.
+    \begin{itemize}
+        \item If $(x_i)$ is Cauchy, then there exists $y$ such that $\lim_{i\to\infty}d(x_i,y)=0$.
+    \end{itemize}
+    \item \textbf{Complete} (metric space): A metric space $X$ such that all Cauchy sequences converge to some $x\in X$.
+    \begin{itemize}
+        \item Informally, a complete metric space is a metric space $X$ such that all convergent sequences of elements of $X$ converge to an element of $X$.
+        \item For example, $(0,1)$ under $d(x,y)=|x-y|$ has contains convergent sequences that converge to 1, so it is not complete.
+    \end{itemize}
+    \item Completeness and compactness are not identical, but they are quite analogous.
+    \item \textbf{Baire Category Theorem} (informal): Open subsets of a complete metric space are big.
+    \begin{itemize}
+        \item Big: Not made out of countably many small things.
+        \item Fact: If $X_1,X_2,\dots$ are all measure 0, then $\bigcup_{i\in\N}X_i$ is measure 0.
+        \item $\overline{\Q}=\R$.
+    \end{itemize}
+    \item \textbf{First category} (of small sets): A countable union of nowhere dense sets.
+    \item \textbf{Second category}: Not a first category.
+    \item Prove the theorem by showing that open subsets of the metric space are second category.
+\end{itemize}
+
+
+
+
+\end{document}
