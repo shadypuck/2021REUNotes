@@ -412,5 +412,125 @@
 
 
 
+\chapter{Homomorphisms}
+\begin{itemize}
+    \item \marginnote{7/23:}Homomorphisms isolate the special group-like properties of subsets of groups.
+    \item A homomorphism often sends a group to a subgroup whose elements can be relabeled and reinterpreted.
+    \item Let $G,H$ be groups, and $f:G\to H$ a homomorphism.
+    \begin{theorem}\leavevmode
+        \begin{enumerate}[label={\textup{(}\roman*\textup{)}}]
+            \item $f(e)=e$;
+            \item $f(a^{-1})=[f(a)]^{-1}$ for every $a\in G$.
+        \end{enumerate}
+    \end{theorem}
+    \item \textbf{Normal} (subgroup $H$ of $G$): A subgroup $H$ that is closed with respect to conjugates, i.e., for any $a\in H$ and $x\in G$, $xax^{-1}\in H$.
+    \item \textbf{Kernel} (of a homomorphism $f$): The set $K$ of all the elements of $G$ which are carried by $f$ onto the neutral element of $G$.
+    \item Let $f:G\to H$ be a homomorphism.
+    \begin{theorem}\leavevmode
+        \begin{enumerate}[label={\textup{(}\roman*\textup{)}}]
+            \item The kernel of $f$ is a normal subgroup of $G$.
+            \begin{proof}
+                Closure under products: Let $x,y\in\ker(f)$. Then $f(x)=e=f(y)$. It follows by the definition of a homomorphism that $f(xy)=ee=e$. Thus, $xy\in\ker(f)$.\par
+                Closure under inverses: Let $x\in\ker(f)$. Then $f(x)=e$. Thus, $f(x^{-1})=[f(x)]^{-1}=e^{-1}=e$. Therefore, $x^{-1}\in\ker(f)$.\par
+                Closure under conjugates: Let $a\in\ker(f)$, $x\in G$. Then $f(xax^{-1})=f(x)f(a)f(x^{-1})=f(x)e[f(x)]^{-1}=e$. Therefore, $xax^{-1}\in\ker(f)$.
+            \end{proof}
+            \item The range of $f$ is a subgroup of $H$.
+            \begin{proof}
+                Closure under products: Let $f(x),f(y)\in f(G)$. Clearly, $f(x)f(y)=f(xy)\in f(G)$, as desired.\par
+                Closure under inverses: Let $f(x)\in f(G)$. Clearly, $[f(x)]^{-1}=f(x^{-1})\in f(G)$, as desired.
+            \end{proof}
+        \end{enumerate}
+    \end{theorem}
+\end{itemize}
+
+\subsection*{Exercises}
+\begin{enumerate}[label={\textbf{\Alph*.}}]
+    \setenumerate[2]{label={\textbf{\arabic*}}}
+    \setcounter{enumi}{2}
+    \item \textbf{Elementary Properties of Homomorphisms}
+    \begin{enumerate}
+        \item If $f:G\to H$ and $g:H\to K$ are homomorphisms, then their composite $g\circ f:G\to K$ is a homomorphism.
+        \item If $f:G\to H$ is a homomorphism with kernel $K$, then $f$ is injective iff $K=\{e\}$.
+        \begin{proof}
+            Suppose first that $f$ is injective, and suppose for the sake of contradiction that $K\neq\{e\}$. Since $K$ includes at least $e$ by Theorem 14.1i, $K$ must also include another element $g\in G$ that is distinct from $e$. But since $f$ is injective, $g\neq e$ implies that $f(g)=e\neq e=f(e)$, a contradiction.\par
+            Now suppose that $K=\{e\}$. Let $f(g)=f(h)$. Then $f(g)[f(h)]^{-1}=f(gh^{-1})=e$. Thus, $gh^{-1}=e$. It follows that $g=h$, as desired.
+        \end{proof}
+        \item If $f:G\to H$ is a homomorphism and $K$ is any subgroup of $G$, then $f(K)=\{f(x):x\in K\}$ is a subgroup of $H$.
+        \item If $f:G\to H$ is a homomorphism and $J$ is any subgroup of $H$, then $f^{-1}(J)=\{x\in G:f(x)\in J\}$ is a subgroup of $G$. Furthermore, $\ker(f)\subset f^{-1}(J)$.
+        \item If $f:G\to H$ is a homomorphism with kernel $K$, and $J$ is a subgroup of $G$, let $f_J$ designate the restriction of $f$ to $J$. (In other words, $f_J$ is the same function as $f$, except that its domain is restricted to $J$.) Then $\ker(f_J)=J\cap K$.
+        \begin{proof}
+            Suppose first that $x\in\ker(f_J)$. Then $f_J(x)=e$. Thus, $f(x)=e$. It follows that $x\in K$. Additionally, by the definition of the kernel $x\in J$. Therefore, $x\in J\cap K$.\par
+            Now suppose that $x\in J\cap K$. Since $x\in K$, $f(x)=e$. And since $x\in J$, $f_J(x)$ is defined (specifically, to equal $e$). Therefore, $x\in\ker(f_J)$.
+        \end{proof}
+        \item For any group $G$, the function $f:G\to G$ defined by $f(x)=e$ is a homomorphism.
+        \item For any group $G$, $\{e\}$ and $G$ are homomorphic images of $G$.
+        \item The function $f:G\to G$ defined by $f(x)=x^2$ is a homomorphism iff $G$ is abelian.
+        \begin{proof}
+            Suppose first that $f(x)=x^2$ is a homomorphism. Let $x,y\in G$ be arbitrary. Then $xyxy=(xy)^2=f(xy)=f(x)f(y)=x^2y^2=xxyy$. It follows by consecutive applications of the cancellation law that $yx=xy$, proving that $G$ is abelian, as desired.\par
+            Now suppose that $G$ is abelian. Let $x,y\in G$ be arbitrary. Then $xy=yx$. It follows that $xxyy=xyxy$. But this implies that $f(x)f(y)=xxyy=xyxy=f(xy)$, as desired.
+        \end{proof}
+        \item The functions $f_1(x,y)=x$ and $f_2(x,y)=y$ from $G\times H$ to $G$ and $H$, respectively, are homomorphisms.
+        \begin{proof}
+            $f_1[(x,y)(x',y')]=f_1(xx',yy')=xx'=f_1(x,y)f(x',y')$, as desired.\par
+            Symmetric for $f_2$.
+        \end{proof}
+    \end{enumerate}
+    \item \marginnote{7/24:}\textbf{Basic Properties of Normal Subgroups}
+    \begin{enumerate}
+        \item Find all the normal subgroups
+        \begin{enumerate}[label={(\alph*)}]
+            \item of $S_3$;
+            \begin{proof}[Answer]
+                Subgroups: $\{\epsilon\},\{\epsilon,\alpha\},\{\epsilon,\gamma\},\{\epsilon,\kappa\},\{\epsilon,\beta,\delta\},S_3$.
+            \end{proof}
+            \item and of $D_4$.
+        \end{enumerate}
+        \item Every subgroup of an abelian group is normal.
+        \begin{proof}
+            Let $H$ be a subgroup of an abelian group $G$. Then $H$ is abelian. Let $a\in H$ and $x\in G$ be arbitrary. It follows that $xa=ax$, i.e., that $xax^{-1}=a\in H$, as desired.
+        \end{proof}
+        \item The center of any group $G$ is a normal subgroup of $G$.
+        \begin{proof}
+            We know that $Z(G)$ is a subgroup of $G$. Let $a\in Z(G)$ and $x\in G$ be arbitrary. Then $xa=ax$ by the definition of the center. It follows that $xax^{-1}=a\in Z(G)$, as desired.
+        \end{proof}
+        \item Let $H$ be a subgroup of $G$. $H$ is normal iff it has the following property: For all $a,b\in G$, $ab\in H$ iff $ba\in H$.
+        \begin{proof}
+            Suppose first that $H$ is normal. Let $a,b\in G$ be arbitrary. Suppose first that $ab\in H$. Then $b(ab)b^{-1}=ba\in H$. The argument is symmetric in the other direction.\par
+            Now suppose that for all $a,b\in G$, $ab\in H$ iff $ba\in H$. Let $a\in H$ and $x\in G$ be arbitrary. Since $a\in H$, $x^{-1}(xa)\in H$. It follows by hypothesis that $(xa)x^{-1}\in H$, as desired.
+        \end{proof}
+        \item Let $H$ be a subgroup of $G$. $H$ is normal iff $aH=Ha$ for every $a\in G$.
+        \begin{proof}
+            Suppose first that $H$ is normal. Let $a\in G$ be arbitrary. Let $ah\in aH$ be arbitrary. Then since $H$ is normal, $aha^{-1}=h'$ for some $h'\in H$. It follows that $ah=h'a$. But since $h'a\in Ha$, this implies that $ah\in Ha$, as desired. The argument is symmetric in the other direction.\par
+            Now suppose that $aH=Ha$ for every $a\in G$. Let $h\in H$ be arbitrary. It follows by hypothesis that $ah=h'a$ for some $h'\in H$. Thus, $aha^{-1}=h'$ for some $h'\in H$, for every $a\in G$. Thus, $H$ is closed under conjugates, i.e., $H$ is normal.
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+
+
+
+\chapter{Quotient Groups}
+\begin{itemize}
+    \item Let $H$ be a normal subgroup of $G$.
+    \begin{theorem}
+        Then $aH=Ha$ for every $a\in G$.
+        \begin{proof}
+            See Exercise 14.D.5.
+        \end{proof}
+    \end{theorem}
+    \item We define coset multiplication as follows:
+    \begin{equation*}
+        Ha\cdot Hb = H(ab)
+    \end{equation*}
+    \item Let $H$ be a normal subgroup of $G$.
+    \begin{theorem}
+        If $Ha=Hc$ and $Hb=Hd$, then $H(ab)=H(cd)$.
+        \begin{proof}
+            
+        \end{proof}
+    \end{theorem}
+\end{itemize}
+
+
+
 
 \end{document}
