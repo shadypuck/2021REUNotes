@@ -150,7 +150,7 @@
 
 
 \begin{abstract}
-    This paper defines the basics of group theory and representation theory with a focus on domains that are applicable to foundational inorganic chemistry. Subgroups are introduced and Lagrange's theorem proved. Group actions and the relationship of groups and permutations are extended into representation theory. Representations are defined in the abstract and their applicable use in $\mathbb{R}^3$ as representing symmetries recovered as a special case. Lastly, the relationship between all theoretical tenets and the chemistry in which they are used are discussed.
+    This paper defines the basics of group theory and representation theory with a focus on domains that are applicable to foundational inorganic chemistry. Subgroups are introduced and Lagrange's theorem proved. Group actions and the relationship of groups and permutations are extended into representation theory. Representations are defined in the abstract and their applicable use in $\mathbb{R}^3$ as representing symmetries is recovered as a special case. Lastly, the relationship between all theoretical tenets and the chemistry in which they are used is discussed.
 \end{abstract}
 
 
@@ -194,8 +194,8 @@ New advances in mathematics are often driven by the study of worldly phenomena. 
 %         \item As will be discussed in Section 5, subgroups are of critical importance not only in that they lead to many important results in group theory, but in that they come endowed with properties applicable to other fields.
 %         \item However, finding subgroups can be difficult --- there are often many subsets to sort through in the power set of $G$. Thus, it will be useful to eliminate some possibilities right off the bat.
 %         \item One of the most effective ways of narrowing our search is with Lagrange's theorem, which we shall now work up to.
-%         \item \textbf{Left coset} (of $H$ in $G$): The set of all products $ah$, where $H$ is a subgroup of $G$, $a\in G$ is fixed, and $h$ ranges over $H$. \emph{Denoted by} $aH$.
-%         \item \textbf{Right coset} (of $H$ in $G$): The set of all products $ha$, where $H$ is a subgroup of $G$, $a\in G$ is fixed, and $h$ ranges over $H$. \emph{Denoted by} $Ha$.
+%         \item \textbf{Left coset} (of $H$ in $G$): The set of all products $ah$, where $H$ is a subgroup of $G$, $a\in G$ is fixed, and $h$ ranges over $H$. It is denoted by $aH$.
+%         \item \textbf{Right coset} (of $H$ in $G$): The set of all products $ha$, where $H$ is a subgroup of $G$, $a\in G$ is fixed, and $h$ ranges over $H$. It is denoted by $Ha$.
 %         \item In this book, we choose to focus on right cosets.
 %         \item If $a\in Hb$, then $Ha=Hb$.
 %         \begin{proof}
@@ -247,7 +247,7 @@ New advances in mathematics are often driven by the study of worldly phenomena. 
 
 Abstract algebra is the study of the structure of algebraic objects. One of the first examples we become familiar with is the real numbers, which are a continuum and an ordered field, thus satisfying many axioms that imply a rich theory. However, algebra also studies sets of objects that satisfy far fewer axioms.\par
 \begin{defn}
-    A \textbf{group} $\langle G,\cdot\rangle$ is a set $G$ along with a binary operation $\cdot$ on $G$ that satisfies three group axioms: $\cdot$ is associative, there exists an identity element $e\in G$ satisfying $e\cdot g=g\cdot e=g$ for all $g\in G$, and for all $g\in G$, there exists an $h\in G$ such that $g\cdot h=h\cdot g=e$.
+    A \textbf{group} $\langle G,\cdot\rangle$ is a set $G$ along with a binary operation $\cdot$ on $G$ that satisfies three group axioms: $\cdot$ is associative, there exists an identity element $e\in G$ satisfying $e\cdot g=g\cdot e=g$ for all $g\in G$, and, for all $g\in G$, there exists an $h\in G$ such that $g\cdot h=h\cdot g=e$.
 \end{defn}
 A simple example of a group is $\langle\mathbb{Z},+\rangle$, or the integers under addition. Addition combines any two integers into a third integer, adding is associative, 0 serves as an additive identity, and the inverse of any integer is its opposite ($-x$ corresponding to $x$).
 \begin{defn}
@@ -273,16 +273,16 @@ The first important property of subgroups that we shall prove is the following.
         Let $H$ be a subgroup of $G$. To prove that $H$ is a group, it will suffice to show that $H$ satisfies the three group axioms.\par\smallskip
         Axiom 1: Associativity of the elements in the subgroup follows directly from the associativity of the elements in the context of the original group.\par
         Axiom 2: Let $g\in H$ be arbitrary. Then by closure under inverses, $g^{-1}\in H$. It by closure under products that $gg^{-1}=e\in H$, as desired.\par
-        Axiom 3: Existence of inverses follows from closure under inverses.
+        Axiom 3: It follows by closure under inverses that there exist inverses in $G$ for all $g\in G$.
     \end{proof}
 \end{rem}
 A simple example of a subgroup is that the \textbf{alternating group} $A_n$ is a subgroup of the \textbf{symmetric group} $S_n$.
 \begin{defn}
-    Consider the set $[n]$. The \textbf{symmetric group} (of order $n$) is the set of all bijections $f:[n]\to[n]$ under the operation of function composition. \emph{Denoted by} $S_n$.
+    Consider the set $[n]$. The \textbf{symmetric group} (of order $n$) is the set of all bijections $f:[n]\to[n]$ under the operation of function composition. It is denoted by $S_n$.
 \end{defn}
-In other words, the symmetric group is the set of all permutations of the numbers 1 through $n$. Now, every permutation of an amount of numbers can be written as the product of some number of \textbf{transpositions}, and it can be proven that no permutation can be written as the product of an even number of transpositions \emph{and} an odd number of transpositions. This fact allows for the following definition.
+In other words, the symmetric group is the set of all permutations of the numbers 1 through $n$. Now, every permutation of an amount of numbers can be written as the product of some number of \textbf{transpositions}, and it can be proven that no permutation can be written as both the product of an even number of transpositions \emph{and} an odd number of transpositions. This fact allows for the following definition.
 \begin{defn}
-    Consider the symmetric group of order $n$. The \textbf{alternating group} (or order $n$) is the subset of $S_n$ consisting of all \emph{even} permutations of order $n$ under the operation of function composition. \emph{Denoted by} $A_n$.
+    Consider the symmetric group of order $n$. The \textbf{alternating group} (or order $n$) is the subset of $S_n$ consisting of all \emph{even} permutations of order $n$ under the operation of function composition. It is denoted by $A_n$.
 \end{defn}
 These definitions allow us to prove the following proposition.
 \begin{prop}
@@ -293,11 +293,11 @@ These definitions allow us to prove the following proposition.
 \end{prop}
 As will be discussed in Section 5, subgroups are of critical importance not only in that they lead to many important results in group theory, but in that they come endowed with properties applicable to other fields. However, finding subgroups can be difficult --- there are often many subsets of $G$ to sort through.
 \begin{defn}
-    Let $G$ be a set. The \textbf{power set} (of $G$) is the set of all subsets of $G$. \emph{Denoted by} $\wp(G)$.
+    Let $G$ be a set. The \textbf{power set} (of $G$) is the set of all subsets of $G$. It is denoted by $\wp(G)$.
 \end{defn}
-If $G$ is an infinite group, the power set of $G$ is also infinite (and, in fact, it can be proven that the power set of an infinite group is a of a higher order infinity than that of the original group). If $G$ is a finite group with $|G|=n$, it can be proven that $|\wp(G)|=2^n$. Thus, it will be useful to eliminate some possibilities right off the bat. One of the most effective ways of narrowing our search is with Lagrange's theorem, which we shall now work up to.\par
+If $G$ is an infinite group, the power set of $G$ is also infinite (and, in fact, it can be proven that the power set of an infinite group is a of a higher order of infinity than that of the original group). If $G$ is a finite group with $|G|=n$, it can be proven that $|\wp(G)|=2^n$. Thus, it will be useful to eliminate some possibilities right off the bat. One of the most effective ways of narrowing our search is with Lagrange's theorem, which we shall now work up to.\par
 \begin{defn}
-    Let $H$ be a subgroup of $G$. We define each \textbf{right coset} (of $H$ in $G$) to be the set of all products $ha$, where $a\in G$ is fixed and $h$ ranges over the elements of $H$. \emph{Denoted by} $Ha$. Symbolically, we have that
+    Let $H$ be a subgroup of $G$. We define each \textbf{right coset} (of $H$ in $G$) to be the set of all products $ha$, where $a\in G$ is fixed and $h$ ranges over the elements of $H$. It is denoted by $Ha$. Symbolically, we have that
     \begin{equation*}
         Ha = \{ha\mid h\in H\}
     \end{equation*}
@@ -333,7 +333,7 @@ We can now combine the last two results in an interesting manner --- we now know
         By Theorem 2.2, we may let the cosets of $H$ divide $G$ into $n$ partitions. By Theorem 2.3, each of these $n$ partitions has the same cardinality $|H|$. Therefore, since the elements in the group are divided into $n$ partitions of size $|H|$, $|G|=n|H|$, as desired.
     \end{proof}
 \end{thm}\par
-Although a simple result, Lagrange's theorem gives usa  powerful tool in our quest to assert order on groups. One of the most immediate and most striking consequences of Lagrange's theorem is that it completely characterizes all groups of prime order.
+Although a simple result, Lagrange's theorem gives us a  powerful tool in our quest to assert order on groups. One of the most immediate and most striking consequences of Lagrange's theorem is that it completely characterizes all groups of prime order.
 \begin{thm}
     Let $G$ be a group. If $G$ has a prime number $p$ of elements, then $G$ is a cyclic group. Furthermore, any element $a\neq e$ in $G$ is a generator of $G$.
     \begin{proof}
@@ -435,7 +435,7 @@ is the group multiplication table. It is trivial, albeit tedious, to show that t
 Representation theory was originally motivated by the desire to study groups and other algebraic objects by what they act on. Group actions formalize the notion of a group acting on a set, and representation theory takes the next step of formalizing the notion of a group acting on a vector space, a well-studied and well-defined mathematical object that can provide great reverse insight into algebraic structure.\par
 Informally, a representation maps each element in a group to an automorphism of a vector space onto itself in an order-preserving manner, where group multiplication becomes function composition. Let's now build up to this formally.
 \begin{defn}
-    Let $V$ be an $n$-dimensional vector space over the complex numbers. We define the \textbf{general linear group of degree \emph{n}} to be the set of invertible linear mappings from $V$ to $V$. \emph{Denoted by} $GL_n(\mathbb{C})$. Symbolically, we have that
+    Let $V$ be an $n$-dimensional vector space over the complex numbers. We define the \textbf{general linear group of degree \emph{n}} to be the set of invertible linear mappings from $V$ to $V$. It is denoted by $GL_n(\mathbb{C})$. Symbolically, we have that
     \begin{equation*}
         GL_n(\mathbb{C}) = \{f:V\to V\mid f\text{ is linear \& invertible}\}
     \end{equation*}
@@ -513,7 +513,7 @@ A curious thing to note is that in finite groups, every element has finite order
 %     \item In IChem, molecules of point group G often share properties with molecules of point group H, where H is a subgroup of G. Finding subgroups can be tricky though, so we need tools to make our search easier. The most powerful of these tools is Lagrange's theorem.
 % \end{itemize}
 
-Motivated by the need to understand the vibrational modes of molecules, which are heavily dependent on their symmetry, inorganic chemists took the budding field of representation theory and applied it to their work. The connection is actually quite simple. Representation theory essentially abstracts the group-like character of automorphisms of a vector space, and a symmetry operation can be thought of as an automorphism of $\mathbb{R}^3$, specifically one that maps a certain set of points onto itself, permuting them linearly. All of these factors --- automorphisms, linear transformations, and permutations --- dramatically evoke representation theory, and indeed it has been a valuable tool for pulling information out of the algebraically unsolveable wave equation.\par
+Motivated by the need to understand the vibrational modes of molecules, which are heavily dependent on their symmetry, in the early twentieth century inorganic chemists took the at-the-time budding field of representation theory and applied it to their work. The connection is actually quite simple. Representation theory essentially abstracts the group-like character of automorphisms of a vector space, and a symmetry operation can be thought of as an automorphism of $\mathbb{R}^3$, specifically one that maps a certain set of points onto itself, permuting them linearly. All of these factors --- automorphisms, linear transformations, and permutations --- dramatically evoke representation theory, and indeed it has been a valuable tool for pulling information out of the algebraically unsolveable wave equation.\par
 As chemists have refined their understanding of reaction kinetics over the years, they have gone from "two molecules must meet at the right speed and with the correct orientation in order to react" to "two orbitals must be within 10 electron volts of each other and have the same symmetry in order to form a molecular orbital." Thus, symmetry point groups, the foundation of molecular symmetry, directly govern which molecules can react, how they react, and to what extent, all without having to directly solve the wave equation for many many electrons and nuclei.\par
 \begin{center}
     \begin{tikzpicture}
@@ -556,6 +556,7 @@ It is a pleasure to thank my mentor, Micah Gay, for pointing me to books that wo
     Linear Representations of Finite Groups.
     Springer. 1971.
 \end{thebibliography}
+The image on page 8 is the author's rendering of a figure originally appearing in Miessler, Fischer, and Tarr's (2014) \emph{Inorganic Chemistry} (Fifth edition).
 
 
 
